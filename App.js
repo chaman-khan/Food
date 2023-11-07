@@ -9,7 +9,7 @@ const App = () => {
   });
   return (
     // <View>
-    <Donor_Request />
+    <Donor_Nav />
     // </View>
   );
 };

@@ -71,38 +71,18 @@ const Donor_Request = ({navigation}) => {
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.tabWrapper}
-      onPress={() =>
-        navigation.navigate('Donation Details', {
-          category: item.category,
-          image: item.image,
-          title: item.title,
-          totalNumber: item.totalNumber,
-          description: item.description,
-        })
-      }>
+      onPress={() => navigation.navigate('Donation Details', {item})}>
       <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
       <View style={styles.tabBottom}>
-        <Text style={{color: '#20B7FE', fontWeight: '500'}}>{category}</Text>
-        <Text style={{fontWeight: 'bold', fontSize: 12}}>{item.title}</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text style={{fontWeight: '500', fontSize: 12}}>
-            Required {item.category}
-          </Text>
+        <Text style={styles.categoryText}>{category}</Text>
+        <Text style={styles.titleText}>{item.title}</Text>
+        <View style={styles.bottomDetail}>
+          <Text style={styles.textStyle}>Required {item.category}</Text>
           <Text style={styles.reqCatValue}>{item.totalNumber}</Text>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text style={{fontWeight: '500', fontSize: 12}}>Required Raised</Text>
-          <Text style={{color: '#20B7FE', fontWeight: '500', fontSize: 12}}>
-            00
-          </Text>
+        <View style={styles.bottomDetail}>
+          <Text style={styles.textStyle}>Required Raised</Text>
+          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>00</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -117,17 +97,17 @@ const Donor_Request = ({navigation}) => {
         />
         <View style={styles.topIconCont}>
           <Image
-            style={{height: 20, width: 20, resizeMode: 'contain'}}
+            style={styles.topImageIcon}
             source={require('../../Images/profileLogo.png')}
           />
           <Image
-            style={{height: 20, width: 20}}
+            style={styles.topImageIcon}
             source={require('../../Images/plus.png')}
           />
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={{width: '95%', padding: 0}} />
+        <TextInput placeholder="Search" style={styles.input} />
         <EvilIcons
           name="search"
           size={25}
@@ -162,6 +142,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '15%',
   },
+  topImageIcon: {
+    height: 20,
+    width: 20,
+    resizeMode: 'contain',
+  },
   searchBarWrapper: {
     width: '95%',
     alignSelf: 'center',
@@ -194,6 +179,10 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 10,
     height: '60%',
   },
+  input: {
+    width: '95%',
+    padding: 0,
+  },
   tabBottom: {
     borderWidth: 0.5,
     borderColor: '#D1F0FF',
@@ -204,7 +193,27 @@ const styles = StyleSheet.create({
     padding: 10,
     justifyContent: 'space-evenly',
   },
-  reqCatValue: {color: '#20B7FE', fontWeight: '500', fontSize: 12},
+  reqCatValue: {
+    color: '#20B7FE',
+    fontWeight: '500',
+    fontSize: 12,
+  },
+  categoryText: {
+    color: '#20B7FE',
+    fontWeight: '500',
+  },
+  titleText: {
+    fontWeight: 'bold',
+    fontSize: 12,
+  },
+  bottomDetail: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  textStyle: {
+    fontWeight: '500',
+    fontSize: 12,
+  },
 });
 
 export default Donor_Request;
