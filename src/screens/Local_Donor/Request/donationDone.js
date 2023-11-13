@@ -11,7 +11,7 @@ const Donation_Done = ({navigation}) => {
         style={{margin: 10}}
       />
       <Image
-        source={require('../../Images/done.png')}
+        source={require('../../../Images/done.png')}
         style={{marginVertical: 50, width: '100%'}}
       />
       <Text style={styles.successfull}>Donation is Successfully</Text>

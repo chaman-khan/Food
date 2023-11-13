@@ -35,7 +35,7 @@ const MyDonation = ({navigation}) => {
       category: 'Leftover',
       title: 'Nourishing Hearts Through Medicine Donation',
       totalNumber: '4575',
-      image: require('../../Images/clothing.jpg'),
+      image: require('../../../Images/clothing.jpg'),
       description:
         'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
     },
@@ -44,7 +44,7 @@ const MyDonation = ({navigation}) => {
       category: 'Medicine',
       title: 'Nourishing Hearts Through Medicine Donation',
       totalNumber: '3461',
-      image: require('../../Images/medicine.jpg'),
+      image: require('../../../Images/medicine.jpg'),
       description:
         'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
     },
@@ -55,7 +55,7 @@ const MyDonation = ({navigation}) => {
       category: 'Medicine',
       title: 'Nourishing Hearts Through Medicine Donation',
       totalNumber: '3461',
-      image: require('../../Images/medicine.jpg'),
+      image: require('../../../Images/medicine.jpg'),
       description:
         'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
     },

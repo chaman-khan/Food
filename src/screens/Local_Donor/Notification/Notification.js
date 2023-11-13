@@ -42,7 +42,7 @@ const Donor_Notification = () => {
               }}>
               <Text style={{width: '85%'}}>{item.text}</Text>
               <Image
-                source={require('../../Images/1.png')}
+                source={require('../../../Images/1.png')}
                 style={{
                   position: 'absolute',
                   bottom: 5,

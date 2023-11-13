@@ -4,22 +4,22 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Signup_Screen from '../SignUp_Screen/signup_screen';
-import Login_Screen from '../Login_Screen/login_screen';
-import OnBording from '../OnBording/onbording';
-import Recover_Screen from '../Recover/recover';
-import Reset_Password_Screen from '../Recover/reset_password';
-import Verification_Screen from '../Recover/verification';
-import Donor_Setting from '../Local_Donor/Setting/Setting';
-import Donor_Request from '../Local_Donor/Request/request';
-import Donor_Notification from '../Local_Donor/Notification/Notification';
-import Donor_Category from '../Local_Donor/Category/Category';
-import DonationDetail from '../Local_Donor/Request/donationDetail';
-import Send_Donation from '../Local_Donor/Request/sendDonation';
-import Donation_Done from '../Local_Donor/Request/donationDone';
-import CreateRequest from '../Local_Donor/Request/createRequest';
-import MyDonation from '../Local_Donor/Request/myDonation';
-import MyDonationDetail from '../Local_Donor/Request/myDonationDetail';
+import Signup_Screen from '../screens/SignUp_Screen/signup_screen';
+import Login_Screen from '../screens/Login_Screen/login_screen';
+import OnBording from '../screens/OnBording/onbording';
+import Recover_Screen from '../screens/Recover/recover';
+import Reset_Password_Screen from '../screens/Recover/reset_password';
+import Verification_Screen from '../screens/Recover/verification';
+import Donor_Setting from '../screens/Local_Donor/Setting/Setting';
+import Donor_Request from '../screens/Local_Donor/Request/request';
+import Donor_Notification from '../screens/Local_Donor/Notification/Notification';
+import Donor_Category from '../screens/Local_Donor/Category/Category';
+import DonationDetail from '../screens/Local_Donor/Request/donationDetail';
+import Send_Donation from '../screens/Local_Donor/Request/sendDonation';
+import Donation_Done from '../screens/Local_Donor/Request/donationDone';
+import CreateRequest from '../screens/Local_Donor/Request/createRequest';
+import MyDonation from '../screens/Local_Donor/Request/myDonation';
+import MyDonationDetail from '../screens/Local_Donor/Request/myDonationDetail';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -50,13 +50,13 @@ const MyTabs = () => {
           let iconName;
           let Screen_name = route.name;
           if (Screen_name === 'Request') {
-            iconName = require('../Images/request.png');
+            iconName = require('../../Images/request.png');
           } else if (Screen_name === 'Notification') {
-            iconName = require('../Images/notifications.png');
+            iconName = require('../../Images/notifications.png');
           } else if (Screen_name === 'Category') {
-            iconName = require('../Images/category.png');
+            iconName = require('../../Images/category.png');
           } else if (Screen_name === 'Setting') {
-            iconName = require('../Images/setting.png');
+            iconName = require('../../Images/setting.png');
           }
           return (
             <Image

@@ -1,20 +1,13 @@
 import React, {useEffect} from 'react';
-import Donor_Nav from './Component_Data/Navigations/Navigation';
 import SplashScreen from 'react-native-splash-screen';
-import {Text, View} from 'react-native';
-import Donor_Request from './Component_Data/Local_Donor/Request/request';
-import CreateRequest from './Component_Data/Local_Donor/Request/createRequest';
-import MyDonation from './Component_Data/Local_Donor/Request/myDonation';
-import MyDonationDetail from './Component_Data/Local_Donor/Request/myDonationDetail';
-import Donor_Notification from './Component_Data/Local_Donor/Notification/Notification';
-import Donation_Done from './Component_Data/Local_Donor/Request/donationDone';
+import MainNav from './src/Navigations/mainNav';
+import {SafeAreaView} from 'react-native';
 const App = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  });
   return (
     // <View>
-    <Donor_Nav />
+    <SafeAreaView style={{flex: 1}}>
+      <MainNav />
+    </SafeAreaView>
     // <Donation_Done />
     // </View>
   );
