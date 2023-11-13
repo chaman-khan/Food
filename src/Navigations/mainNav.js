@@ -13,6 +13,13 @@ import Donation_Done from '../screens/Local_Donor/Request/donationDone';
 import CreateRequest from '../screens/Local_Donor/Request/createRequest';
 import MyDonation from '../screens/Local_Donor/Request/myDonation';
 import MyDonationDetail from '../screens/Local_Donor/Request/myDonationDetail';
+import DeleteAccount from '../screens/Local_Donor/Setting/DeleteAccount';
+import ChangePassword from '../screens/Local_Donor/Setting/ChangePassword';
+import Terms from '../screens/Local_Donor/Setting/Terms';
+import FAQs from '../screens/Local_Donor/Setting/FAQs';
+import AboutUs from '../screens/Local_Donor/Setting/AboutUs';
+import ChangeEmail from '../screens/Local_Donor/Setting/ChangeEmail';
+import ChangeLocation from '../screens/Local_Donor/Setting/ChangeLocation';
 
 function MainNav() {
   const Stack = createNativeStackNavigator();
@@ -20,7 +27,7 @@ function MainNav() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Splash"
+        // initialRouteName="ChangeLocation"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="OnBoarding" component={OnBording} />
@@ -56,6 +63,41 @@ function MainNav() {
         <Stack.Screen
           name="My Donation Details"
           component={MyDonationDetail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DeleteAccount"
+          component={DeleteAccount}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePassword}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Terms"
+          component={Terms}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="FAQs"
+          component={FAQs}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="AboutUs"
+          component={AboutUs}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChangeEmail"
+          component={ChangeEmail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ChangeLocation"
+          component={ChangeLocation}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

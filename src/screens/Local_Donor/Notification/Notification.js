@@ -1,6 +1,5 @@
-import React from 'react';
-import {View, Text, FlatList} from 'react-native';
-import {Image} from 'react-native-elements';
+import React, {useState} from 'react';
+import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -9,6 +8,7 @@ const theme = {
 };
 
 const Donor_Notification = () => {
+  const [noOfNotifications, setNoOFNotifications] = useState(1);
   const Data = [
     {
       id: 1,
@@ -17,40 +17,20 @@ const Donor_Notification = () => {
   ];
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          width: '95%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 40,
-        }}>
+      <View style={styles.topBar}>
         <Text style={{fontSize: 16, fontWeight: '500'}}>Notifications</Text>
       </View>
-      <View>
+      <View style={{marginTop: 17}}>
         <FlatList
           data={Data}
           renderItem={({item}) => (
-            <View
-              style={{
-                backgroundColor: '#E7F8FF',
-                padding: 15,
-                width: '95%',
-                alignSelf: 'center',
-                borderRadius: 10,
-                borderWidth: 0.5,
-                borderColor: theme.colors.grey,
-              }}>
+            <View style={styles.notification}>
               <Text style={{width: '85%'}}>{item.text}</Text>
-              <Image
-                source={require('../../../Images/1.png')}
-                style={{
-                  position: 'absolute',
-                  bottom: 5,
-                  right: 5,
-                  width: 35,
-                  height: 25,
-                }}
-              />
+              <View style={styles.innerNotification}>
+                <Text style={{color: 'white', fontWeight: '600'}}>
+                  {noOfNotifications}
+                </Text>
+              </View>
             </View>
           )}
           keyExtractor={item => item.id}
@@ -60,4 +40,30 @@ const Donor_Notification = () => {
   );
 };
 
+const styles = StyleSheet.create({
+  topBar: {
+    width: '95%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 40,
+  },
+  notification: {
+    backgroundColor: '#E7F8FF',
+    padding: 15,
+    width: '95%',
+    alignSelf: 'center',
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor: theme.colors.grey,
+  },
+  innerNotification: {
+    position: 'absolute',
+    bottom: 5,
+    right: 15,
+    backgroundColor: theme.colors.primary,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 20,
+  },
+});
 export default Donor_Notification;
