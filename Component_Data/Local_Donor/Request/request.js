@@ -100,10 +100,13 @@ const Donor_Request = ({navigation}) => {
             style={styles.topImageIcon}
             source={require('../../Images/profileLogo.png')}
           />
-          <Image
-            style={styles.topImageIcon}
-            source={require('../../Images/plus.png')}
-          />
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Create Request')}>
+            <Image
+              style={styles.topImageIcon}
+              source={require('../../Images/plus.png')}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.searchBarWrapper}>

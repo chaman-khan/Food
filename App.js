@@ -3,6 +3,9 @@ import Donor_Nav from './Component_Data/Navigations/Navigation';
 import SplashScreen from 'react-native-splash-screen';
 import {Text, View} from 'react-native';
 import Donor_Request from './Component_Data/Local_Donor/Request/request';
+import CreateRequest from './Component_Data/Local_Donor/Request/createRequest';
+import MyDonation from './Component_Data/Local_Donor/Request/myDonation';
+import MyDonationDetail from './Component_Data/Local_Donor/Request/myDonationDetail';
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
@@ -10,6 +13,7 @@ const App = () => {
   return (
     // <View>
     <Donor_Nav />
+    // <MyDonationDetail />
     // </View>
   );
 };
