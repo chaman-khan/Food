@@ -6,6 +6,8 @@ import Donor_Request from './Component_Data/Local_Donor/Request/request';
 import CreateRequest from './Component_Data/Local_Donor/Request/createRequest';
 import MyDonation from './Component_Data/Local_Donor/Request/myDonation';
 import MyDonationDetail from './Component_Data/Local_Donor/Request/myDonationDetail';
+import Donor_Notification from './Component_Data/Local_Donor/Notification/Notification';
+import Donation_Done from './Component_Data/Local_Donor/Request/donationDone';
 const App = () => {
   useEffect(() => {
     SplashScreen.hide();
@@ -13,7 +15,7 @@ const App = () => {
   return (
     // <View>
     <Donor_Nav />
-    // <MyDonationDetail />
+    // <Donation_Done />
     // </View>
   );
 };

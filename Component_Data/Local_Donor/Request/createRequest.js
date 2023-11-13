@@ -80,7 +80,11 @@ const CreateRequest = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
-        <Icon name="arrow-left" type="feather" />
+        <Icon
+          name="arrow-left"
+          type="feather"
+          onPress={() => navigation.goBack()}
+        />
         <Text style={{fontSize: 16, fontWeight: '500'}}>Create Request</Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>

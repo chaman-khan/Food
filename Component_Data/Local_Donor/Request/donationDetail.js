@@ -2,19 +2,31 @@ import {useRoute} from '@react-navigation/native';
 import react from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+const theme = {
+  colors: {
+    primary: '#1CB5FD',
+    grey: '#9B9B9B',
+  },
+};
 const DonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   return (
     <View style={{flex: 1}}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 15,
+        }}>
         <Ionicons
           name="arrow-back"
           size={25}
-          style={{flex: 1}}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{flex: 6, fontSize: 25}}>Donation Details</Text>
+        <Text style={{fontSize: 25}}>Donation Details</Text>
+        <Ionicons name="arrow-back" size={25} color="transparent" />
       </View>
       <Image
         source={routee.image}
@@ -59,7 +71,7 @@ const styles = StyleSheet.create({
   },
   descView: {
     width: '100%',
-    borderBottomColor: '#858581',
+    borderBottomColor: theme.colors.grey,
     borderWidth: 1,
     marginVertical: 10,
   },

@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -30,9 +31,11 @@ const MyTabs = () => {
         tabBarActiveTintColor: '#20B7FE',
         inactiveTintColor: 'gray', // Set your desired inactive color
         tabBarStyle: {
-          backgroundColor: '#FFFFFF',
+          backgroundColor: 'white',
           position: 'relative',
           borderTopWidth: 0,
+          height: 50,
+          elevation: 5,
         },
         tabBarLabelStyle: {
           fontSize: 10,
@@ -47,21 +50,28 @@ const MyTabs = () => {
           let iconName;
           let Screen_name = route.name;
           if (Screen_name === 'Request') {
-            iconName = focused ? 'message1' : 'message-text-outline';
+            iconName = require('../Images/request.png');
           } else if (Screen_name === 'Notification') {
-            iconName = focused ? 'notifications' : 'notifications-outline';
+            iconName = require('../Images/notifications.png');
           } else if (Screen_name === 'Category') {
-            iconName = focused ? 'notifications' : 'notifications-outline';
+            iconName = require('../Images/category.png');
           } else if (Screen_name === 'Setting') {
-            iconName = focused ? 'settings-sharp' : 'settings-outline';
+            iconName = require('../Images/setting.png');
           }
           return (
-            <Ionicons
-              name={iconName}
+            <Image
+              source={iconName}
               size={size}
-              color={color}
-              style={{height: 30, width: 30}}
+              tintColor={color}
+              resizeMode="contain"
+              style={{width: 30, height: 30}}
             />
+            // <Ionicons
+            //   name={iconName}
+            //   size={size}
+            //   color={color}
+            //   style={{height: 30, width: 30}}
+            // />
           );
         },
       })}>
