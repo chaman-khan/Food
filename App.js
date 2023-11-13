@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import SplashScreen from 'react-native-splash-screen';
 import MainNav from './src/Navigations/mainNav';
 import {SafeAreaView} from 'react-native';
 const App = () => {
