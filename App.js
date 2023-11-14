@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import MainNav from './src/Navigations/mainNav';
-import {SafeAreaView} from 'react-native';
-const App = () => {
+import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/lib/integration/react';
+import {store, persister} from './src/redux/store';
+
+export default App = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <MainNav />
-    </SafeAreaView>
+    <Provider store={store}>
+      <PersistGate persistor={persister}>
+        <MainNav />
+      </PersistGate>
+    </Provider>
   );
 };
-export default App;

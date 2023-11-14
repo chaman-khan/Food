@@ -15,7 +15,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const {width, height} = Dimensions.get('screen');
-const Donor_Request = ({navigation}) => {
+const NGO_Request = ({navigation}) => {
   const [category, setCategory] = useState('leftover');
   const [title, setTitle] = useState('Norshing Hearts through Food Donation');
   const [totalNumber, setTotalNumber] = useState(4575);
@@ -105,10 +105,14 @@ const Donor_Request = ({navigation}) => {
             style={styles.topImageIcon}
             source={require('../../../Images/profileLogo.png')}
           />
+          <Image
+            style={styles.topImageIcon}
+            source={require('../../../Images/profileLogo1.png')}
+          />
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('DonorStack', {
-                screen: 'Create Request',
+              navigation.navigate('NGOStack', {
+                screen: 'NGOCreateRequest',
               })
             }>
             <Image
@@ -152,7 +156,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '15%',
+    width: '20%',
   },
   topImageIcon: {
     height: 20,
@@ -228,4 +232,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Donor_Request;
+export default NGO_Request;

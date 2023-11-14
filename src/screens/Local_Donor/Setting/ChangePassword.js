@@ -89,9 +89,11 @@ const ChangePassword = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.button}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.goBack()}>
         <Text style={{color: 'white'}}>Save Change</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

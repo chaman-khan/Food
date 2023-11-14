@@ -21,36 +21,37 @@ const LoginScreen = ({navigation}) => {
     setPasswordVisible(!passwordVisible);
   };
   const handleLogin = () => {
-    const emailRegex =
-      /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
+    // const emailRegex =
+    //   /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
 
-    if (!emailRegex.test(email)) {
-      setEmailError(true);
-    } else {
-      setEmailError(false);
-    }
+    // if (!emailRegex.test(email)) {
+    //   setEmailError(true);
+    // } else {
+    //   setEmailError(false);
+    // }
 
-    if (!password) {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-    }
-    if (emailError || passwordError) {
-      Alert.alert(
-        'Warning',
-        'Please enter a valid email or password.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    } else {
-      navigation.navigate('BottomTab');
-      return false;
-    }
+    // if (!password) {
+    //   setPasswordError(true);
+    // } else {
+    //   setPasswordError(false);
+    // }
+    // if (emailError || passwordError) {
+    //   Alert.alert(
+    //     'Warning',
+    //     'Please enter a valid email or password.',
+    //     [
+    //       {
+    //         text: 'OK',
+    //         onPress: () => console.log('OK Pressed'),
+    //       },
+    //     ],
+    //     {cancelable: false},
+    //   );
+    // } else {
+    //   navigation.navigate('NGOBottomTab');
+    //   return false;
+    // }
+    navigation.navigate('NGOBottomTab');
   };
   return (
     <KeyboardAvoidingView

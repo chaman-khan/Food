@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const DeleteAccount = ({navigation}) => {
+const ChangePassword = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
   const togglePasswordVisibility = () => {
@@ -23,15 +23,14 @@ const DeleteAccount = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Delete Account</Text>
+        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Password</Text>
       </View>
-      <View style={{marginTop: 60, gap: 50}}>
+      <View style={{marginTop: 60, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
-          Delete Acount!
+          Change Password
         </Text>
-        <Text style={{lineHeight: 20, marginBottom: 70, color: 'black'}}>
-          Once you delete this account, its data cannot be recovered. Areyou
-          sure want to proceed?
+        <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>
+          You can choose strong and new Password.
         </Text>
       </View>
       <View style={styles.Password_Box}>
@@ -46,7 +45,7 @@ const DeleteAccount = ({navigation}) => {
             secureTextEntry={!passwordVisible}
             placeholderTextColor={'#818181'}
             style={styles.Password_input}
-            placeholder="Password"
+            placeholder="Old Password"
           />
           <TouchableOpacity
             style={styles.ToggleButton}
@@ -62,11 +61,37 @@ const DeleteAccount = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
-        <Text style={{color: 'white'}}>Delete Account</Text>
-      </TouchableOpacity>
+      <View style={styles.Password_Box}>
+        <Text style={styles.Head_Texts}>Password</Text>
+        <View style={styles.User_Input_Container}>
+          <Image
+            source={require('../../../Images/password.png')}
+            style={styles.UserIcon}
+          />
+          <TextInput
+            onChangeText={Text => setPassword(Text)}
+            secureTextEntry={!passwordVisible}
+            placeholderTextColor={'#818181'}
+            style={styles.Password_input}
+            placeholder="New Password"
+          />
+          <TouchableOpacity
+            style={styles.ToggleButton}
+            onPress={togglePasswordVisibility}>
+            <Image
+              style={{width: 18, height: 18, marginRight: 20}}
+              source={
+                passwordVisible
+                  ? require('../../../Images/eye-on.png')
+                  : require('../../../Images/eye-off.png')
+              }
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.button}>
+        <Text style={{color: 'white'}}>Save Change</Text>
+      </View>
     </View>
   );
 };
@@ -135,4 +160,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DeleteAccount;
+export default ChangePassword;

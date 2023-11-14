@@ -5,7 +5,6 @@ import {theme} from '../theme/theme';
 const Splash = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      console.log('helllooooo');
       navigation.navigate('OnBoarding');
     }, 2000);
   }, []);

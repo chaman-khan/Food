@@ -6,29 +6,33 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   Modal,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-const MyDonationDetail = ({navigation}) => {
+const theme = {
+  colors: {
+    primary: '#1CB5FD',
+    grey: '#9B9B9B',
+  },
+};
+const RejectedDeatil = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
-  const {width, height} = Dimensions.get('screen');
+
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
-        <Icon
-          name="arrow-left"
-          type="feather"
+        <Ionicons
+          name="arrow-back"
+          size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Donation Detail</Text>
-
+        <Text style={{fontSize: 25}}>Donation Details</Text>
         <Entypo
           name="dots-three-vertical"
-          size={20}
+          size={25}
           onPress={() => setClicked(true)}
         />
       </View>
@@ -40,29 +44,21 @@ const MyDonationDetail = ({navigation}) => {
         <Text style={styles.category}>{routee.category}</Text>
         <Text style={{marginVertical: 7}}>{routee.title}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
+          <Text>Donation Quantity</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>00</Text>
+          <Text>Phone Number</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.phoneNO}</Text>
+        </View>
+        <View style={styles.categoryView}>
+          <Text>Location</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
         </View>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate('DonorStack', {
-            screen: 'Send Donation',
-          })
-        }>
-        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-          Donate
-        </Text>
-      </TouchableOpacity>
-
       {clicked && (
         <Modal transparent>
           <View style={{flex: 1, backgroundColor: 'rgba(50, 50, 50,0.9)'}}>
@@ -79,9 +75,9 @@ const MyDonationDetail = ({navigation}) => {
                 style={styles.cancel}
                 onPress={() => {
                   setClicked(false);
-                  navigation.navigate('My Donation');
+                  navigation.navigate('NGOStack', {screen: 'AllUserRequests'});
                 }}>
-                <Text>Cancel Request</Text>
+                <Text>Delete Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancel}
@@ -98,13 +94,10 @@ const MyDonationDetail = ({navigation}) => {
 
 const styles = StyleSheet.create({
   topBar: {
-    width: '95%',
-    height: 40,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 10,
+    justifyContent: 'space-between',
+    marginBottom: 15,
   },
   category: {
     marginVertical: 5,
@@ -118,7 +111,7 @@ const styles = StyleSheet.create({
   },
   descView: {
     width: '100%',
-    borderBottomColor: '#858581',
+    borderBottomColor: theme.colors.grey,
     borderWidth: 1,
     marginVertical: 10,
   },
@@ -129,16 +122,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
   },
-  button: {
-    width: '90%',
-    alignSelf: 'center',
-    backgroundColor: '#20B7FE',
-    borderRadius: 10,
-    alignItems: 'center',
-    padding: 13,
-    position: 'absolute',
-    bottom: 10,
-  },
   cancel: {
     height: 50,
     alignItems: 'center',
@@ -147,4 +130,4 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-export default MyDonationDetail;
+export default RejectedDeatil;

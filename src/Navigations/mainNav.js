@@ -20,6 +20,9 @@ import FAQs from '../screens/Local_Donor/Setting/FAQs';
 import AboutUs from '../screens/Local_Donor/Setting/AboutUs';
 import ChangeEmail from '../screens/Local_Donor/Setting/ChangeEmail';
 import ChangeLocation from '../screens/Local_Donor/Setting/ChangeLocation';
+import NGOBottomTab from './tabs/ngoBottomTab';
+import DonorStack from './stacks/donorStack';
+import NGOStack from './stacks/ngoStack';
 
 function MainNav() {
   const Stack = createNativeStackNavigator();
@@ -27,79 +30,17 @@ function MainNav() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        // initialRouteName="ChangeLocation"
+        initialRouteName="NGOBottomTab"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="OnBoarding" component={OnBording} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Sign Up" component={SignUp_Screen} />
         <Stack.Screen name="RecoverStack" component={RecoverStack} />
+        <Stack.Screen name="DonorStack" component={DonorStack} />
         <Stack.Screen name="BottomTab" component={BottomTab} />
-        <Stack.Screen
-          name="Donation Details"
-          component={DonationDetail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Send Donation"
-          component={Send_Donation}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Donation Done"
-          component={Donation_Done}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Create Request"
-          component={CreateRequest}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="My Donation"
-          component={MyDonation}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="My Donation Details"
-          component={MyDonationDetail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="DeleteAccount"
-          component={DeleteAccount}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChangePassword"
-          component={ChangePassword}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Terms"
-          component={Terms}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FAQs"
-          component={FAQs}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AboutUs"
-          component={AboutUs}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChangeEmail"
-          component={ChangeEmail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="ChangeLocation"
-          component={ChangeLocation}
-          options={{headerShown: false}}
-        />
+        <Stack.Screen name="NGOStack" component={NGOStack} />
+        <Stack.Screen name="NGOBottomTab" component={NGOBottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
   );

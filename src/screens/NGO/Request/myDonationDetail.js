@@ -1,32 +1,37 @@
 import {useRoute} from '@react-navigation/native';
-import react from 'react';
-import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-const theme = {
-  colors: {
-    primary: '#1CB5FD',
-    grey: '#9B9B9B',
-  },
-};
-const DonationDetail = ({navigation}) => {
+import React, {useState} from 'react';
+import {
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  Modal,
+} from 'react-native';
+import {Icon} from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
+const NGOMyDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
+  const [clicked, setClicked] = useState(false);
+  const {width, height} = Dimensions.get('screen');
   return (
     <View style={{flex: 1}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 15,
-        }}>
-        <Ionicons
-          name="arrow-back"
-          size={25}
+      <View style={styles.topBar}>
+        <Icon
+          name="arrow-left"
+          type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 25}}>Donation Details</Text>
-        <Ionicons name="arrow-back" size={25} color="transparent" />
+        <Text style={{fontSize: 16, fontWeight: '500'}}>Donation Detail</Text>
+
+        <Entypo
+          name="dots-three-vertical"
+          size={20}
+          color="transparent"
+          onPress={() => setClicked(true)}
+        />
       </View>
       <Image
         source={routee.image}
@@ -47,22 +52,20 @@ const DonationDetail = ({navigation}) => {
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => {
-          navigation.navigate('DonorStack', {
-            screen: 'Send Donation',
-          });
-        }}>
-        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-          Donate
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  topBar: {
+    width: '95%',
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
   category: {
     marginVertical: 5,
     color: '#20B7FE',
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
   },
   descView: {
     width: '100%',
-    borderBottomColor: theme.colors.grey,
+    borderBottomColor: '#858581',
     borderWidth: 1,
     marginVertical: 10,
   },
@@ -96,5 +99,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 10,
   },
+  cancel: {
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 15,
+    backgroundColor: 'white',
+  },
 });
-export default DonationDetail;
+export default NGOMyDonationDetail;

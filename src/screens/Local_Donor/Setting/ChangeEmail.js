@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -7,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const ChangeEmail = () => {
+const ChangeEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
 
   return (
@@ -39,9 +46,11 @@ const ChangeEmail = () => {
           />
         </View>
       </View>
-      <View style={styles.button}>
-        <Text style={{color: 'white'}}>Delete Account</Text>
-      </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.goBack()}>
+        <Text style={{color: 'white'}}>Save Changes</Text>
+      </TouchableOpacity>
     </View>
   );
 };

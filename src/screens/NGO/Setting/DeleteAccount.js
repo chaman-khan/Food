@@ -62,11 +62,10 @@ const DeleteAccount = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
+      <View
+        style={styles.button}>
         <Text style={{color: 'white'}}>Delete Account</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };

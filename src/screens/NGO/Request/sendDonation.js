@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const Send_Donation = ({navigation}) => {
+const NGOSend_Donation = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View style={{width: '95%', alignSelf: 'center', gap: 20}}>
@@ -44,11 +44,11 @@ const Send_Donation = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => {
-          navigation.navigate('DonorStack', {
+        onPress={() =>
+          navigation.navigate('NGOStack', {
             screen: 'Donation Done',
-          });
-        }}>
+          })
+        }>
         <Text style={styles.bttnText}>Confirm Donation</Text>
       </TouchableOpacity>
     </View>
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-export default Send_Donation;
+export default NGOSend_Donation;

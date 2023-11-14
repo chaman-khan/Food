@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image} from 'react-native';
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -14,59 +7,41 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const DeleteAccount = ({navigation}) => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [password, setPassword] = useState('');
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
+const ChangeEmail = () => {
+  const [email, setEmail] = useState('');
+
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Delete Account</Text>
+        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
       </View>
-      <View style={{marginTop: 60, gap: 50}}>
+      <View style={{marginTop: 40, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
-          Delete Acount!
+          Change Email Address
         </Text>
-        <Text style={{lineHeight: 20, marginBottom: 70, color: 'black'}}>
-          Once you delete this account, its data cannot be recovered. Areyou
-          sure want to proceed?
+        <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>
+          Write a new and authentic Ethentic Email Address.
         </Text>
       </View>
-      <View style={styles.Password_Box}>
-        <Text style={styles.Head_Texts}>Password</Text>
+      <View style={styles.User_Box}>
+        <Text style={styles.Head_Texts}>Email</Text>
         <View style={styles.User_Input_Container}>
           <Image
-            source={require('../../../Images/password.png')}
+            source={require('../../../Images/email.png')}
             style={styles.UserIcon}
           />
           <TextInput
-            onChangeText={Text => setPassword(Text)}
-            secureTextEntry={!passwordVisible}
+            onChangeText={Text => setEmail(Text)}
             placeholderTextColor={'#818181'}
-            style={styles.Password_input}
-            placeholder="Password"
+            // placeholderStyle={styles.placeholderStyle}
+            style={styles.User_input}
+            placeholder="Email"
           />
-          <TouchableOpacity
-            style={styles.ToggleButton}
-            onPress={togglePasswordVisibility}>
-            <Image
-              style={{width: 18, height: 18, marginRight: 20}}
-              source={
-                passwordVisible
-                  ? require('../../../Images/eye-on.png')
-                  : require('../../../Images/eye-off.png')
-              }
-            />
-          </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
+      <View style={styles.button}>
         <Text style={{color: 'white'}}>Delete Account</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -78,10 +53,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 40,
   },
-  Password_Box: {
+  User_Box: {
+    marginTop: responsiveScreenHeight(1.6),
+    // borderWidth:2,
     height: responsiveScreenHeight(9),
     width: '100%',
-    marginTop: responsiveScreenHeight(1.7),
   },
   Head_Texts: {
     fontFamily: 'Poppins',
@@ -108,21 +84,14 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(2.3), // Set the height as needed
     marginLeft: responsiveScreenWidth(1.2),
   },
-  Password_input: {
-    // borderWidth:1,
+  User_input: {
+    // borderWidth:2,
     height: responsiveScreenHeight(5),
-    width: '80%',
+    width: '91%',
     fontSize: responsiveScreenFontSize(1.5),
     fontFamily: 'Poppins',
     color: '#000000',
     fontWeight: '400',
-  },
-  ToggleButton: {
-    width: responsiveScreenWidth(10.5),
-    height: responsiveScreenHeight(5),
-    // borderWidth:2,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   button: {
     marginTop: 50,
@@ -135,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DeleteAccount;
+export default ChangeEmail;

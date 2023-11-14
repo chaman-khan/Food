@@ -6,29 +6,39 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   Modal,
 } from 'react-native';
-import {Icon} from 'react-native-elements';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-const MyDonationDetail = ({navigation}) => {
+const theme = {
+  colors: {
+    primary: '#1CB5FD',
+    grey: '#9B9B9B',
+  },
+};
+const NGODonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
-  const {width, height} = Dimensions.get('screen');
+
   return (
     <View style={{flex: 1}}>
-      <View style={styles.topBar}>
-        <Icon
-          name="arrow-left"
-          type="feather"
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 15,
+        }}>
+        <Ionicons
+          name="arrow-back"
+          size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Donation Detail</Text>
-
+        <Text style={{fontSize: 25}}>Donation Details</Text>
         <Entypo
           name="dots-three-vertical"
-          size={20}
+          size={25}
           onPress={() => setClicked(true)}
         />
       </View>
@@ -51,38 +61,31 @@ const MyDonationDetail = ({navigation}) => {
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate('DonorStack', {
-            screen: 'Send Donation',
-          })
-        }>
-        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
-          Donate
-        </Text>
-      </TouchableOpacity>
 
       {clicked && (
         <Modal transparent>
           <View style={{flex: 1, backgroundColor: 'rgba(50, 50, 50,0.9)'}}>
-            <View
-              style={{
-                position: 'absolute',
-                bottom: 20,
-                height: 120,
-                gap: 20,
-                width: '95%',
-                alignSelf: 'center',
-              }}>
-              <TouchableOpacity
-                style={styles.cancel}
-                onPress={() => {
-                  setClicked(false);
-                  navigation.navigate('My Donation');
-                }}>
-                <Text>Cancel Request</Text>
-              </TouchableOpacity>
+            <View style={styles.modell}>
+              <View style={styles.request}>
+                <TouchableOpacity
+                  style={styles.button1}
+                  onPress={() => {
+                    setClicked(false);
+                    navigation.navigate('NGOStack', {
+                      screen: 'NGOMyDonation',
+                    });
+                  }}>
+                  <Text>Delete Request</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.button1}
+                  onPress={() => {
+                    setClicked(false);
+                    navigation.navigate('NGOStack', {screen: 'NGOEditRequest'});
+                  }}>
+                  <Text>Edit Request</Text>
+                </TouchableOpacity>
+              </View>
               <TouchableOpacity
                 style={styles.cancel}
                 onPress={() => setClicked(false)}>
@@ -97,15 +100,6 @@ const MyDonationDetail = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  topBar: {
-    width: '95%',
-    height: 40,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    alignSelf: 'center',
-    marginBottom: 10,
-  },
   category: {
     marginVertical: 5,
     color: '#20B7FE',
@@ -118,7 +112,7 @@ const styles = StyleSheet.create({
   },
   descView: {
     width: '100%',
-    borderBottomColor: '#858581',
+    borderBottomColor: theme.colors.grey,
     borderWidth: 1,
     marginVertical: 10,
   },
@@ -128,6 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+    height: 180,
   },
   button: {
     width: '90%',
@@ -146,5 +141,28 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: 'white',
   },
+  request: {
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 15,
+    backgroundColor: 'white',
+  },
+  modell: {
+    position: 'absolute',
+    bottom: 20,
+    height: 170,
+    gap: 20,
+    width: '95%',
+    alignSelf: 'center',
+  },
+  button1: {
+    width: '100%',
+    height: 50,
+    borderBottomWidth: 0.5,
+    borderBottomColor: theme.colors.grey,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
-export default MyDonationDetail;
+export default NGODonationDetail;

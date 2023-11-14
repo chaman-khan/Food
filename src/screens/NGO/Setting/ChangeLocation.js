@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Image} from 'react-native';
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
@@ -14,7 +7,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const ChangeLocation = ({navigation}) => {
+const ChangeLocation = () => {
   const [location, setLocation] = useState('Valencia Town');
 
   return (
@@ -44,11 +37,9 @@ const ChangeLocation = ({navigation}) => {
           <Image source={require('../../../Images/search.png')} />
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}>
+      <View style={styles.button}>
         <Text style={{color: 'white'}}>Save Changes</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };
