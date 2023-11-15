@@ -72,8 +72,8 @@ const NGO_Request = ({navigation}) => {
     <TouchableOpacity
       style={styles.tabWrapper}
       onPress={() => {
-        navigation.navigate('DonorStack', {
-          screen: 'Donation Details',
+        navigation.navigate('NGOStack', {
+          screen: 'NGODonationDetail',
           params: {item: item},
         });
       }}>
@@ -101,14 +101,24 @@ const NGO_Request = ({navigation}) => {
           source={require('../../../Images/logoo.png')}
         />
         <View style={styles.topIconCont}>
-          <Image
-            style={styles.topImageIcon}
-            source={require('../../../Images/profileLogo.png')}
-          />
-          <Image
-            style={styles.topImageIcon}
-            source={require('../../../Images/profileLogo1.png')}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('NGOSrack', {screen: 'NGOMyDonation'})
+            }>
+            <Image
+              style={styles.topImageIcon}
+              source={require('../../../Images/profileLogo.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('NGOStack', {screen: 'AllUserRequests'})
+            }>
+            <Image
+              style={styles.topImageIcon}
+              source={require('../../../Images/profileLogo1.png')}
+            />
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('NGOStack', {

@@ -136,7 +136,7 @@ const NGOCreateRequest = ({navigation}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          navigation.navigate('NGOStack', {screen: 'NGOMyDonation'})
+          navigation.navigate('NGOBottomTab', {screen: 'NGO_Request'})
         }>
         <Text style={{color: 'white'}}>Send request</Text>
       </TouchableOpacity>

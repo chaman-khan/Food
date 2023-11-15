@@ -46,7 +46,7 @@ const ChangeLocation = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}>
+        onPress={() => navigation.navigate('NGOBottomTab')}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
     </View>

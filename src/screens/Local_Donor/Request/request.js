@@ -101,10 +101,15 @@ const Donor_Request = ({navigation}) => {
           source={require('../../../Images/logoo.png')}
         />
         <View style={styles.topIconCont}>
-          <Image
-            style={styles.topImageIcon}
-            source={require('../../../Images/profileLogo.png')}
-          />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('DonorStack', {screen: 'My Donation'})
+            }>
+            <Image
+              style={styles.topImageIcon}
+              source={require('../../../Images/profileLogo.png')}
+            />
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('DonorStack', {

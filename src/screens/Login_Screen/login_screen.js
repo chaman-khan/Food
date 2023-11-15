@@ -51,7 +51,7 @@ const LoginScreen = ({navigation}) => {
     //   navigation.navigate('NGOBottomTab');
     //   return false;
     // }
-    navigation.navigate('NGOBottomTab');
+    navigation.navigate('BottomTab');
   };
   return (
     <KeyboardAvoidingView

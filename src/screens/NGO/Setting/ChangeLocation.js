@@ -6,8 +6,9 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
+import {TouchableOpacity} from 'react-native';
 
-const ChangeLocation = () => {
+const ChangeLocation = ({navigation}) => {
   const [location, setLocation] = useState('Valencia Town');
 
   return (
@@ -37,9 +38,11 @@ const ChangeLocation = () => {
           <Image source={require('../../../Images/search.png')} />
         </View>
       </View>
-      <View style={styles.button}>
-        <Text style={{color: 'white'}}>Save Changes</Text>
-      </View>
+      <TouchableOpacity onPress={() => navigation.navigate('BottomTab')}>
+        <View style={styles.button}>
+          <Text style={{color: 'white'}}>Save Changes</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

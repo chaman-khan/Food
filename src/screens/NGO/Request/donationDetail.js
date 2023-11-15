@@ -42,11 +42,8 @@ const NGODonationDetail = ({navigation}) => {
           onPress={() => setClicked(true)}
         />
       </View>
-      <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
-      />
-      <View style={{margin: 5, paddingHorizontal: 12}}>
+      <Image source={routee.image} style={{width: '100%'}} />
+      <View style={{margin: 5, paddingHorizontal: 7}}>
         <Text style={styles.category}>{routee.category}</Text>
         <Text style={{marginVertical: 7}}>{routee.title}</Text>
         <View style={styles.categoryView}>
@@ -113,11 +110,11 @@ const styles = StyleSheet.create({
   descView: {
     width: '100%',
     borderBottomColor: theme.colors.grey,
-    borderWidth: 1,
+    borderWidth: 0.2,
     marginVertical: 10,
   },
   desc: {
-    borderWidth: 1,
+    borderWidth: 0.2,
     borderColor: '#858581',
     borderRadius: 10,
     padding: 10,

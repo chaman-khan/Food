@@ -14,7 +14,7 @@ const Stack = createNativeStackNavigator();
 const BottomTab = () => {
   return (
     <Tab.Navigator
-      initialRouteName="Notification"
+      initialRouteName="Request"
       screenOptions={({route}) => ({
         tabBarActiveTintColor: '#20B7FE',
         inactiveTintColor: 'gray', // Set your desired inactive color

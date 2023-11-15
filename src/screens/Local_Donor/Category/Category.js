@@ -20,7 +20,7 @@ const Donor_Category = () => {
         </View>
       </View>
       <View style={[styles.category, {backgroundColor: '#E9FDF6'}]}>
-        <Image source={require('../../../Images/medicine.png')} />
+        <Image source={require('../../../Images/medicinec.png')} />
         <Text style={{fontSize: 20, fontWeight: '400'}}>Medicine</Text>
       </View>
     </View>

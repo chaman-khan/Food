@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {theme} from '../../../theme/theme';
 const MyDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
@@ -32,10 +33,15 @@ const MyDonationDetail = ({navigation}) => {
           onPress={() => setClicked(true)}
         />
       </View>
-      <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
-      />
+      <View style={styles.red}>
+        <Image source={require('../../../Images/i.png')} tintColor="white" />
+        <Text
+          style={{width: '90%', color: 'white', fontSize: 13, lineHeight: 20}}>
+          Your Request has been sent to NGO. A notification will be sent to you
+          when it is accepted
+        </Text>
+      </View>
+      <Image source={routee.image} style={{width: '100%'}} />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.category}</Text>
         <Text style={{marginVertical: 7}}>{routee.title}</Text>
@@ -48,7 +54,7 @@ const MyDonationDetail = ({navigation}) => {
           <Text style={{color: '#20B7FE'}}>00</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontSize: 17}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
       <TouchableOpacity
@@ -118,13 +124,13 @@ const styles = StyleSheet.create({
   },
   descView: {
     width: '100%',
-    borderBottomColor: '#858581',
-    borderWidth: 1,
+    borderBottomColor: theme.colors.grey,
+    borderWidth: 0.3,
     marginVertical: 10,
   },
   desc: {
-    borderWidth: 1,
-    borderColor: '#858581',
+    borderWidth: 0.3,
+    borderColor: theme.colors.grey,
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
@@ -145,6 +151,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 15,
     backgroundColor: 'white',
+  },
+  red: {
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'red',
+    padding: 9,
   },
 });
 export default MyDonationDetail;

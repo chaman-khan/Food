@@ -30,7 +30,7 @@ function MainNav() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="NGOBottomTab"
+        initialRouteName="Splash"
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="OnBoarding" component={OnBording} />

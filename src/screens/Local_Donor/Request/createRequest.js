@@ -144,8 +144,10 @@ const CreateRequest = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          onPress={() => navigation.navigate('My Donation')}>
-          <Text style={{color: 'white'}}>Send</Text>
+          onPress={() =>
+            navigation.navigate('DonorStack', {screen: 'My Donation'})
+          }>
+          <Text style={{color: 'white'}}>Send Request</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
