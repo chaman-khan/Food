@@ -7,6 +7,7 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
+  Image,
   Dimensions,
   Modal,
   Alert,
@@ -24,6 +25,7 @@ const categoryData = ['Leftover', 'medicine', 'clothes'];
 const NGOEditRequest = ({navigation}) => {
   const [category, setCategory] = useState('Select');
   const [dropOn, setDropOn] = useState(false);
+  const [source, setSource] = useState(null);
 
   const DropDown = ({setValue, value, data, dropOpen, setDropOpenn}) => {
     return (
@@ -71,10 +73,11 @@ const NGOEditRequest = ({navigation}) => {
   };
 
   const gallery = () => {
-    ImagePicker.openPicker({
-      multiple: true,
-    }).then(images => {
+    ImagePicker.openPicker({}).then(images => {
       console.log(images);
+      setSource(images.path);
+      console.log('source');
+      console.log(source);
     });
   };
   return (
@@ -94,13 +97,22 @@ const NGOEditRequest = ({navigation}) => {
           onPress={() => {
             gallery();
           }}>
-          <Icon
-            name="pluscircle"
-            type="ant-design"
-            color={theme.colors.primary}
-            size={30}
-          />
-          <Text style={{fontSize: 12, marginTop: 8}}>Tap to upload</Text>
+          {source == null ? (
+            <View>
+              <Icon
+                name="pluscircle"
+                type="ant-design"
+                color={theme.colors.primary}
+                size={30}
+              />
+              <Text style={{fontSize: 12, marginTop: 8}}>Tap to upload</Text>
+            </View>
+          ) : (
+            <Image
+              source={{uri: source}}
+              style={{width: '100%', height: '100%', borderRadius: 10}}
+            />
+          )}
         </TouchableOpacity>
         <InputFielder
           title={'Donation Introduction'}
@@ -122,7 +134,7 @@ const NGOEditRequest = ({navigation}) => {
           <InputFielder
             title={'Donation Quantity'}
             placeholder={'Donation Description'}
-            height={220}
+            height={180}
             multiline
           />
         </View>
