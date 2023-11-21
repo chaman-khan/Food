@@ -9,9 +9,16 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   SafeAreaView,
+  CheckBox,
 } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {styles} from './Signup_Styles';
+import {useDispatch} from 'react-redux';
+import {registerUser} from '../../redux/actions/auth';
+import {Loading} from '../../components/loading';
+// import {CheckBox} from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
 const data = [
   {label: 'Local Donor', value: '1'},
   {label: 'NGO', value: '2'},
@@ -31,6 +38,9 @@ const SignUp_Screen = ({navigation}) => {
   const [nameError, setNameError] = useState(false);
   const [phone_number, setPhone_number] = useState('');
   const [phone_numberError, setPhone_numberError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [terms, setTerms] = useState(false);
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -102,22 +112,38 @@ const SignUp_Screen = ({navigation}) => {
         {cancelable: false},
       );
     } else {
+      setLoading(true);
+      const data = {
+        fullName: 'demo',
+        username: name,
+        email: email,
+        password: password,
+        location: 'paris',
+        type: value,
+      };
+      console.log(data);
+      dispatch(registerUser(data, handleSuccess));
       // console.log(value, name, phone_number, email, password)
-      Alert.alert(
-        'Successfully Signed up',
-        'You have successfully signed up. Press on Sign in button to continue.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
+
       // navigation.navigate("Login")
     }
   };
-
+  const handleSuccess = val => {
+    console.log('response from api.................. =>');
+    console.log(val);
+    setLoading(false);
+    Alert.alert(
+      val.status === 'failed' ? 'Error' : 'Success',
+      val.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => console.log('OK Pressed'),
+        },
+      ],
+      {cancelable: false},
+    );
+  };
   const renderLabel = () => {
     if (value || isFocus) {
       return (
@@ -180,7 +206,7 @@ const SignUp_Screen = ({navigation}) => {
               </View>
             </View>
             <View style={styles.User_Box}>
-              <Text style={styles.Head_Texts}>User Name</Text>
+              <Text style={styles.Head_Texts}>Full Name</Text>
               <View style={styles.User_Input_Container}>
                 <Image
                   source={require('../../Images/User.png')}
@@ -196,6 +222,22 @@ const SignUp_Screen = ({navigation}) => {
               </View>
             </View>
             <View style={styles.User_Box}>
+              <Text style={styles.Head_Texts}>User Name</Text>
+              <View style={styles.User_Input_Container}>
+                <Image
+                  source={require('../../Images/User.png')}
+                  style={styles.UserIcon}
+                />
+                <TextInput
+                  onChangeText={Text => setName(Text)}
+                  placeholderTextColor={'#818181'}
+                  // placeholderStyle={styles.placeholderStyle}
+                  style={styles.User_input}
+                  placeholder="username"
+                />
+              </View>
+            </View>
+            {/* <View style={styles.User_Box}>
               <Text style={styles.Head_Texts}>Phone Number</Text>
               <View style={styles.User_Input_Container}>
                 <Image
@@ -212,7 +254,7 @@ const SignUp_Screen = ({navigation}) => {
                   placeholder="Phone Number"
                 />
               </View>
-            </View>
+            </View> */}
             <View style={styles.User_Box}>
               <Text style={styles.Head_Texts}>Email</Text>
               <View style={styles.User_Input_Container}>
@@ -257,6 +299,31 @@ const SignUp_Screen = ({navigation}) => {
                 </TouchableOpacity>
               </View>
             </View>
+            <View style={styles.User_Box}>
+              <Text style={styles.Head_Texts}>Location</Text>
+              <View style={styles.newSection}>
+                <TextInput placeholder="Add" />
+                <Entypo name="location-pin" size={20} />
+              </View>
+            </View>
+            <View
+              style={{
+                width: '85%',
+                marginTop: 30,
+              }}>
+              <BouncyCheckbox
+                size={20}
+                fillColor="black"
+                unfillColor="#FFFFFF"
+                text="I agree to all terms and conditions"
+                // iconStyle={{borderColor: 'red'}}
+                // innerIconStyle={{borderWidth: 2}}
+                textStyle={{fontFamily: 'JosefinSans-Regular'}}
+                onPress={() => {
+                  setTerms(Boolean);
+                }}
+              />
+            </View>
             <View style={styles.Button_Box}>
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -274,6 +341,7 @@ const SignUp_Screen = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Loading visible={loading} />
         </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>

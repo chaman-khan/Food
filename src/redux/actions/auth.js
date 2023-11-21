@@ -1,35 +1,25 @@
-import axios from 'axios';
 import * as types from './types';
 import {apiKey, baseUrl} from '../../constants/constants';
-import ShowSnackBar from '../../components/SnackBar';
-import {fetchHotelDetail, homeLoad} from './home';
 
-export const registerManager = (data, handleSuccess) => {
+export const registerUser = (data, handleSuccess) => {
   return async dispatch => {
     try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+
+      var raw = JSON.stringify(data);
       var requestOptions = {
         method: 'POST',
-        body: data,
+        headers: myHeaders,
+        body: raw,
         redirect: 'follow',
       };
 
-      fetch(`${baseUrl}register_manager.php`, requestOptions)
+      fetch(`${baseUrl}api/user/register`, requestOptions)
         .then(response => response.json())
-        .then(function (response) {
-          console.log('response.data.data');
-          console.log(response);
-          dispatch(authLoad(false));
-          if (response.state === 'OK') {
-            dispatch(signupSuccess(response.data.manager));
-            handleSuccess(true);
-          } else {
-            ShowSnackBar('There is something wrong');
-          }
-        })
-        .catch(function (error) {
-          dispatch(authLoad(false));
-          console.log(error);
-        });
+        .then(result => handleSuccess(result))
+        .catch(error => console.log('error', error));
     } catch (err) {
       dispatch(authLoad(false));
       console.log(err);
@@ -40,42 +30,23 @@ export const registerManager = (data, handleSuccess) => {
 export const loginManager = (data, successLogin) => {
   return async dispatch => {
     try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+
+      var raw = JSON.stringify(data);
+
       var requestOptions = {
         method: 'POST',
-        body: data,
+        headers: myHeaders,
+        body: raw,
         redirect: 'follow',
       };
 
-      fetch(`${baseUrl}login_manager.php`, requestOptions)
-        .then(response => response.json())
-        .then(response => {
-          console.log('..........................');
-          console.log(response);
-          if (response.state === 'OK') {
-            successLogin(response.data.manager);
-            dispatch(loginSuccess(response.data.manager));
-          } else {
-            dispatch(authLoad(false));
-            ShowSnackBar('There is something wrong');
-          }
-        })
+      fetch(`${baseUrl}/api/user/login`, requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
         .catch(error => console.log('error', error));
-
-      // axios(config)
-      //   .then(function (response) {
-      //     dispatch(authLoad(false));
-      //     console.log(response.data);
-      //     if (response.data.state === 'OK') {
-      //       successLogin(true);
-      //       dispatch(loginSuccess(response.data.data.manager));
-      //     } else {
-      //       ShowSnackBar('There is something wrong');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     dispatch(authLoad(false));
-      //     console.log(error);
-      //   });
     } catch (err) {
       dispatch(authLoad(false));
       console.log(err);
