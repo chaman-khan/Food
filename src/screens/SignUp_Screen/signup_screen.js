@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Text,
   View,
@@ -12,8 +12,10 @@ import {
 } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {styles} from './Signup_Styles';
-import { useDispatch } from 'react-redux';
-import { baseUrl } from '../../constants/constants';
+import {useDispatch} from 'react-redux';
+import {baseUrl} from '../../constants/constants';
+import MapView, {Marker} from 'react-native-maps';
+import Geolocation from '@react-native-community/geolocation';
 const data = [
   {label: 'Local Donor', value: '1'},
   {label: 'NGO', value: '2'},
@@ -34,9 +36,24 @@ const SignUp_Screen = ({navigation}) => {
   const [userName, setUsername] = useState('');
   const [phone_number, setPhone_number] = useState('');
   const [phone_numberError, setPhone_numberError] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+  //   useEffect(() => {
+  //     // Get the user's current location when the component mounts
+  //     getCurrentLocation();
+  //   }, []);
+  const getCurrentLocation = () => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setCurrentLocation({latitude, longitude});
+      },
+      error => console.log(error),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
   };
   const handleSignUp = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
@@ -108,44 +125,44 @@ const SignUp_Screen = ({navigation}) => {
     } else if (value != '1') {
       navigation.navigate('SignUp Verification');
     } else {
-        var myHeaders = new Headers();
-myHeaders.append("Accept", "application/json");
-myHeaders.append("Content-Type", "application/json");
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
 
-var raw = JSON.stringify({
-  "fullName": name,
-  "username": userName,
-  "email": email,
-  "password": password,
-  "location": loca,
-  "latitude": lati,
-  "longitude": "68.3357165",
-  "role": "restaurant"
-});
+      var raw = JSON.stringify({
+        fullName: name,
+        username: userName,
+        email: email,
+        password: password,
+        location: loca,
+        latitude: lati,
+        longitude: '68.3357165',
+        role: 'restaurant',
+      });
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      };
 
-fetch(`${baseUrl}/user/register`, requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+      fetch(`${baseUrl}/user/register`, requestOptions)
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
       // console.log(value, name, phone_number, email, password)
-    //   Alert.alert(
-    //     'Successfully Signed up',
-    //     'You have successfully signed up. Press on Sign in button to continue.',
-    //     [
-    //       {
-    //         text: 'OK',
-    //         onPress: () => console.log('OK Pressed'),
-    //       },
-    //     ],
-    //     {cancelable: false},
-    //   );
+      //   Alert.alert(
+      //     'Successfully Signed up',
+      //     'You have successfully signed up. Press on Sign in button to continue.',
+      //     [
+      //       {
+      //         text: 'OK',
+      //         onPress: () => console.log('OK Pressed'),
+      //       },
+      //     ],
+      //     {cancelable: false},
+      //   );
       // navigation.navigate("Login")
     }
   };
@@ -320,6 +337,24 @@ fetch(`${baseUrl}/user/register`, requestOptions)
                   style={{width: 18, height: 18, marginRight: 20}}></Image>
               </TouchableOpacity>
             </View>
+            {currentLocation && (
+              <MapView
+                style={styles.map}
+                initialRegion={{
+                  latitude: currentLocation.latitude,
+                  longitude: currentLocation.longitude,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}>
+                <Marker
+                  coordinate={{
+                    latitude: currentLocation.latitude,
+                    longitude: currentLocation.longitude,
+                  }}
+                  title="Current Location"
+                />
+              </MapView>
+            )}
             {value == '1' ? (
               <View style={styles.Button_Box}>
                 <TouchableOpacity
