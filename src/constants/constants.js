@@ -1,1 +1,1 @@
-export const baseUrl = 'http://3.27.209.209:8000/';
+export const baseUrl = 'https://foodcare.glitch.me/api';

@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import {styles} from './Signup_Styles';
+import { useDispatch } from 'react-redux';
+import { baseUrl } from '../../constants/constants';
 const data = [
   {label: 'Local Donor', value: '1'},
   {label: 'NGO', value: '2'},
@@ -29,8 +31,10 @@ const SignUp_Screen = ({navigation}) => {
   const [passwordError, setPasswordError] = useState(false);
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState(false);
+  const [userName, setUsername] = useState('');
   const [phone_number, setPhone_number] = useState('');
   const [phone_numberError, setPhone_numberError] = useState(false);
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -104,18 +108,44 @@ const SignUp_Screen = ({navigation}) => {
     } else if (value != '1') {
       navigation.navigate('SignUp Verification');
     } else {
+        var myHeaders = new Headers();
+myHeaders.append("Accept", "application/json");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "fullName": name,
+  "username": userName,
+  "email": email,
+  "password": password,
+  "location": loca,
+  "latitude": lati,
+  "longitude": "68.3357165",
+  "role": "restaurant"
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch(`${baseUrl}/user/register`, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
       // console.log(value, name, phone_number, email, password)
-      Alert.alert(
-        'Successfully Signed up',
-        'You have successfully signed up. Press on Sign in button to continue.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
+    //   Alert.alert(
+    //     'Successfully Signed up',
+    //     'You have successfully signed up. Press on Sign in button to continue.',
+    //     [
+    //       {
+    //         text: 'OK',
+    //         onPress: () => console.log('OK Pressed'),
+    //       },
+    //     ],
+    //     {cancelable: false},
+    //   );
       // navigation.navigate("Login")
     }
   };
@@ -189,11 +219,29 @@ const SignUp_Screen = ({navigation}) => {
                   style={styles.UserIcon}
                 />
                 <TextInput
+                  onChangeText={Text => setUsername(Text)}
+                  placeholderTextColor={'#818181'}
+                  // placeholderStyle={styles.placeholderStyle}
+                  style={styles.User_input}
+                  placeholder="User name"
+                  value={userName}
+                />
+              </View>
+            </View>
+            <View style={styles.User_Box}>
+              <Text style={styles.Head_Texts}>Full Name</Text>
+              <View style={styles.User_Input_Container}>
+                <Image
+                  source={require('../../Images/User.png')}
+                  style={styles.UserIcon}
+                />
+                <TextInput
                   onChangeText={Text => setName(Text)}
                   placeholderTextColor={'#818181'}
                   // placeholderStyle={styles.placeholderStyle}
                   style={styles.User_input}
                   placeholder="Full name"
+                  value={name}
                 />
               </View>
             </View>
@@ -212,6 +260,7 @@ const SignUp_Screen = ({navigation}) => {
                   // placeholderStyle={styles.placeholderStyle}
                   style={styles.User_input}
                   placeholder="Phone Number"
+                  value={phone_number}
                 />
               </View>
             </View>
@@ -228,6 +277,7 @@ const SignUp_Screen = ({navigation}) => {
                   // placeholderStyle={styles.placeholderStyle}
                   style={styles.User_input}
                   placeholder="Email"
+                  value={email}
                 />
               </View>
             </View>
@@ -244,6 +294,7 @@ const SignUp_Screen = ({navigation}) => {
                   placeholderTextColor={'#818181'}
                   style={styles.Password_input}
                   placeholder="Password"
+                  value={password}
                 />
                 <TouchableOpacity
                   style={styles.ToggleButton}
