@@ -45,10 +45,7 @@ const SignUp_Screen = ({navigation}) => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-    useEffect(() => {
-      // Get the user's current location when the component mounts
-      getCurrentLocation();
-    }, []);
+    
   const getCurrentLocation = async () => {
     try {
       const granted = await PermissionsAndroid.request(
