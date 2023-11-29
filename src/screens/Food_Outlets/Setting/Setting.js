@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
-const Donor_Setting = ({navigation}) => {
+const FoodOutlet_Setting = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-export default Donor_Setting;
+export default FoodOutlet_Setting;

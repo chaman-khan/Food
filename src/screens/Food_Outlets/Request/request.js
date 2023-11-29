@@ -15,7 +15,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 const {width, height} = Dimensions.get('screen');
-const Donor_Request = ({navigation}) => {
+const FoodOutlet_Request = ({navigation}) => {
   const [category, setCategory] = useState('leftover');
   const [title, setTitle] = useState('Norshing Hearts through Food Donation');
   const [totalNumber, setTotalNumber] = useState(4575);
@@ -233,4 +233,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Donor_Request;
+export default FoodOutlet_Request;

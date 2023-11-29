@@ -7,7 +7,7 @@ const theme = {
   },
 };
 
-const Donor_Notification = () => {
+const FoodOutlet_Notification = () => {
   const [noOfNotifications, setNoOFNotifications] = useState(1);
   const Data = [
     {
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
-export default Donor_Notification;
+export default FoodOutlet_Notification;
