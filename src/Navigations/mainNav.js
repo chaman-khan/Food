@@ -23,6 +23,7 @@ import ChangeLocation from '../screens/Local_Donor/Setting/ChangeLocation';
 import NGOBottomTab from './tabs/ngoBottomTab';
 import DonorStack from './stacks/donorStack';
 import NGOStack from './stacks/ngoStack';
+import FoodBottomTab from './tabs/foodBottomTab';
 
 function MainNav() {
   const Stack = createNativeStackNavigator();
@@ -41,6 +42,7 @@ function MainNav() {
         <Stack.Screen name="BottomTab" component={BottomTab} />
         <Stack.Screen name="NGOStack" component={NGOStack} />
         <Stack.Screen name="NGOBottomTab" component={NGOBottomTab} />
+        <Stack.Screen name='FoodBottomTab' component={FoodBottomTab} />
       </Stack.Navigator>
     </NavigationContainer>
   );
