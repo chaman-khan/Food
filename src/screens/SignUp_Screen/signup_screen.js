@@ -37,6 +37,8 @@ const SignUp_Screen = ({navigation}) => {
   const [phone_number, setPhone_number] = useState('');
   const [phone_numberError, setPhone_numberError] = useState(false);
   const [currentLocation, setCurrentLocation] = useState(null);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setlongitude] = useState(null);
   const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
