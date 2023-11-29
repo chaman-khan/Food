@@ -17,6 +17,7 @@ import {baseUrl} from '../../constants/constants';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {registerUser} from '../../redux/actions/auth';
+import { PermissionsAndroid } from 'react-native';
 const data = [
   {label: 'Local Donor', value: '1'},
   {label: 'NGO', value: '2'},
@@ -48,16 +49,36 @@ const SignUp_Screen = ({navigation}) => {
   //     // Get the user's current location when the component mounts
   //     getCurrentLocation();
   //   }, []);
-  const getCurrentLocation = () => {
-    Geolocation.getCurrentPosition(
-      position => {
-        const {latitude, longitude} = position.coords;
-        setCurrentLocation({latitude, longitude});
-      },
-      error => console.log(error),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    );
+  const getCurrentLocation = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message: 'This app needs access to your location.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('Location permission granted');
+        Geolocation.getCurrentPosition(
+          position => {
+            const { latitude, longitude } = position.coords;
+            setCurrentLocation({ latitude, longitude });
+          },
+          error => console.log('Error getting location:', error),
+          { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+        );
+      } else {
+        console.log('Location permission denied');
+      }
+    } catch (err) {
+      console.warn('Error requesting location permission:', err);
+    }
   };
+  
   const handleSignUp = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
     const emailRegex =
