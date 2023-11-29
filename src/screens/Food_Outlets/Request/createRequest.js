@@ -22,7 +22,7 @@ const theme = {
 
 const categoryData = ['Leftover', 'medicine', 'clothes'];
 
-const CreateRequest = ({navigation}) => {
+const FoodCreateRequest = ({navigation}) => {
   const [category, setCategory] = useState('Select');
   const [dropOn, setDropOn] = useState(false);
   const [source, setSource] = useState(null);
@@ -236,4 +236,4 @@ const styles = StyleSheet.create({
     elevation: 11,
   },
 });
-export default CreateRequest;
+export default FoodCreateRequest;

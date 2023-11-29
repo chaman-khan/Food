@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const DeleteAccount = ({navigation}) => {
+const DeleteAccountFood = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
   const togglePasswordVisibility = () => {
@@ -135,4 +135,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default DeleteAccount;
+export default DeleteAccountFood;

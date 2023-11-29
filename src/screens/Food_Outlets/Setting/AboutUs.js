@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-const AboutUs = () => {
+const AboutUsFood = () => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -29,4 +29,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AboutUs;
+export default AboutUsFood;

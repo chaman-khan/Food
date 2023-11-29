@@ -8,7 +8,7 @@ const theme = {
     grey: '#9B9B9B',
   },
 };
-const DonationDetail = ({navigation}) => {
+const FoodDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   return (
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     bottom: 10,
   },
 });
-export default DonationDetail;
+export default FoodDonationDetail;

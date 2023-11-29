@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const ChangeEmail = ({navigation}) => {
+const ChangeFoodEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
 
   return (
@@ -113,4 +113,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChangeEmail;
+export default ChangeFoodEmail;

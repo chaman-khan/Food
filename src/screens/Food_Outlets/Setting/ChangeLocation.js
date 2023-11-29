@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const ChangeLocation = ({navigation}) => {
+const ChangeFoodLocation = ({navigation}) => {
   const [location, setLocation] = useState('Valencia Town');
 
   return (
@@ -111,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChangeLocation;
+export default ChangeFoodLocation;

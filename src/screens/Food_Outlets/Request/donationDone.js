@@ -1,7 +1,7 @@
 import react from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-const Donation_Done = ({navigation}) => {
+const Food_Donation_Done = ({navigation}) => {
   return (
     <View>
       <Entypo
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default Donation_Done;
+export default Food_Donation_Done;

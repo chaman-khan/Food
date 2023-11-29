@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const Send_Donation = ({navigation}) => {
+const Food_Send_Donation = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View style={{width: '95%', alignSelf: 'center', gap: 20}}>
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 });
-export default Send_Donation;
+export default Food_Send_Donation;

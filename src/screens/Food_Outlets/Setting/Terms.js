@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
 
-const Terms = ({navigation}) => {
+const FoodTerms = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Terms;
+export default FoodTerms;

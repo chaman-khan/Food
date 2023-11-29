@@ -12,7 +12,7 @@ import {
 import {Icon} from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {theme} from '../../../theme/theme';
-const MyDonationDetail = ({navigation}) => {
+const MyFoodDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
@@ -161,4 +161,4 @@ const styles = StyleSheet.create({
     padding: 9,
   },
 });
-export default MyDonationDetail;
+export default MyFoodDonationDetail;

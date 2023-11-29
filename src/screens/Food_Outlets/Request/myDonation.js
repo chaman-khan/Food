@@ -19,7 +19,7 @@ const theme = {
 };
 const {width, height} = Dimensions.get('screen');
 
-const MyDonation = ({navigation}) => {
+const MyFoodDonation = ({navigation}) => {
   const [selectedColor1, setSelectedColor1] = useState(theme.colors.primary);
   const [selectedColor2, setSelectedColor2] = useState('transparent');
 
@@ -253,4 +253,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MyDonation;
+export default MyFoodDonation;

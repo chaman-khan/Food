@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
 
-const FAQs = () => {
+const FoodFAQs = () => {
   const [source, setSource] = useState(
     require('../../../Images/rightArrow.png'),
   );
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FAQs;
+export default FoodFAQs;

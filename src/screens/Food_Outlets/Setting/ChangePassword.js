@@ -14,7 +14,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 
-const ChangePassword = ({navigation}) => {
+const ChangeFoodPassword = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
   const togglePasswordVisibility = () => {
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ChangePassword;
+export default ChangeFoodPassword;
