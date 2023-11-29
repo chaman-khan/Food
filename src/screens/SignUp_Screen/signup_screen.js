@@ -45,10 +45,10 @@ const SignUp_Screen = ({navigation}) => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  //   useEffect(() => {
-  //     // Get the user's current location when the component mounts
-  //     getCurrentLocation();
-  //   }, []);
+    useEffect(() => {
+      // Get the user's current location when the component mounts
+      getCurrentLocation();
+    }, []);
   const getCurrentLocation = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -58,7 +58,7 @@ const SignUp_Screen = ({navigation}) => {
           message: 'This app needs access to your location.',
           buttonNeutral: 'Ask Me Later',
           buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
+          buttonPositive: 'OK', 
         },
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
