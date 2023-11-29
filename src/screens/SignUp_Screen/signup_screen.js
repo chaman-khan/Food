@@ -49,6 +49,7 @@ const SignUp_Screen = ({navigation}) => {
       // Get the user's current location when the component mounts
       getCurrentLocation();
     }, []);
+    
   const getCurrentLocation = async () => {
     try {
       const granted = await PermissionsAndroid.request(
