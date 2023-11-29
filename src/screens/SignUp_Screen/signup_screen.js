@@ -16,6 +16,7 @@ import {useDispatch} from 'react-redux';
 import {baseUrl} from '../../constants/constants';
 import MapView, {Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
+import {registerUser} from '../../redux/actions/auth';
 const data = [
   {label: 'Local Donor', value: '1'},
   {label: 'NGO', value: '2'},
@@ -131,19 +132,6 @@ const SignUp_Screen = ({navigation}) => {
       myHeaders.append('Accept', 'application/json');
       myHeaders.append('Content-Type', 'application/json');
 
-      registerUser(
-        {
-          fullName: name,
-          username: userName,
-          email: email,
-          password: password,
-          location: currentLocation,
-          latitude: latitude,
-          longitude: longitude,
-          role: value,
-        },
-        handleRegistrationSuccess
-      );
       var raw = JSON.stringify({
         fullName: name,
         username: userName,
@@ -155,6 +143,7 @@ const SignUp_Screen = ({navigation}) => {
         role: value,
       });
 
+      registerUser(raw);
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
@@ -344,7 +333,10 @@ const SignUp_Screen = ({navigation}) => {
             </View>
             <View style={styles.Location_Box}>
               <Text style={styles.Head_Texts}>Location</Text>
-              <TouchableOpacity style={styles.Location} activeOpacity={0.5}>
+              <TouchableOpacity
+                style={styles.Location}
+                activeOpacity={0.5}
+                onPress={getCurrentLocation}>
                 <Text style={styles.Location_field_text}>Location</Text>
                 <Image
                   //   source={require('../../Images/Location_mark.png')}
