@@ -131,6 +131,19 @@ const SignUp_Screen = ({navigation}) => {
       myHeaders.append('Accept', 'application/json');
       myHeaders.append('Content-Type', 'application/json');
 
+      registerUser(
+        {
+          fullName: name,
+          username: userName,
+          email: email,
+          password: password,
+          location: currentLocation,
+          latitude: latitude,
+          longitude: longitude,
+          role: value,
+        },
+        handleRegistrationSuccess
+      );
       var raw = JSON.stringify({
         fullName: name,
         username: userName,
