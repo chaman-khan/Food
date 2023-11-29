@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     },
     Display: {
         flex: 1,
-        height:responsiveScreenHeight(100),
+        // height:responsiveScreenHeight(110),
         backgroundColor: '#FFFFFF',
         alignItems: 'center',
         // justifyContent: 'center',
