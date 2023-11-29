@@ -138,7 +138,7 @@ const SignUp_Screen = ({navigation}) => {
         password: password,
         location: currentLocation,
         latitude: latitude,
-        longitude: '68.3357165',
+        longitude: longitude,
         role: value,
       });
 
