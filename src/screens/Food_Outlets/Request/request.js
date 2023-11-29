@@ -72,7 +72,7 @@ const FoodOutlet_Request = ({navigation}) => {
     <TouchableOpacity
       style={styles.tabWrapper}
       onPress={() => {
-        navigation.navigate('DonorStack', {
+        navigation.navigate('FoodStack', {
           screen: 'Donation Details',
           params: {item: item},
         });
@@ -103,7 +103,7 @@ const FoodOutlet_Request = ({navigation}) => {
         <View style={styles.topIconCont}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('DonorStack', {screen: 'My Donation'})
+              navigation.navigate('FoodStack', {screen: 'My Donation'})
             }>
             <Image
               style={styles.topImageIcon}
@@ -112,7 +112,7 @@ const FoodOutlet_Request = ({navigation}) => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('DonorStack', {
+              navigation.navigate('FoodStack', {
                 screen: 'Create Request',
               })
             }>

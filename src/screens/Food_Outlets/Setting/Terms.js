@@ -13,13 +13,13 @@ const FoodTerms = ({navigation}) => {
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
-        onPress={() => navigation.navigate('DonorStack', {screen: 'FAQs'})}>
+        onPress={() => navigation.navigate('FoodStack', {screen: 'FAQs'})}>
         <Text>FAQ's</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
-        onPress={() => navigation.navigate('DonorStack', {screen: 'AboutUs'})}>
+        onPress={() => navigation.navigate('FoodStack', {screen: 'AboutUs'})}>
         <Text>About Us</Text>
       </TouchableOpacity>
     </View>

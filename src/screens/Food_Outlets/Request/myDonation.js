@@ -97,7 +97,7 @@ const MyFoodDonation = ({navigation}) => {
       style={styles.tabWrapper}
       onPress={() => {
         if (pos1) {
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'My Donation Details',
             params: {item: item},
           });

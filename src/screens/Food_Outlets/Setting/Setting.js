@@ -11,7 +11,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'ChangePassword',
           })
         }>
@@ -21,7 +21,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'Terms',
           })
         }>
@@ -31,7 +31,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'ChangeEmail',
           })
         }>
@@ -43,7 +43,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'ChangeLocation',
           })
         }>
@@ -53,7 +53,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'DeleteAccount',
           })
         }>

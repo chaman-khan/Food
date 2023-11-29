@@ -50,7 +50,7 @@ const FoodDonationDetail = ({navigation}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() => {
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'Send Donation',
           });
         }}>

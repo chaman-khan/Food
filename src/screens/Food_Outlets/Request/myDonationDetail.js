@@ -60,7 +60,7 @@ const MyFoodDonationDetail = ({navigation}) => {
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('FoodStack', {
             screen: 'Send Donation',
           })
         }>
@@ -85,7 +85,8 @@ const MyFoodDonationDetail = ({navigation}) => {
                 style={styles.cancel}
                 onPress={() => {
                   setClicked(false);
-                  navigation.navigate('My Donation');
+                  navigation.navigate('FoodStack', {
+                    screen: 'My Donation'});
                 }}>
                 <Text>Cancel Request</Text>
               </TouchableOpacity>

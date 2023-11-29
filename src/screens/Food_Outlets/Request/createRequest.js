@@ -145,7 +145,7 @@ const FoodCreateRequest = ({navigation}) => {
             justifyContent: 'center',
           }}
           onPress={() =>
-            navigation.navigate('DonorStack', {screen: 'My Donation'})
+            navigation.navigate('FoodStack', {screen: 'My Donation'})
           }>
           <Text style={{color: 'white'}}>Send Request</Text>
         </TouchableOpacity>
