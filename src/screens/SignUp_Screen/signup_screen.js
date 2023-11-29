@@ -134,10 +134,10 @@ const SignUp_Screen = ({navigation}) => {
         username: userName,
         email: email,
         password: password,
-        location: loca,
-        latitude: lati,
+        location: currentLocation,
+        latitude: '79.9856775',
         longitude: '68.3357165',
-        role: 'restaurant',
+        role: value,
       });
 
       var requestOptions = {
