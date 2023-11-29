@@ -20,41 +20,41 @@ const theme = {
   },
 };
 
-const categoryData = ['Leftover', 'medicine', 'clothes'];
+// const categoryData = ['Leftover', 'medicine', 'clothes'];
 
 const FoodCreateRequest = ({navigation}) => {
   const [category, setCategory] = useState('Select');
   const [dropOn, setDropOn] = useState(false);
   const [source, setSource] = useState(null);
 
-  const DropDown = ({setValue, value, data, dropOpen, setDropOpenn}) => {
-    return (
-      <View style={{position: 'relative'}}>
-        <TouchableOpacity
-          style={styles.dropTab}
-          onPress={() => setDropOpenn(!dropOpen)}>
-          <Text style={{width: '90%', color: theme.colors.grey}}>{value}</Text>
-          <Icon name="caretdown" type="ant-design" size={15} />
-        </TouchableOpacity>
+  // const DropDown = ({setValue, value, data, dropOpen, setDropOpenn}) => {
+  //   return (
+  //     <View style={{position: 'relative'}}>
+  //       <TouchableOpacity
+  //         style={styles.dropTab}
+  //         onPress={() => setDropOpenn(!dropOpen)}>
+  //         <Text style={{width: '90%', color: theme.colors.grey}}>{value}</Text>
+  //         <Icon name="caretdown" type="ant-design" size={15} />
+  //       </TouchableOpacity>
 
-        {dropOpen && (
-          <View style={styles.containerWrapper}>
-            {data.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.containerItem}
-                onPress={() => {
-                  setValue(item);
-                  setDropOpenn(false);
-                }}>
-                <Text>{item}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      </View>
-    );
-  };
+  //       {dropOpen && (
+  //         <View style={styles.containerWrapper}>
+  //           {data.map((item, index) => (
+  //             <TouchableOpacity
+  //               key={index}
+  //               style={styles.containerItem}
+  //               onPress={() => {
+  //                 setValue(item);
+  //                 setDropOpenn(false);
+  //               }}>
+  //               <Text>{item}</Text>
+  //             </TouchableOpacity>
+  //           ))}
+  //         </View>
+  //       )}
+  //     </View>
+  //   );
+  // };
 
   const InputFielder = ({title, placeholder, height = 40, multiline}) => {
     return (
@@ -112,7 +112,7 @@ const FoodCreateRequest = ({navigation}) => {
             />
           )}
         </TouchableOpacity>
-        <View style={styles.donation}>
+        {/* <View style={styles.donation}>
           <Text>Donation Categroy</Text>
           <DropDown
             data={categoryData}
@@ -121,7 +121,7 @@ const FoodCreateRequest = ({navigation}) => {
             dropOpen={dropOn}
             setDropOpenn={setDropOn}
           />
-        </View>
+        </View> */}
         <View style={{zIndex: 0}}>
           <InputFielder title={'Donation Quantity'} placeholder={'Add'} />
           <InputFielder title={'Phone Number'} placeholder={'+2634234982739'} />
