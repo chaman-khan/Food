@@ -232,7 +232,7 @@ const LoginScreen = ({navigation}) => {
               <Text
                 onPress={() => navigation.navigate('Sign Up')}
                 style={styles.Register_Text}>
-                {' '}
+                
                 Register Now
               </Text>
             </Text>
