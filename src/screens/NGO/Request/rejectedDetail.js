@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useDispatch, useSelector} from 'react-redux';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -20,6 +21,45 @@ const RejectedDeatil = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch();
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const handleDelete = () => {
+    dispatch(authLoad(true));
+    dispatch(deleteUserDonationRequest(loginData, routee, onSuccess, onError));
+  };
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            setClicked(false);
+            val.status === 'success' &&
+              navigation.navigate('NGOStack', {screen: 'AllUserRequests'});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -74,8 +114,7 @@ const RejectedDeatil = ({navigation}) => {
               <TouchableOpacity
                 style={styles.cancel}
                 onPress={() => {
-                  setClicked(false);
-                  navigation.navigate('NGOStack', {screen: 'AllUserRequests'});
+                  handleDelete;
                 }}>
                 <Text>Delete Request</Text>
               </TouchableOpacity>

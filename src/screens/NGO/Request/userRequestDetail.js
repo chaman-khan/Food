@@ -48,7 +48,7 @@ const UserRequestDetail = ({navigation}) => {
         style={{alignSelf: 'center', width: '90%'}}
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
-        <Text style={styles.category}>{routee.category}</Text>
+        <Text style={styles.category}>{routee.donation_category}</Text>
         <View style={styles.categoryView}>
           <Text>Donation Quantity</Text>
           <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>

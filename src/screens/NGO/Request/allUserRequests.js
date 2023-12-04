@@ -1,3 +1,4 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   View,
@@ -11,6 +12,10 @@ import {
   Modal,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
+import {authLoad} from '../../../redux/actions/auth';
+import {NGOgetAllUserRequests} from '../../../redux/actions/home';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../../components/loading';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -28,6 +33,27 @@ const AllUserRequests = ({navigation}) => {
 
   const [category, setCategory] = useState('leftover');
   const [showMdel, setShowModel] = useState(false);
+  const [allrequests, setAllRequests] = useState([]);
+
+  const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(authLoad(true));
+      dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setAllRequests(val.data);
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   const data = [
     {
@@ -80,9 +106,13 @@ const AllUserRequests = ({navigation}) => {
           });
         }
       }}>
-      <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
+      <Image
+        source={{uri: item.image}}
+        resizeMode="cover"
+        style={styles.tabImage}
+      />
       <View style={styles.tabBottom}>
-        <Text style={styles.categoryText}>{item.category}</Text>
+        <Text style={styles.categoryText}>{item.donation_category}</Text>
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Donation Quantity</Text>
           <Text style={styles.reqCatValue}>{item.quantity}</Text>
@@ -140,13 +170,33 @@ const AllUserRequests = ({navigation}) => {
             height: height / 1.2,
           }}>
           <FlatList
-            data={pos1 ? data : data1}
+            data={pos1 ? allrequests : data1}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={{height: '100%'}}
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  style={{
+                    height: 500,
+                    width: '90%',
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                    No Donation found
+                  </Text>
+                </View>
+              );
+            }}
+            ListFooterComponent={() => {
+              return <View style={{height: 200}} />;
+            }}
           />
         </View>
       </ScrollView>
+      <Loading visible={authLoading} />
     </View>
   );
 };

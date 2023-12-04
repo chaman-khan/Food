@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {Loading} from '../../../components/loading';
+import {NGOdeleteUserDonationRequest} from '../../../redux/actions/home';
+import {useDispatch, useSelector} from 'react-redux';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -21,6 +24,17 @@ const NGODonationDetail = ({navigation}) => {
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
 
+  const {authLoading, loginData} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const handleDelete = () => {
+    dispatch(authLoad(true));
+    dispatch(
+      NGOdeleteUserDonationRequest(loginData, routee, onSuccess, onError),
+    );
+    navigation.navigate('NGOStack', {
+      screen: 'NGOMyDonation',
+    });
+  };
   return (
     <View style={{flex: 1}}>
       <View
@@ -45,14 +59,14 @@ const NGODonationDetail = ({navigation}) => {
       <Image source={routee.image} style={{width: '100%'}} />
       <View style={{margin: 5, paddingHorizontal: 7}}>
         <Text style={styles.category}>{routee.donation_category}</Text>
-        <Text style={{marginVertical: 7}}>{data.donation_intro}</Text>
+        <Text style={{marginVertical: 7}}>{routee.donation_intro}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {data.donation_category}</Text>
-          <Text style={{color: '#20B7FE'}}>{data.required_amount}</Text>
+          <Text>Required {routee.donation_category}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.required_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>{data.total_donation_amount}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.total_donation_amount}</Text>
         </View>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
@@ -67,10 +81,8 @@ const NGODonationDetail = ({navigation}) => {
                 <TouchableOpacity
                   style={styles.button1}
                   onPress={() => {
+                    handleDelete;
                     setClicked(false);
-                    navigation.navigate('NGOStack', {
-                      screen: 'NGOMyDonation',
-                    });
                   }}>
                   <Text>Delete Request</Text>
                 </TouchableOpacity>
@@ -90,6 +102,7 @@ const NGODonationDetail = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Loading visible={authLoading} />
         </Modal>
       )}
     </View>

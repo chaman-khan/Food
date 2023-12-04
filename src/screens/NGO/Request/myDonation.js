@@ -133,18 +133,17 @@ const NGOMyDonation = ({navigation}) => {
           });
         }
       }}>
-      <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
+      <Image
+        source={{uri: item.image}}
+        resizeMode="cover"
+        style={styles.tabImage}
+      />
       <View style={styles.tabBottom}>
-        <Text style={styles.categoryText}>{item.category}</Text>
-        <Text style={styles.titleText}>{item.title}</Text>
-        <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required {item.category}</Text>
-          <Text style={styles.reqCatValue}>{item.totalNumber}</Text>
-        </View>
-        <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required Raised</Text>
-          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>00</Text>
-        </View>
+        <Text style={styles.categoryText}>{item.donation_category}</Text>
+        <Text style={styles.titleText}>{item.user_name}</Text>
+        <Text style={{...styles.titleText, fontWeight: '400'}}>
+          {item.donation_desc}
+        </Text>
       </View>
     </TouchableOpacity>
   );
