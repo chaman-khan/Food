@@ -44,19 +44,19 @@ const NGODonationDetail = ({navigation}) => {
       </View>
       <Image source={routee.image} style={{width: '100%'}} />
       <View style={{margin: 5, paddingHorizontal: 7}}>
-        <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.title}</Text>
+        <Text style={styles.category}>{routee.donation_category}</Text>
+        <Text style={{marginVertical: 7}}>{data.donation_intro}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
+          <Text>Required {data.donation_category}</Text>
+          <Text style={{color: '#20B7FE'}}>{data.required_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>00</Text>
+          <Text style={{color: '#20B7FE'}}>{data.total_donation_amount}</Text>
         </View>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
 
       {clicked && (

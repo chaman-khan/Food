@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   responsiveScreenFontSize,
@@ -13,12 +14,76 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad} from '../../../redux/actions/auth';
+import {deleteAccount} from '../../../redux/actions/home';
+import {Loading} from '../../../components/loading';
 
 const DeleteAccount = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handleconfirm = () => {
+    var raw = JSON.stringify({
+      password: password,
+      username: loginData.data.username,
+    });
+    console.log(raw);
+
+    if (password === '') {
+      Alert.alert(
+        'Error',
+        'Fill all fields',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      dispatch(authLoad(true));
+      dispatch(deleteAccount(loginData, raw, onSuccess, onError));
+    }
+  };
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
@@ -64,9 +129,30 @@ const DeleteAccount = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
+        onPress={() => {
+          Alert.alert(
+            'Alert',
+            'Are you sure you want to delete account?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {
+                text: 'Yes',
+                onPress: () => {
+                  handleconfirm();
+                },
+              },
+            ],
+            {cancelable: true},
+          );
+        }}>
         <Text style={{color: 'white'}}>Delete Account</Text>
       </TouchableOpacity>
+
+      <Loading />
     </View>
   );
 };

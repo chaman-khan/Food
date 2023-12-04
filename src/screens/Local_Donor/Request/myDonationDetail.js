@@ -8,15 +8,62 @@ import {
   StyleSheet,
   Dimensions,
   Modal,
+  Alert,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {theme} from '../../../theme/theme';
+import {Loading} from '../../../components/loading';
+import {authLoad} from '../../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteUserDonationRequest} from '../../../redux/actions/home';
 const MyDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
   const [clicked, setClicked] = useState(false);
   const {width, height} = Dimensions.get('screen');
+
+  const dispatch = useDispatch();
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const handleDelete = () => {
+    dispatch(authLoad(true));
+    dispatch(deleteUserDonationRequest(loginData, routee, onSuccess, onError));
+  };
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            setClicked(false);
+            val.status === 'success' &&
+              navigation.navigate('DonorStack', {screen: 'My Donation'});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
@@ -41,23 +88,26 @@ const MyDonationDetail = ({navigation}) => {
           when it is accepted
         </Text>
       </View>
-      <Image source={routee.image} style={{width: '100%'}} />
+      <Image
+        source={{uri: routee.image}}
+        style={{width: '100%', height: 200}}
+      />
       <View style={{margin: 5, paddingHorizontal: 12}}>
-        <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.title}</Text>
+        <Text style={styles.category}>{routee.donation_category}</Text>
+        <Text style={{marginVertical: 7}}>{routee.user_name}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
+          <Text>Donation amount</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.donation_amount}</Text>
         </View>
-        <View style={styles.categoryView}>
+        {/* <View style={styles.categoryView}>
           <Text>Required Raised</Text>
           <Text style={{color: '#20B7FE'}}>00</Text>
-        </View>
+        </View> */}
         <View style={styles.descView}></View>
         <Text style={{fontSize: 17}}>Donation Description</Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.button}
         onPress={() =>
           navigation.navigate('DonorStack', {
@@ -67,7 +117,7 @@ const MyDonationDetail = ({navigation}) => {
         <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
           Donate
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {clicked && (
         <Modal transparent>
@@ -84,8 +134,7 @@ const MyDonationDetail = ({navigation}) => {
               <TouchableOpacity
                 style={styles.cancel}
                 onPress={() => {
-                  setClicked(false);
-                  navigation.navigate('My Donation');
+                  handleDelete();
                 }}>
                 <Text>Cancel Request</Text>
               </TouchableOpacity>
@@ -96,6 +145,7 @@ const MyDonationDetail = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Loading visible={authLoading} />
         </Modal>
       )}
     </View>

@@ -1,28 +1,182 @@
 import * as types from './types';
 import {apiKey, baseUrl} from '../../constants/constants';
 
-export const registerUser = (data, handleSuccess) => {
+export const registerUser = (data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
       myHeaders.append('Accept', 'application/json');
       myHeaders.append('Content-Type', 'application/json');
-
       var raw = JSON.stringify(data);
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: data,
         redirect: 'follow',
       };
 
-      fetch(`${baseUrl}api/user/register`, requestOptions)
+      fetch(`${baseUrl}/user/register`, requestOptions)
         .then(response => response.json())
-        .then(result => handleSuccess(result))
-        .catch(error => console.log('error', error));
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
     } catch (err) {
       dispatch(authLoad(false));
       console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const verifyAccount = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/verify-account`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const loginUser = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/login`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const sendResetPassword = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/send-reset-password-email`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const verifyOTP = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/check-reset-password-otp`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const resetPassword = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/reset-password`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
     }
   };
 };

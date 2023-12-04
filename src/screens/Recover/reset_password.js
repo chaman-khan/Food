@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   View,
   Image,
@@ -8,14 +8,24 @@ import {
   Alert,
 } from 'react-native';
 import styles from './reset_password_styles';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad, resetPassword} from '../../redux/actions/auth';
+import {Loading} from '../../components/loading';
 // import verification from '../../Images/verification.svg'
-const Reset_Password_Screen = ({navigation}) => {
+const Reset_Password_Screen = ({navigation, route}) => {
+  const {otp} = route.params;
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
+  const {authLoading} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  useEffect(() => {
+    dispatch(authLoad(false));
+  }, []);
   const Handle_update = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -34,19 +44,41 @@ const Reset_Password_Screen = ({navigation}) => {
       return;
     } else {
       setPasswordError(false);
-      Alert.alert(
-        'Successfull',
-        'Your password has been changed successfully',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-      navigation.navigate('Login');
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
+        otp: otp,
+        password: password,
+        confirm_password: password,
+      });
+
+      console.log(raw);
+      dispatch(resetPassword(raw, onSuccess, onError));
     }
+  };
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' && navigation.navigate('Login');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
   return (
     <View style={styles.Display}>
@@ -60,7 +92,7 @@ const Reset_Password_Screen = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.Password_Box}>
-        <Text style={styles.User_Password_Texts}>Password</Text>
+        <Text style={styles.User_Password_Texts}>New Password</Text>
         <View style={styles.User_Input_Container}>
           <Image
             source={require('../../Images/password.png')}
@@ -71,7 +103,7 @@ const Reset_Password_Screen = ({navigation}) => {
             secureTextEntry={!passwordVisible}
             placeholderTextColor={'#818181'}
             style={styles.Password_input}
-            placeholder="Password"
+            placeholder="Enter new Password"
           />
           <TouchableOpacity
             style={styles.ToggleButton}
@@ -98,6 +130,7 @@ const Reset_Password_Screen = ({navigation}) => {
           <Text style={styles.Verify_Text}>Update</Text>
         </TouchableOpacity>
       </View>
+      <Loading visible={authLoading} />
     </View>
   );
 };

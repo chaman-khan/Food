@@ -8,11 +8,17 @@ import {
   Alert,
 } from 'react-native';
 import {styles} from './recover_style';
+import {authLoad, sendResetPassword} from '../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../components/loading';
 // import { TextInput } from 'react-native-gesture-handler';
 // import { Text } from 'react-native-reanimated/lib/typescript/Animated';
 const Recover_Screen = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [emailEror, setEmailError] = useState(false);
+
+  const {authLoading} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   Handle_send = () => {
     const emailRegex =
       /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
@@ -32,9 +38,43 @@ const Recover_Screen = ({navigation}) => {
       );
       return;
     } else {
-      setEmailError(false);
-      navigation.navigate('Verification Screen');
+      // setEmailError(false);
+
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
+        email: email,
+      });
+
+      console.log(raw);
+      dispatch(sendResetPassword(raw, onSuccess, onError));
     }
+  };
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' &&
+              navigation.navigate('Verification Screen');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
   return (
     <View style={styles.Display}>
@@ -76,6 +116,7 @@ const Recover_Screen = ({navigation}) => {
           <Text style={styles.Sign_In_Text}>Send</Text>
         </TouchableOpacity>
       </View>
+      <Loading visible={authLoading} />
     </View>
   );
 };

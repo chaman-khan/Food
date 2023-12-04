@@ -1,3 +1,4 @@
+import {useFocusEffect} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   View,
@@ -11,6 +12,10 @@ import {
   Modal,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
+import {getAllUserRequests} from '../../../redux/actions/home';
+import {authLoad} from '../../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../../components/loading';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -25,9 +30,14 @@ const MyDonation = ({navigation}) => {
 
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
+  const [allrequests, setAllRequests] = useState([]);
 
   const [category, setCategory] = useState('leftover');
   const [showMdel, setShowModel] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
 
   const data = [
     {
@@ -60,6 +70,23 @@ const MyDonation = ({navigation}) => {
         'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
     },
   ];
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(authLoad(true));
+      dispatch(getAllUserRequests(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setAllRequests(val.data);
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   const Modell = () => {
     return (
@@ -96,33 +123,39 @@ const MyDonation = ({navigation}) => {
     <TouchableOpacity
       style={styles.tabWrapper}
       onPress={() => {
-        if (pos1) {
-          navigation.navigate('DonorStack', {
-            screen: 'My Donation Details',
-            params: {item: item},
-          });
-        } else {
-          setShowModel(true);
-        }
+        navigation.navigate('DonorStack', {
+          screen: 'My Donation Details',
+          params: {item: item},
+        });
       }}>
-      <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
+      <Image
+        source={{uri: item.image}}
+        resizeMode="cover"
+        style={styles.tabImage}
+      />
       <View style={styles.tabBottom}>
-        <Text style={styles.categoryText}>{item.category}</Text>
-        <Text style={styles.titleText}>{item.title}</Text>
+        <Text style={styles.categoryText}>{item.donation_category}</Text>
+        <Text style={styles.titleText}>{item.user_name}</Text>
+        <Text style={{...styles.titleText, fontWeight: '400'}}>
+          {item.donation_desc}
+        </Text>
+
         <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required {item.category}</Text>
-          <Text style={styles.reqCatValue}>{item.totalNumber}</Text>
+          <Text style={styles.textStyle}>Donation amount</Text>
+          <Text style={styles.reqCatValue}> {item.donation_amount}</Text>
         </View>
-        <View style={styles.bottomDetail}>
+        {/* <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Required Raised</Text>
-          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>00</Text>
-        </View>
+          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>
+            {item.total_donation_amount}
+          </Text>
+        </View> */}
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.topBar}>
         <Icon
           name="arrow-left"
@@ -162,14 +195,35 @@ const MyDonation = ({navigation}) => {
             height: height / 1.2,
           }}>
           <FlatList
-            data={pos1 ? data : data1}
+            data={pos1 ? allrequests : data1}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={{height: '100%'}}
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  style={{
+                    height: 500,
+                    width: '90%',
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                    No Donation found
+                  </Text>
+                </View>
+              );
+            }}
+            ListFooterComponent={() => {
+              return <View style={{height: 200}} />;
+            }}
           />
         </View>
       </ScrollView>
       {showMdel && <Modell />}
+
+      <Loading visible={authLoading} />
     </View>
   );
 };
@@ -204,8 +258,8 @@ const styles = StyleSheet.create({
   tabWrapper: {
     borderRadius: 10,
     width: '100%',
-    height: height / 3,
-    marginBottom: 10,
+    // height: height / 3,
+    // marginBottom: 10,
   },
   tabImage: {
     width: '100%',

@@ -11,8 +11,14 @@ import {
   Alert,
 } from 'react-native';
 import styles from './Login_Styles';
-import {loginManager} from '../../redux/actions/auth';
-import {useDispatch} from 'react-redux';
+import {
+  authLoad,
+  loginManager,
+  loginSuccess,
+  loginUser,
+} from '../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../components/loading';
 const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState('');
@@ -21,6 +27,7 @@ const LoginScreen = ({navigation}) => {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [userNameError, setUserNameError] = useState(false);
+  const {authLoading} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
@@ -49,28 +56,47 @@ const LoginScreen = ({navigation}) => {
         {cancelable: false},
       );
     } else {
-      const data = {
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
         username: userName,
         password: password,
-      };
-      dispatch(loginManager(data, handleSuccess));
-      navigation.navigate('BottomTab');
+      });
+      console.log(raw);
+      dispatch(loginUser(raw, onSuccess, onError));
     }
-    const handleSuccess = val => {
-      console.log('response from api.................. =>');
-      console.log(val);
-      Alert.alert(
-        val.status === 'failed' ? 'Error' : 'Success',
-        val.message,
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
+  };
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            dispatch(loginSuccess(val));
+            if (val.status === 'success') {
+              val.data.role === 'user'
+                ? navigation.navigate('BottomTab')
+                : val.data.role === 'ngo'
+                ? navigation.navigate('NGOBottomTab')
+                : navigation.navigate('FoodBottomTab');
+            }
           },
-        ],
-        {cancelable: false},
-      );
-    };
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
   // const handleLogin = () => {
   //   const emailRegex =
@@ -150,7 +176,7 @@ const LoginScreen = ({navigation}) => {
                 ) : null}
               </View> */}
               <View style={styles.Email_Box}>
-                <Text style={styles.User_Password_Texts}>Email</Text>
+                <Text style={styles.User_Password_Texts}>Username</Text>
                 <View style={styles.User_Input_Container}>
                   <Image
                     source={require('../../Images/User.png')}
@@ -228,16 +254,16 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.Google_Text}>Google</Text>
             </TouchableOpacity>
             <Text style={styles.Account}>
-              Don't have an account?
+              Don't have an account?{' '}
               <Text
                 onPress={() => navigation.navigate('Sign Up')}
                 style={styles.Register_Text}>
-                
                 Register Now
               </Text>
             </Text>
           </View>
         </ScrollView>
+        <Loading visible={authLoading} />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

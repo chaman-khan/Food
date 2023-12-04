@@ -6,6 +6,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   responsiveScreenFontSize,
@@ -13,13 +14,97 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
+import {useDispatch, useSelector} from 'react-redux';
+import {changePassword} from '../../../redux/actions/home';
+import {authLoad} from '../../../redux/actions/auth';
+import {Loading} from '../../../components/loading';
 
 const ChangeFoodPassword = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible1, setPasswordVisible1] = useState(false);
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+  const togglePasswordVisibility1 = () => {
+    setPasswordVisible1(!passwordVisible1);
+  };
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handleconfirm = () => {
+    var raw = JSON.stringify({
+      password: password,
+      confirm_password: confirmPassword,
+    });
+    console.log(raw);
+
+    if (password === '' || confirmPassword === '') {
+      Alert.alert(
+        'Error',
+        'Fill all fields',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    } else if (password !== confirmPassword) {
+      Alert.alert(
+        'Error',
+        'Passwords donot match.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      dispatch(authLoad(true));
+      dispatch(changePassword(loginData, raw, onSuccess, onError));
+    }
+  };
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -34,7 +119,7 @@ const ChangeFoodPassword = ({navigation}) => {
         </Text>
       </View>
       <View style={styles.Password_Box}>
-        <Text style={styles.Head_Texts}>Password</Text>
+        <Text style={styles.Head_Texts}>New Password</Text>
         <View style={styles.User_Input_Container}>
           <Image
             source={require('../../../Images/password.png')}
@@ -45,7 +130,8 @@ const ChangeFoodPassword = ({navigation}) => {
             secureTextEntry={!passwordVisible}
             placeholderTextColor={'#818181'}
             style={styles.Password_input}
-            placeholder="Old Password"
+            placeholder="New Password"
+            value={password}
           />
           <TouchableOpacity
             style={styles.ToggleButton}
@@ -62,26 +148,27 @@ const ChangeFoodPassword = ({navigation}) => {
         </View>
       </View>
       <View style={styles.Password_Box}>
-        <Text style={styles.Head_Texts}>Password</Text>
+        <Text style={styles.Head_Texts}>Confirm Password</Text>
         <View style={styles.User_Input_Container}>
           <Image
             source={require('../../../Images/password.png')}
             style={styles.UserIcon}
           />
           <TextInput
-            onChangeText={Text => setPassword(Text)}
-            secureTextEntry={!passwordVisible}
+            onChangeText={Text => setConfirmPassword(Text)}
+            secureTextEntry={!passwordVisible1}
             placeholderTextColor={'#818181'}
             style={styles.Password_input}
-            placeholder="New Password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
           />
           <TouchableOpacity
             style={styles.ToggleButton}
-            onPress={togglePasswordVisibility}>
+            onPress={togglePasswordVisibility1}>
             <Image
               style={{width: 18, height: 18, marginRight: 20}}
               source={
-                passwordVisible
+                passwordVisible1
                   ? require('../../../Images/eye-on.png')
                   : require('../../../Images/eye-off.png')
               }
@@ -89,11 +176,11 @@ const ChangeFoodPassword = ({navigation}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={styles.button} onPress={() => handleconfirm()}>
         <Text style={{color: 'white'}}>Save Change</Text>
       </TouchableOpacity>
+
+      <Loading visible={authLoading} />
     </View>
   );
 };

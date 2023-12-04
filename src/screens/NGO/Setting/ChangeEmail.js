@@ -1,14 +1,81 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Image} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import {
   responsiveScreenFontSize,
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
+import {useDispatch, useSelector} from 'react-redux';
 
-const ChangeEmail = () => {
+const ChangeEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handleconfirm = () => {
+    var raw = JSON.stringify({
+      password: password,
+      confirm_password: confirmPassword,
+    });
+    console.log(raw);
+
+    if (email === '') {
+      Alert.alert(
+        'Error',
+        'Fill all fields',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      dispatch(authLoad(true));
+      dispatch(changePassword(loginData, raw, onSuccess, onError));
+    }
+  };
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
@@ -39,9 +106,11 @@ const ChangeEmail = () => {
           />
         </View>
       </View>
-      <View style={styles.button}>
-        <Text style={{color: 'white'}}>Delete Account</Text>
-      </View>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.goBack()}>
+        <Text style={{color: 'white'}}>Save Changes</Text>
+      </TouchableOpacity>
     </View>
   );
 };

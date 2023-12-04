@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
 
-const Terms = () => {
+const Terms = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -10,10 +10,16 @@ const Terms = () => {
           Terms & Conditions
         </Text>
       </View>
-      <TouchableOpacity style={styles.item} activeOpacity={1}>
+      <TouchableOpacity
+        style={styles.item}
+        activeOpacity={1}
+        onPress={() => navigation.navigate('DonorStack', {screen: 'FAQs'})}>
         <Text>FAQ's</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.item} activeOpacity={1}>
+      <TouchableOpacity
+        style={styles.item}
+        activeOpacity={1}
+        onPress={() => navigation.navigate('DonorStack', {screen: 'AboutUs'})}>
         <Text>About Us</Text>
       </TouchableOpacity>
     </View>

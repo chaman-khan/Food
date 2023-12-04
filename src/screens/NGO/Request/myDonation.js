@@ -11,6 +11,11 @@ import {
   Modal,
 } from 'react-native';
 import {Icon} from 'react-native-elements';
+import {authLoad} from '../../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../../components/loading';
+import {NGOmyDonatios} from '../../../redux/actions/home';
+import {useFocusEffect} from '@react-navigation/native';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -25,10 +30,14 @@ const NGOMyDonation = ({navigation}) => {
 
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
+  const [allrequests, setAllRequests] = useState([]);
 
   const [category, setCategory] = useState('leftover');
   const [showMdel, setShowModel] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
   const data = [
     {
       id: '1',
@@ -60,6 +69,22 @@ const NGOMyDonation = ({navigation}) => {
         'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
     },
   ];
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(authLoad(true));
+      dispatch(NGOmyDonatios(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setAllRequests(val.data);
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   const Modell = () => {
     return (
@@ -165,10 +190,29 @@ const NGOMyDonation = ({navigation}) => {
             height: height / 1.2,
           }}>
           <FlatList
-            data={pos1 ? data : data1}
+            data={pos1 ? allrequests : data1}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={{height: '100%'}}
+            ListEmptyComponent={() => {
+              return (
+                <View
+                  style={{
+                    height: 500,
+                    width: '90%',
+                    alignSelf: 'center',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                    No Donation found
+                  </Text>
+                </View>
+              );
+            }}
+            ListFooterComponent={() => {
+              return <View style={{height: 200}} />;
+            }}
           />
         </View>
       </ScrollView>

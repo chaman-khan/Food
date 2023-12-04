@@ -1,7 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
-const NGOSetting = ({navigation}) => {
+import {useDispatch} from 'react-redux';
+import {logout} from '../../../redux/actions/auth';
+const Donor_Setting = ({navigation}) => {
+  const dispatch = useDispatch();
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
@@ -62,7 +65,10 @@ const NGOSetting = ({navigation}) => {
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
-        onPress={() => navigation.navigate('Login')}>
+        onPress={() => {
+          dispatch(logout());
+          navigation.navigate('Login');
+        }}>
         <Text style={{fontSize: 16, color: 'red', fontWeight: '0'}}>
           Log Out
         </Text>
@@ -87,4 +93,4 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
 });
-export default NGOSetting;
+export default Donor_Setting;

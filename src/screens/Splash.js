@@ -1,11 +1,23 @@
 import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
 import {theme} from '../theme/theme';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad} from '../redux/actions/auth';
 
 const Splash = ({navigation}) => {
+  const {loggedIn, loginData} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('OnBoarding');
+      // navigation.navigate('BottomTab');
+      dispatch(authLoad(false));
+      if (loggedIn) {
+        loginData?.data?.role === 'user'
+          ? navigation.navigate('BottomTab')
+          : loginData?.data?.role === 'ngo'
+          ? navigation.navigate('NGOBottomTab')
+          : navigation.navigate('FoodBottomTab');
+      } else navigation.navigate('OnBoarding');
     }, 2000);
   }, []);
   return (
