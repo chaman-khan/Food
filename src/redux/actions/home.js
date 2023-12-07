@@ -1,6 +1,7 @@
 import * as types from '../actions/types';
 import {baseUrl} from '../../constants/constants';
 import {useSelector} from 'react-redux';
+import {loginSuccess} from './auth';
 
 export const activeScreen = params => ({
   type: types.ACTIVE_SCREEN,
@@ -11,7 +12,7 @@ export const getAllUserRequests = (data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${data.token}`);
       var raw = '';
 
@@ -78,7 +79,7 @@ export const sendDonation = (token, data, handleSuccess, handleError) => {
     try {
       console.log('token');
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -105,6 +106,37 @@ export const sendDonation = (token, data, handleSuccess, handleError) => {
   };
 };
 
+export const getUserData = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${data.token}`);
+      var raw = '';
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/details/`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
 export const createUserDonationRequest = (
   token,
   data,
@@ -115,7 +147,7 @@ export const createUserDonationRequest = (
     try {
       console.log('token');
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -185,7 +217,7 @@ export const deleteUserDonationRequest = (
       console.log(data);
       console.log(token);
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -208,12 +240,45 @@ export const deleteUserDonationRequest = (
     }
   };
 };
+// export const changePassword = (token, data, handleSuccess, handleError) => {
+//   return async dispatch => {
+//     try {
+//       console.log('token');
+//       var myHeaders = new Headers();
+//       myHeaders.append('Accept', 'application/json');
+//       myHeaders.append('Authorization', `Bearer Bearer ${token.token}`);
+
+//       var requestOptions = {
+//         method: 'POST',
+//         headers: myHeaders,
+//         body: data,
+//         redirect: 'follow',
+//       };
+
+//       console.log('requestOptions');
+//       console.log(requestOptions);
+//       console.log(`Bearer ${token.token}`);
+//       fetch(`${baseUrl}/user/changepassword`, requestOptions)
+//         .then(response => response.json())
+//         .then(result => {
+//           handleSuccess(result);
+//         })
+//         .catch(error => {
+//           handleError(error);
+//         });
+//     } catch (err) {
+//       dispatch(authLoad(false));
+//       console.log(err);
+//       handleError(err);
+//     }
+//   };
+// };
+
 export const changePassword = (token, data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
-      console.log('token');
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -244,7 +309,7 @@ export const deleteAccount = (token, data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -275,7 +340,7 @@ export const changeLocation = (token, data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -308,7 +373,7 @@ export const NGOgetAllUserRequests = (data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${data.token}`);
       var raw = '';
 
@@ -320,7 +385,7 @@ export const NGOgetAllUserRequests = (data, handleSuccess, handleError) => {
       };
 
       fetch(
-        `${baseUrl}/user/getAllUserRequests/${data.data._id}`,
+        `${baseUrl}/ngo/getAllUserRequests/${data.data._id}`,
         requestOptions,
       )
         .then(response => response.json())

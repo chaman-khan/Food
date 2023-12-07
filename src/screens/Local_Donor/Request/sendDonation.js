@@ -288,5 +288,11 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#FFFFFF',
   },
+  section111: {
+    borderColor: '#858581',
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 8,
+  },
 });
 export default Send_Donation;

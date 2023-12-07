@@ -89,17 +89,37 @@
 // });
 // export default FoodOutlet_Setting;
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
-import {useDispatch} from 'react-redux';
-import {logout} from '../../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad, loginSuccess, logout} from '../../../redux/actions/auth';
+import {getUserData} from '../../../redux/actions/home';
+import {useFocusEffect} from '@react-navigation/native';
 const FoodOutlet_Setting = ({navigation}) => {
   const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // dispatch(getUserData(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    dispatch(loginSuccess(val));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Category</Text>
+        <Text style={{fontSize: 16, fontWeight: '500'}}>Setting</Text>
       </View>
       <TouchableOpacity
         style={styles.item}

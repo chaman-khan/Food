@@ -34,9 +34,9 @@ const LoginScreen = ({navigation}) => {
   };
   const handleLogin = () => {
     if (!userName) {
-      setUserName(true);
+      setUserNameError(true);
     } else {
-      setUserName(false);
+      setUserNameError(false);
     }
     if (!password) {
       setPasswordError(true);

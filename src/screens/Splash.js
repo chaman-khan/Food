@@ -13,11 +13,11 @@ const Splash = ({navigation}) => {
       dispatch(authLoad(false));
       if (loggedIn) {
         loginData?.data?.role === 'user'
-          ? navigation.navigate('BottomTab')
+          ? navigation.replace('BottomTab')
           : loginData?.data?.role === 'ngo'
-          ? navigation.navigate('NGOBottomTab')
-          : navigation.navigate('FoodBottomTab');
-      } else navigation.navigate('OnBoarding');
+          ? navigation.replace('NGOBottomTab')
+          : navigation.replace('FoodBottomTab');
+      } else navigation.replace('OnBoarding');
     }, 2000);
   }, []);
   return (

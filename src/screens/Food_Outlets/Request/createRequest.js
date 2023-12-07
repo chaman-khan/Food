@@ -346,9 +346,9 @@ const FoodCreateRequest = ({navigation}) => {
   const handleCreate = () => {
     var raw = JSON.stringify({
       user_id: loginData.data._id,
-      // image: source,
-      donation_category: category,
-      donation_amount: quatity,
+      image: source,
+      donation_category: category.value,
+      donation_amount: parseInt(quatity),
       donation_desc: des,
       phone_number: number,
       location: 'Pakistan',
@@ -357,8 +357,7 @@ const FoodCreateRequest = ({navigation}) => {
     });
 
     if (
-      (quatity === '' || number === '' || latitude === undefined,
-      des === '' || category === 'Select')
+      (quatity === '' || number === '' || latitude === undefined, des === '')
     ) {
       Alert.alert(
         'Error',

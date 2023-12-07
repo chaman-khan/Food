@@ -102,8 +102,8 @@ const NGO_Request = ({navigation}) => {
     <TouchableOpacity
       style={styles.tabWrapper}
       onPress={() => {
-        navigation.navigate('DonorStack', {
-          screen: 'Donation Details',
+        navigation.navigate('NGOStack', {
+          screen: 'NGODonationDetail',
           params: {item: item},
         });
       }}>
@@ -114,21 +114,21 @@ const NGO_Request = ({navigation}) => {
       />
       <View style={styles.tabBottom}>
         <Text style={styles.categoryText}>{item.donation_category}</Text>
-        <Text style={styles.titleText}>{item.ngo_name}</Text>
+        <Text style={styles.titleText}>{item.user_name}</Text>
         <Text style={{...styles.titleText, fontWeight: '400'}}>
-          {item.donation_intro}
+          {item.donation_desc}
         </Text>
 
         <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required {item.category}</Text>
-          <Text style={styles.reqCatValue}>{item.required_amount}</Text>
+          <Text style={styles.textStyle}>Donation amount</Text>
+          <Text style={styles.reqCatValue}>{item.donation_amount}</Text>
         </View>
-        <View style={styles.bottomDetail}>
+        {/* <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Required Raised</Text>
           <Text style={[styles.textStyle, {color: '#20B7FE'}]}>
             {item.total_donation_amount}
           </Text>
-        </View>
+        </View> */}
       </View>
     </TouchableOpacity>
   );

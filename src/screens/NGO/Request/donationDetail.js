@@ -20,17 +20,14 @@ const theme = {
   },
 };
 const NGODonationDetail = ({navigation}) => {
-  const route = useRoute().params;
-  const routee = route.item;
+  const {item} = useRoute().params;
   const [clicked, setClicked] = useState(false);
-
+  console.log(item);
   const {authLoading, loginData} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const handleDelete = () => {
     dispatch(authLoad(true));
-    dispatch(
-      NGOdeleteUserDonationRequest(loginData, routee, onSuccess, onError),
-    );
+    dispatch(NGOdeleteUserDonationRequest(loginData, item, onSuccess, onError));
     navigation.navigate('NGOStack', {
       screen: 'NGOMyDonation',
     });
@@ -43,6 +40,8 @@ const NGODonationDetail = ({navigation}) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           marginBottom: 15,
+          height: 50,
+          alignItems: 'center',
         }}>
         <Ionicons
           name="arrow-back"
@@ -56,21 +55,20 @@ const NGODonationDetail = ({navigation}) => {
           onPress={() => setClicked(true)}
         />
       </View>
-      <Image source={routee.image} style={{width: '100%'}} />
+      <Image source={{uri: item.image}} style={{width: '100%', height: 240}} />
       <View style={{margin: 5, paddingHorizontal: 7}}>
-        <Text style={styles.category}>{routee.donation_category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.donation_intro}</Text>
+        <Text style={styles.category}>{item.donation_category}</Text>
+        <Text style={{marginVertical: 7, color: 'black', fontWeight: '600'}}>
+          {item.user_name}
+        </Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.donation_category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.required_amount}</Text>
+          <Text>Donation Amount </Text>
+          <Text style={{color: '#20B7FE'}}>{item.donation_amount}</Text>
         </View>
-        <View style={styles.categoryView}>
-          <Text>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.total_donation_amount}</Text>
-        </View>
+
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
-        <Text style={styles.desc}>{routee.donation_desc}</Text>
+        <Text style={styles.desc}>{item.donation_desc}</Text>
       </View>
 
       {clicked && (

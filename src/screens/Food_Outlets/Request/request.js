@@ -143,10 +143,10 @@ const FoodOutlet_Request = ({navigation}) => {
               </View>
             );
           }}
-          ListFooterComponent={() => {
-            return <View style={{height: 200}} />;
-          }}
-          style={{height: '100%'}}
+          // ListFooterComponent={() => {
+          //   return <View style={{height: 400}} />;
+          // }}
+          // style={{height: '100%'}}
         />
       </View>
       <Loading visible={authLoading} />

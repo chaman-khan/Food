@@ -40,6 +40,7 @@ const ChangePassword = ({navigation}) => {
       password: password,
       confirm_password: confirmPassword,
     });
+    console.log('raw');
     console.log(raw);
 
     if (password === '' || confirmPassword === '') {
@@ -72,6 +73,7 @@ const ChangePassword = ({navigation}) => {
       );
     } else {
       dispatch(authLoad(true));
+
       dispatch(changePassword(loginData, raw, onSuccess, onError));
     }
   };
