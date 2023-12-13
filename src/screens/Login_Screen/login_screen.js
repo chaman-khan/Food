@@ -11,34 +11,42 @@ import {
   Alert,
 } from 'react-native';
 import styles from './Login_Styles';
+import {
+  authLoad,
+  loginManager,
+  loginSuccess,
+  loginUser,
+} from '../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {Loading} from '../../components/loading';
 const LoginScreen = ({navigation}) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [userNameError, setUserNameError] = useState(false);
+  const {authLoading} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
   const handleLogin = () => {
-    const emailRegex =
-      /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
-
-    if (!emailRegex.test(email)) {
-      setEmailError(true);
+    if (!userName) {
+      setUserNameError(true);
     } else {
-      setEmailError(false);
+      setUserNameError(false);
     }
-
     if (!password) {
       setPasswordError(true);
     } else {
       setPasswordError(false);
     }
-    if (emailError || passwordError) {
+    if (userNameError || passwordError) {
       Alert.alert(
         'Warning',
-        'Please enter a valid email or password.',
+        'Please enter a valid user name or password.',
         [
           {
             text: 'OK',
@@ -48,10 +56,85 @@ const LoginScreen = ({navigation}) => {
         {cancelable: false},
       );
     } else {
-      navigation.navigate('BottomTab');
-      return false;
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
+        username: userName,
+        password: password,
+      });
+      console.log(raw);
+      dispatch(loginUser(raw, onSuccess, onError));
     }
   };
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            dispatch(loginSuccess(val));
+            if (val.status === 'success') {
+              val.data.role === 'user'
+                ? navigation.navigate('BottomTab')
+                : val.data.role === 'ngo'
+                ? navigation.navigate('NGOBottomTab')
+                : navigation.navigate('FoodBottomTab');
+            }
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+  // const handleLogin = () => {
+  //   const emailRegex =
+  //     /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
+
+  //   if (!emailRegex.test(email)) {
+  //     setEmailError(true);
+  //   } else {
+  //     setEmailError(false);
+  //   }
+
+  //   if (!password) {
+  //     setPasswordError(true);
+  //   } else {
+  //     setPasswordError(false);
+  //   }
+  //   if (emailError || passwordError) {
+  //     Alert.alert(
+  //       'Warning',
+  //       'Please enter a valid email or password.',
+  //       [
+  //         {
+  //           text: 'OK',
+  //           onPress: () => console.log('OK Pressed'),
+  //         },
+  //       ],
+  //       {cancelable: false},
+  //     );
+  //   } else {
+  //     const data = {
+  //       username: nam,
+  //       password: '12345678',
+  //     };
+  //     // navigation.navigate('NGOBottomTab');
+  //     // return false;
+  //   }
+  //   // navigation.navigate('BottomTab');
+  // };
   return (
     <KeyboardAvoidingView
       enabled={true}
@@ -74,7 +157,7 @@ const LoginScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.Input_Box}>
-              <View style={styles.Email_Box}>
+              {/* <View style={styles.Email_Box}>
                 <Text style={styles.User_Password_Texts}>Email</Text>
                 <View style={styles.User_Input_Container}>
                   <Image
@@ -91,6 +174,21 @@ const LoginScreen = ({navigation}) => {
                 {emailError ? (
                   <Text style={styles.Error_Text}>* Enter valid Email</Text>
                 ) : null}
+              </View> */}
+              <View style={styles.Email_Box}>
+                <Text style={styles.User_Password_Texts}>Username</Text>
+                <View style={styles.User_Input_Container}>
+                  <Image
+                    source={require('../../Images/User.png')}
+                    style={styles.UserIcon}
+                  />
+                  <TextInput
+                    onChangeText={Text => setUserName(Text)}
+                    placeholderTextColor={'#818181'}
+                    style={styles.User_input}
+                    placeholder="User name"
+                  />
+                </View>
               </View>
               <View style={styles.Password_Box}>
                 <Text style={styles.User_Password_Texts}>Password</Text>
@@ -156,16 +254,16 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.Google_Text}>Google</Text>
             </TouchableOpacity>
             <Text style={styles.Account}>
-              Don't have an account?
+              Don't have an account?{' '}
               <Text
                 onPress={() => navigation.navigate('Sign Up')}
                 style={styles.Register_Text}>
-                {' '}
                 Register Now
               </Text>
             </Text>
           </View>
         </ScrollView>
+        <Loading visible={authLoading} />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );

@@ -1,4 +1,4 @@
-import {useRoute} from '@react-navigation/native';
+// import {useRoute} from '@react-navigation/native';
 import react from 'react';
 import {View, Image, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,9 +8,12 @@ const theme = {
     grey: '#9B9B9B',
   },
 };
-const DonationDetail = ({navigation}) => {
-  const route = useRoute().params;
-  const routee = route.item;
+const DonationDetail = ({navigation, route}) => {
+  // const route = useRoute().params;
+  const routee = route.params;
+  const data = routee.item;
+  console.log('.................');
+  console.log(data);
   return (
     <View style={{flex: 1}}>
       <View
@@ -29,27 +32,32 @@ const DonationDetail = ({navigation}) => {
         <Ionicons name="arrow-back" size={25} color="transparent" />
       </View>
       <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
+        source={{uri: data.image}}
+        style={{alignSelf: 'center', width: '90%', height: 180}}
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
-        <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.title}</Text>
+        <Text style={styles.category}>{data.donation_category}</Text>
+        <Text style={{marginVertical: 7}}>{data.donation_intro}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
+          <Text>Required {data.donation_category}</Text>
+          <Text style={{color: '#20B7FE'}}>{data.required_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>00</Text>
+          <Text style={{color: '#20B7FE'}}>{data.total_donation_amount}</Text>
         </View>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{data.donation_desc}</Text>
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Send Donation')}>
+        onPress={() => {
+          navigation.navigate('DonorStack', {
+            screen: 'Send Donation',
+            params: {item: data},
+          });
+        }}>
         <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
           Donate
         </Text>
@@ -76,7 +84,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   desc: {
-    borderWidth: 1,
+    borderWidth: 0.3,
     borderColor: '#858581',
     borderRadius: 10,
     padding: 10,

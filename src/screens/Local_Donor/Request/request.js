@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -13,76 +13,70 @@ import {
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import {Loading} from '../../../components/loading';
+import {useDispatch, useSelector} from 'react-redux';
+import {getAllNgoRequestsByArea} from '../../../redux/actions/home';
+import {authLoad} from '../../../redux/actions/auth';
+import {useFocusEffect} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 const Donor_Request = ({navigation}) => {
   const [category, setCategory] = useState('leftover');
   const [title, setTitle] = useState('Norshing Hearts through Food Donation');
   const [totalNumber, setTotalNumber] = useState(4575);
+  const [data, setData] = useState([]);
 
-  const data = [
-    {
-      id: '1',
-      category: 'Leftover',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '4575',
-      image: require('../../../Images/clothing.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(authLoad(true));
+      dispatch(getAllNgoRequestsByArea(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setData(val.data);
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   const renderItem = ({item}) => (
     <TouchableOpacity
       style={styles.tabWrapper}
-      onPress={() => navigation.navigate('Donation Details', {item})}>
-      <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
+      onPress={() => {
+        navigation.navigate('DonorStack', {
+          screen: 'Donation Details',
+          params: {item: item},
+        });
+      }}>
+      <Image
+        source={{uri: item.image}}
+        resizeMode="cover"
+        style={styles.tabImage}
+      />
       <View style={styles.tabBottom}>
-        <Text style={styles.categoryText}>{category}</Text>
-        <Text style={styles.titleText}>{item.title}</Text>
+        <Text style={styles.categoryText}>{item.donation_category}</Text>
+        <Text style={styles.titleText}>{item.ngo_name}</Text>
+        <Text style={{...styles.titleText, fontWeight: '400'}}>
+          {item.donation_intro}
+        </Text>
+
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Required {item.category}</Text>
-          <Text style={styles.reqCatValue}>{item.totalNumber}</Text>
+          <Text style={styles.reqCatValue}>{item.required_amount}</Text>
         </View>
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Required Raised</Text>
-          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>00</Text>
+          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>
+            {item.total_donation_amount}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -96,12 +90,21 @@ const Donor_Request = ({navigation}) => {
           source={require('../../../Images/logoo.png')}
         />
         <View style={styles.topIconCont}>
-          <Image
-            style={styles.topImageIcon}
-            source={require('../../../Images/profileLogo.png')}
-          />
           <TouchableOpacity
-            onPress={() => navigation.navigate('Create Request')}>
+            onPress={() =>
+              navigation.navigate('DonorStack', {screen: 'My Donation'})
+            }>
+            <Image
+              style={styles.topImageIcon}
+              source={require('../../../Images/profileLogo.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('DonorStack', {
+                screen: 'Create Request',
+              })
+            }>
             <Image
               style={styles.topImageIcon}
               source={require('../../../Images/plus.png')}
@@ -123,9 +126,30 @@ const Donor_Request = ({navigation}) => {
           data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={() => {
+            return (
+              <View
+                style={{
+                  height: 500,
+                  width: '90%',
+                  alignSelf: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                  No request found
+                </Text>
+              </View>
+            );
+          }}
+          ListFooterComponent={() => {
+            return <View style={{height: 200}} />;
+          }}
           style={{height: '100%'}}
         />
       </View>
+      <Loading visible={authLoading} />
     </View>
   );
 };
@@ -173,8 +197,14 @@ const styles = StyleSheet.create({
   tabWrapper: {
     borderRadius: 10,
     width: '100%',
-    height: height / 3,
+    // height: height / 3,
     marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.5,
+    shadowRadius: 2,
+    elevation: 2,
+    backgroundColor: 'white',
   },
   tabImage: {
     width: '100%',
