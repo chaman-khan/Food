@@ -569,6 +569,36 @@ export const updateGORequest = (token, data, handleSuccess, handleError) => {
     }
   };
 };
+export const notification = (token, data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      console.log('data..............');
+      console.log(data);
+      console.log(token);
+      var myHeaders = new Headers();
+      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${token.token}`);
+
+      var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow',
+      };
+      fetch(`${baseUrl}/ngo/deleteRequest/${data._id}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
 
 // helping functions
 export const homeLoad = data => {

@@ -63,13 +63,6 @@ const BottomTab = () => {
           );
         },
       })}>
-      {/* <Tab.Screen
-        name="Home"
-        component={Donor_Home}
-        options={{
-          headerShown: false,
-        }}
-      /> */}
       <Tab.Screen
         name="Request"
         component={Donor_Request}

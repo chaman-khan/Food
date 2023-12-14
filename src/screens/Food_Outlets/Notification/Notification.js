@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, FlatList, Image, StyleSheet, PermissionsAndroid} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -8,7 +9,14 @@ const theme = {
   },
 };
 
+PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS)
+
 const FoodOutlet_Notification = () => {
+  useEffect(
+    messaging().setBackgroundMessageHandler(async remoteMessage => {
+      console.log('Message handled in the background!', remoteMessage);
+    })
+  )
   const [noOfNotifications, setNoOFNotifications] = useState(1);
   const Data = [
     {

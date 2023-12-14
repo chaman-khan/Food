@@ -4,6 +4,12 @@ import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/lib/integration/react';
 import {store, persister} from './src/redux/store';
 import {SafeAreaView} from 'react-native';
+import messaging from '@react-native-firebase/messaging';
+
+messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('Message handled in the background!', remoteMessage);
+});
+
 const App = () => {
   return (
     <Provider store={store}>
@@ -15,3 +21,5 @@ const App = () => {
     </Provider>
   );
 };
+
+export default App;
