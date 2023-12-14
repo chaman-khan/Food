@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "433196592425",
+    "project_id": "foodcare-abb8f",
+    "storage_bucket": "foodcare-abb8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433196592425:android:89116174ff7c5a9f5d9b38",
+        "android_client_info": {
+          "package_name": "com.food"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtQFkMWU8USRmCbNpk2tSWkyMYpDJlgEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -105,6 +105,37 @@ export const sendDonation = (token, data, handleSuccess, handleError) => {
     }
   };
 };
+export const verifieduser = (token, data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      console.log('token');
+      var myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Authorization', `Bearer ${token.token}`);
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+      console.log(requestOptions);
+      console.log(`Bearer ${token.token}`);
+      fetch(`${baseUrl}/user/sendDonationToNgo`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
 
 export const getUserData = (data, handleSuccess, handleError) => {
   return async dispatch => {
