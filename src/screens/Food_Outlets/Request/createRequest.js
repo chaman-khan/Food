@@ -348,7 +348,7 @@ const FoodCreateRequest = ({navigation}) => {
       user_id: loginData._id,
       // user_id: 'loginData._id',
       image: source,
-      donation_category: category.toStri,
+      donation_category: category.value,
       donation_amount: parseInt(quatity),
       donation_desc: des,
       phone_number: number,
