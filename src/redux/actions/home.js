@@ -1,7 +1,7 @@
 import * as types from '../actions/types';
 import {baseUrl} from '../../constants/constants';
 import {useSelector} from 'react-redux';
-import {loginSuccess} from './auth';
+import {authLoad, loginSuccess} from './auth';
 
 export const activeScreen = params => ({
   type: types.ACTIVE_SCREEN,
@@ -57,7 +57,7 @@ export const getAllNgoRequestsByArea = (data, handleSuccess, handleError) => {
       };
 
       fetch(
-        `${baseUrl}/user/getAllNgoRequestsByArea/${data.data._id}`,
+        `${baseUrl}/user/getAllNgoRequestsByArea/${data._id}`,
         requestOptions,
       )
         .then(response => response.json())

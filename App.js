@@ -7,10 +7,26 @@ import {SafeAreaView} from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
+  console.log('******************************************');
   console.log('Message handled in the background!', remoteMessage);
+  console.log('******************************************');
 });
 
 const App = () => {
+  useEffect(() => {
+    const getFCMToken = async () => {
+      try {
+        const token = await messaging().getToken();
+        console.log('******************************************');
+        console.log('FCM Token:', token);
+        console.log('******************************************');
+      } catch (error) {
+        console.error('Error getting FCM token:', error);
+      }
+    };
+
+    getFCMToken();
+  }, []);
   return (
     <Provider store={store}>
       <SafeAreaView style={{flex: 1}}>
