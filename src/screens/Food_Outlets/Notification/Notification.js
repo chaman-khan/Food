@@ -9,9 +9,9 @@ const theme = {
   },
 };
 
-PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS)
+// PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS)
 
-const FoodOutlet_Notification = () => {
+const FoodOutlet_Notification = ({navigation}) => {
   useEffect(
     messaging().setBackgroundMessageHandler(async remoteMessage => {
       console.log('Message handled in the background!', remoteMessage);

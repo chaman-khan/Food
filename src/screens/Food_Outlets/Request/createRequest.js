@@ -345,7 +345,8 @@ const FoodCreateRequest = ({navigation}) => {
 
   const handleCreate = () => {
     var raw = JSON.stringify({
-      user_id: loginData.data._id,
+      user_id: loginData._id,
+      // user_id: 'loginData._id',
       image: source,
       donation_category: category.value,
       donation_amount: parseInt(quatity),
@@ -355,6 +356,9 @@ const FoodCreateRequest = ({navigation}) => {
       latitude: latitude,
       longitude: longitude,
     });
+    console.log('================....................====================');
+    console.log(raw);
+    console.log('================....................====================');
 
     if (
       (quatity === '' || number === '' || latitude === undefined, des === '')

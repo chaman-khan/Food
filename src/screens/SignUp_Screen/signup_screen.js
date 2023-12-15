@@ -20,6 +20,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {authLoad, registerUser} from '../../redux/actions/auth';
 import {PermissionsAndroid} from 'react-native';
 import {Loading} from '../../components/loading';
+import { OneSignal } from 'react-native-onesignal';
 
 const {width} = Dimensions.get('screen');
 const data = [
@@ -177,8 +178,8 @@ const SignUp_Screen = ({navigation}) => {
         ],
         {cancelable: false},
       );
-      // } else if (value !== 'user') {
-      //   navigation.navigate('Singnup_verification');
+      } else if (value !== 'user') {
+        navigation.navigate('Singnup_verification');
     } else {
       dispatch(authLoad(true));
 
@@ -187,7 +188,7 @@ const SignUp_Screen = ({navigation}) => {
         username: userName,
         email: email,
         password: password,
-        location: 'currentLocation',
+        location: 'Pakistan',
         latitude: latitude.toString(),
         longitude: longitude.toString(),
         role: value,
@@ -197,26 +198,65 @@ const SignUp_Screen = ({navigation}) => {
     }
   };
 
+
   const onSuccess = val => {
     console.log(val);
     dispatch(authLoad(false));
-    Alert.alert(
-      val.status === 'success' ? 'Success' : 'Error',
-      val.status === 'success'
-        ? val.message
-        : val.message || val.message.message,
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('SignupVerify');
+  
+    if (val.status === 'success') {
+      // Send user category as a tag
+      OneSignal.sendTag('user_category', value);
+  
+      Alert.alert(
+        'Success',
+        val.message,
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+              navigation.navigate('SignupVerify');
+            },
           },
-        },
-      ],
-      {cancelable: false},
-    );
+        ],
+        {cancelable: false},
+      );
+    } else {
+      Alert.alert(
+        'Error',
+        val.message || val.message.message,
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
+    }
   };
+  
+
+  // const onSuccess = val => {
+  //   console.log(val);
+  //   dispatch(authLoad(false));
+  //   Alert.alert(
+  //     val.status === 'success' ? 'Success' : 'Error',
+  //     val.status === 'success'
+  //       ? val.message
+  //       : val.message || val.message.message,
+  //     [
+  //       {
+  //         text: 'OK',
+  //         onPress: () => {
+  //           console.log('OK Pressed');
+  //           val.status === 'success' && navigation.navigate('SignupVerify');
+  //         },
+  //       },
+  //     ],
+  //     {cancelable: false},
+  //   );
+  // };
   const onError = err => {
     dispatch(authLoad(false));
     console.log(err);
@@ -410,7 +450,9 @@ const SignUp_Screen = ({navigation}) => {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={styles.Button}
-                  onPress={handleSignUp}>
+                  // onPress={handleSignUp}
+                  onPress={handleSignUp}
+                  >
                   <Text style={styles.Sign_Up_Text}>Sign up</Text>
                 </TouchableOpacity>
               </View>
