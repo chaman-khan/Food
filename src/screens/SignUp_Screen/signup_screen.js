@@ -392,7 +392,9 @@ const SignUp_Screen = ({navigation}) => {
               <TouchableOpacity
                 style={styles.Location}
                 activeOpacity={0.5}
-                onPress={handleButtonPress}>
+                onPress={() => {
+                  setShowMap(true);
+                }}>
                 <Text style={styles.Location_field_text}>
                   {currentLocation}
                 </Text>
