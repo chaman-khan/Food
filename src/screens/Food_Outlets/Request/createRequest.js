@@ -280,7 +280,7 @@ const theme = {
 const {width} = Dimensions.get('screen');
 
 const FoodCreateRequest = ({navigation}) => {
-  const [category, setCategory] = useState('Select');
+  const [category, setCategory] = useState('Food');
   const [currentLocation, setCurrentLocation] = useState('Select Location');
   const [dropOn, setDropOn] = useState(false);
   const [categoryData, setCategoryData] = useState([]);

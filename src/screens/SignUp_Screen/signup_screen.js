@@ -71,6 +71,7 @@ const SignUp_Screen = ({navigation}) => {
           console.log('Location permission granted');
           // Now you can use Geolocation to get the current position
           getCurrentLocation();
+          setShowMap(true);
         } else {
           console.log('Location permission denied');
         }
@@ -391,9 +392,7 @@ const SignUp_Screen = ({navigation}) => {
               <TouchableOpacity
                 style={styles.Location}
                 activeOpacity={0.5}
-                onPress={() => {
-                  setShowMap(true);
-                }}>
+                onPress={handleButtonPress}>
                 <Text style={styles.Location_field_text}>
                   {currentLocation}
                 </Text>
