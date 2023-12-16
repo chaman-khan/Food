@@ -49,17 +49,17 @@ const Singnup_verification = ({navigation}) => {
       console.log(raw);
       dispatch(submitCertificates(raw, onSuccess, onError));
 
-      // Alert.alert(
-      //   'Successfully Send',
-      //   'Your request has been successfully sent to admin you will be notify after verification.',
-      //   [
-      //     {
-      //       text: 'OK',
-      //       onPress: () => console.log('OK Pressed'),
-      //     },
-      //   ],
-      //   {cancelable: false},
-      // );
+      Alert.alert(
+        'Successfully Send',
+        'Your request has been successfully sent to admin you will be notify after verification.',
+        [
+          {
+            text: 'OK',
+            onPress: () => console.log('OK Pressed'),
+          },
+        ],
+        {cancelable: false},
+      );
     }
   };
 
