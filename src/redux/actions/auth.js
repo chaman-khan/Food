@@ -60,6 +60,36 @@ export const verifyAccount = (data, handleSuccess, handleError) => {
     }
   };
 };
+export const submitCertificates = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var myHeaders = new Headers();
+      myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('Accept', 'application/json');
+
+      var raw = JSON.stringify(data);
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: data,
+        redirect: 'follow',
+      };
+
+      fetch(`${baseUrl}/user/submit-certificate`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
 
 export const loginUser = (data, handleSuccess, handleError) => {
   return async dispatch => {

@@ -199,64 +199,27 @@ const SignUp_Screen = ({navigation}) => {
   };
 
 
+
   const onSuccess = val => {
     console.log(val);
     dispatch(authLoad(false));
-  
-    if (val.status === 'success') {
-      // Send user category as a tag
-      OneSignal.sendTag('user_category', value);
-  
-      Alert.alert(
-        'Success',
-        val.message,
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              console.log('OK Pressed');
-              navigation.navigate('SignupVerify');
-            },
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' && navigation.navigate('SignupVerify');
           },
-        ],
-        {cancelable: false},
-      );
-    } else {
-      Alert.alert(
-        'Error',
-        val.message || val.message.message,
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    }
+        },
+      ],
+      {cancelable: false},
+    );
   };
-  
-
-  // const onSuccess = val => {
-  //   console.log(val);
-  //   dispatch(authLoad(false));
-  //   Alert.alert(
-  //     val.status === 'success' ? 'Success' : 'Error',
-  //     val.status === 'success'
-  //       ? val.message
-  //       : val.message || val.message.message,
-  //     [
-  //       {
-  //         text: 'OK',
-  //         onPress: () => {
-  //           console.log('OK Pressed');
-  //           val.status === 'success' && navigation.navigate('SignupVerify');
-  //         },
-  //       },
-  //     ],
-  //     {cancelable: false},
-  //   );
-  // };
   const onError = err => {
     dispatch(authLoad(false));
     console.log(err);

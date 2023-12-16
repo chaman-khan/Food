@@ -9,11 +9,15 @@ import {
 } from 'react-native';
 import {styles} from './Signup_verification_styles';
 import ImagePicker from 'react-native-image-crop-picker';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad, submitCertificates} from '../../redux/actions/auth';
 
 const Singnup_verification = ({navigation}) => {
   const [regNo, setRegNo] = useState(null);
   const [regError, setRegError] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
 
   const Handle_Send = () => {
     if (!regNo) {
@@ -35,18 +39,53 @@ const Singnup_verification = ({navigation}) => {
         {cancelable: false},
       );
     } else {
-      Alert.alert(
-        'Successfully Send',
-        'Your request has been successfully sent to admin you will be notify after verification.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
+        user_id: loginData.data.user_id,
+        registration_no: reg,
+        certificate: selectedImage,
+      });
+      console.log(raw);
+      dispatch(submitCertificates(raw, onSuccess, onError));
+
+      // Alert.alert(
+      //   'Successfully Send',
+      //   'Your request has been successfully sent to admin you will be notify after verification.',
+      //   [
+      //     {
+      //       text: 'OK',
+      //       onPress: () => console.log('OK Pressed'),
+      //     },
+      //   ],
+      //   {cancelable: false},
+      // );
     }
+  };
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' && navigation.navigate('SignupVerify');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
 
   const PickImage = () => {
@@ -59,7 +98,6 @@ const Singnup_verification = ({navigation}) => {
       setSelectedImage(image.path);
     });
   };
-  const {authLoading, loginData} = useSelector(state => state.auth);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -68,15 +106,15 @@ const Singnup_verification = ({navigation}) => {
     }, []),
   );
 
-  const onSuccess = val => {
-    console.log(val);
-    dispatch(authLoad(false));
-    setData(val.data);
-  };
-  const onError = err => {
-    dispatch(authLoad(false));
-    console.log(err);
-  };
+  // const onSuccess = val => {
+  //   console.log(val);
+  //   dispatch(authLoad(false));
+  //   setData(val.data);
+  // };
+  // const onError = err => {
+  //   dispatch(authLoad(false));
+  //   console.log(err);
+  // };
 
   return (
     <View style={styles.Display}>
