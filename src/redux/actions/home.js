@@ -608,14 +608,14 @@ export const notification = (token, data, handleSuccess, handleError) => {
       console.log(token);
       var myHeaders = new Headers();
       myHeaders.append('Accept', 'application/json');
-      myHeaders.append('Authorization', `Bearer ${token.token}`);
+      myHeaders.append('Content-Type', 'application/json');
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
         redirect: 'follow',
       };
-      fetch(`${baseUrl}/ngo/deleteRequest/${data._id}`, requestOptions)
+      fetch(`${baseUrl}//${data._id}`, requestOptions)
         .then(response => response.json())
         .then(result => {
           handleSuccess(result);

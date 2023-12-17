@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Splash from '../screens/Splash';
@@ -17,8 +17,8 @@ import Reset_Password_Screen from '../screens/Recover/reset_password';
 import SignupVerify from '../screens/SignUp_Screen/signupVerify';
 
 function MainNav() {
-  const Stack = createNativeStackNavigator();
 
+  const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
       <Stack.Navigator

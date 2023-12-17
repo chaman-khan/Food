@@ -20,7 +20,6 @@ import Geolocation from '@react-native-community/geolocation';
 import {authLoad, registerUser} from '../../redux/actions/auth';
 import {PermissionsAndroid} from 'react-native';
 import {Loading} from '../../components/loading';
-import { OneSignal } from 'react-native-onesignal';
 
 const {width} = Dimensions.get('screen');
 const data = [

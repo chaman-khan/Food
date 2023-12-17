@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,11 +7,74 @@ import Donor_Notification from '../../screens/Local_Donor/Notification/Notificat
 import Donor_Category from '../../screens/Local_Donor/Category/Category';
 import Donor_Setting from '../../screens/Local_Donor/Setting/Setting';
 import Donor_Request from '../../screens/Local_Donor/Request/request';
+import { useDispatch, useSelector } from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
+import { notification } from '../../redux/actions/home';
+import { authLoad } from '../../redux/actions/auth';
 
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
 const BottomTab = () => {
+  const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  useEffect(() => {
+    flanra();
+  }, []);
+
+  const flanra = async () => {
+    const token = await messaging().getToken();
+    
+    fff(token);
+  };
+
+  const fff = token => {
+    var raw = JSON.stringify({
+      user_id: loginData.data._id,
+      fcm_token: token,
+      // user_id: loginData._id,
+      // fcm_token: fcmToken,
+    });
+console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
+console.log(raw);
+console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');    dispatch(authLoad(true));
+
+    dispatch(notification(loginData, raw, onSuccess, onError));
+  };
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('FoodStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success';
+            // &&
+            // navigation.navigate('FoodStack', {
+            //   screen: 'Donation Done',
+            // });
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
   return (
     <Tab.Navigator
       initialRouteName="Request"

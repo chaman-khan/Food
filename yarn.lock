@@ -4101,7 +4101,7 @@ internal-slot@^1.0.5:
     has "^1.0.3"
     side-channel "^1.0.4"
 
-invariant@*, invariant@^2.2.2, invariant@^2.2.4:
+invariant@*, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.npmjs.org/invariant/-/invariant-2.2.4.tgz"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -6014,13 +6014,6 @@ react-native-maps@^1.8.0:
   integrity sha512-ilkknT9Rvy0Cz6RTdtowGUB5XI/hFNU/QsUv1KRUE7m7vKxEIaKvhVpDxZ2yee7uyXACn/uoSYggakZ//8VSiQ==
   dependencies:
     "@types/geojson" "^7946.0.10"
-
-react-native-onesignal@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.npmjs.org/react-native-onesignal/-/react-native-onesignal-5.0.4.tgz#fe09b26955dcbcca03661619205b7a5ed673f5ff"
-  integrity sha512-gnIKTSsRvi8yV2L1fE3FdLzq0UgrROj/zdGO26qV+qnZxT9JRPPGMt/GKO61Qq+SfKKbcRG5ragXx27+lcfDXQ==
-  dependencies:
-    invariant "^2.2.2"
 
 react-native-push-notification@^8.1.1:
   version "8.1.1"
