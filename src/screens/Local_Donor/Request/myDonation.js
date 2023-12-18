@@ -123,7 +123,7 @@ const MyDonation = ({navigation}) => {
     );
   };
   const renderItem = ({item}) => (
-    <TouchableOpacity
+    <TouchableOpacity activeOpacity={1}
       style={styles.tabWrapper}
       onPress={() => {
         navigation.navigate('DonorStack', {
@@ -168,7 +168,7 @@ const MyDonation = ({navigation}) => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>My Donation</Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
-      <ScrollView>
+      {/* <ScrollView> */}
         <View style={styles.topRow}>
           <TouchableOpacity
             style={[styles.button, {backgroundColor: selectedColor1}]}
@@ -195,13 +195,14 @@ const MyDonation = ({navigation}) => {
           style={{
             width: '95%',
             alignSelf: 'center',
-            height: height / 1.2,
+            height: '100%',
+            marginBottom: 200
           }}>
           <FlatList
             data={pos1 ? allrequests : completedrequests}
             renderItem={renderItem}
             keyExtractor={item => item.id}
-            style={{height: '100%'}}
+            style={{ marginBottom: 200,}}
             ListEmptyComponent={() => {
               return (
                 <View
@@ -223,7 +224,7 @@ const MyDonation = ({navigation}) => {
             }}
           />
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
       {showMdel && <Modell />}
 
       <Loading visible={authLoading} />

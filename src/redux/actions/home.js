@@ -12,7 +12,6 @@ export const getAllUserRequests = (data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${data.token}`);
       var raw = '';
 
@@ -24,7 +23,7 @@ export const getAllUserRequests = (data, handleSuccess, handleError) => {
       };
 
       fetch(
-        `${baseUrl}/user/getAllRequestsByUser/${data.data._id}`,
+        `${baseUrl}/user/getAllRequestsByUser/${data.data._id}/all`,
         requestOptions,
       )
         .then(response => response.json())
@@ -189,7 +188,7 @@ export const createUserDonationRequest = (
       };
       console.log(requestOptions);
       console.log(`Bearer ${token.token}`);
-      fetch(`${baseUrl}/user/createUserRequest`, requestOptions)
+      fetch(`${baseUrl}/user/createUserRequest/`, requestOptions)
         .then(response => response.json())
         .then(result => {
           handleSuccess(result);
@@ -248,7 +247,6 @@ export const deleteUserDonationRequest = (
       console.log(data);
       console.log(token);
       var myHeaders = new Headers();
-      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {

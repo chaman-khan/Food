@@ -51,7 +51,7 @@ const CreateRequest = ({navigation}) => {
   const [des, setDes] = useState('');
   const [source, setSource] = useState(null);
   const [latitude, setLatitude] = useState();
-  const [longitude, setlongitude] = useState(73.8137992);
+  const [longitude, setlongitude] = useState();
 
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
@@ -59,7 +59,7 @@ const CreateRequest = ({navigation}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
@@ -79,24 +79,11 @@ const CreateRequest = ({navigation}) => {
     console.log(err);
   };
   const getCurrentLocation = () => {
-    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
       setLatitude(info.coords.latitude);
-      console.log('........now inside here.......');
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
   const onRegionChange = region => {
     setLatitude(region.latitude);
@@ -106,8 +93,8 @@ const CreateRequest = ({navigation}) => {
   const handleCreate = () => {
     var raw = JSON.stringify({
       user_id: loginData.data._id,
-      // image: source,
-      donation_category: category,
+      image: source,
+      donation_category: category.value,
       donation_amount: quatity,
       donation_desc: des,
       phone_number: number,
@@ -115,6 +102,7 @@ const CreateRequest = ({navigation}) => {
       latitude: latitude,
       longitude: longitude,
     });
+
 
     if (
       (quatity === '' || number === '' || latitude === undefined,
@@ -157,7 +145,7 @@ const CreateRequest = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.navigate('DonorStack', {screen: 'My Donation'});
+              navigation.replace('DonorStack', {screen: 'My Donation'});
           },
         },
       ],
@@ -330,7 +318,7 @@ const CreateRequest = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Donation Quantity'}</Text>
+            <Text>{'Donation Description'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
