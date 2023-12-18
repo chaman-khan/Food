@@ -79,6 +79,7 @@ const ChangePassword = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
+    navigation.goBack();
     // navigation.navigate('DonorStack', {
     //   screen: 'Donation Done',
     // });

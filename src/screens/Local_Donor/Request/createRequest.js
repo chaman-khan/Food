@@ -64,7 +64,7 @@ const CreateRequest = ({navigation}) => {
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [longitude, latitude]);
+  }, [longitude, longitude]);
 
   const categorySuccess = val => {
     console.log(val);
@@ -82,7 +82,7 @@ const CreateRequest = ({navigation}) => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
   };
   const onRegionChange = region => {
@@ -130,9 +130,9 @@ const CreateRequest = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
+    navigation.navigate('DonorStack', {
+      screen: 'Donation Done',
+    });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',

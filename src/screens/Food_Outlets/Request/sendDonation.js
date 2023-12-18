@@ -35,7 +35,7 @@ const Food_Send_Donation = ({navigation, route}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(authLoad(false));
@@ -45,7 +45,7 @@ const Food_Send_Donation = ({navigation, route}) => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
       console.log('........now inside here.......');
     });
     // Geolocation.getCurrentPosition(

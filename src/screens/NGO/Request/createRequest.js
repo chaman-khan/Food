@@ -60,7 +60,7 @@ const NGOCreateRequest = ({navigation}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
@@ -84,7 +84,7 @@ const NGOCreateRequest = ({navigation}) => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
       console.log('........now inside here.......');
     });
     // Geolocation.getCurrentPosition(
@@ -141,9 +141,9 @@ const NGOCreateRequest = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
+    navigation.navigate('NGOStack', {
+      screen: 'NGODonation_Done',
+    });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -156,7 +156,7 @@ const NGOCreateRequest = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.navigate('DonorStack', {screen: 'My Donation'});
+              navigation.navigate('NGOStack', {screen: 'NGOMyDonation'});
           },
         },
       ],

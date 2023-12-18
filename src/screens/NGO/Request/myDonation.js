@@ -31,6 +31,7 @@ const NGOMyDonation = ({navigation}) => {
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
   const [allrequests, setAllRequests] = useState([]);
+  const [completedrequests, setCompletedrequests] = useState([]);
 
   const [category, setCategory] = useState('leftover');
   const [showMdel, setShowModel] = useState(false);
@@ -79,6 +80,8 @@ const NGOMyDonation = ({navigation}) => {
   const onSuccess = val => {
     console.log(val);
     dispatch(authLoad(false));
+    console.log(val.data);
+    if (val.data.status === true) setCompletedrequests(val.data);
     setAllRequests(val.data);
   };
   const onError = err => {
@@ -189,7 +192,7 @@ const NGOMyDonation = ({navigation}) => {
             height: height / 1.2,
           }}>
           <FlatList
-            data={pos1 ? allrequests : data1}
+            data={pos1 ? allrequests : completedrequests}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={{height: '100%'}}

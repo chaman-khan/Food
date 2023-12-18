@@ -299,12 +299,12 @@ const FoodCreateRequest = ({navigation}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [longitude, latitude]);
+  }, [latitude, longitude]);
 
   const categorySuccess = val => {
     console.log(val);
@@ -319,24 +319,11 @@ const FoodCreateRequest = ({navigation}) => {
     console.log(err);
   };
   const getCurrentLocation = () => {
-    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
-      console.log('........now inside here.......');
+      setlongitude(info.coords.longitude);
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
   const onRegionChange = region => {
     setLatitude(region.latitude);
@@ -345,23 +332,21 @@ const FoodCreateRequest = ({navigation}) => {
 
   const handleCreate = () => {
     var raw = JSON.stringify({
-      user_id: loginData._id,
-      // user_id: 'loginData._id',
+      user_id: loginData.data._id,
       image: source,
       donation_category: category.value,
-      donation_amount: parseInt(quatity),
+      donation_amount: quatity,
       donation_desc: des,
       phone_number: number,
       location: 'Pakistan',
       latitude: latitude,
       longitude: longitude,
     });
-    console.log('================....................====================');
-    console.log(raw);
-    console.log('================....................====================');
+
 
     if (
-      (quatity === '' || number === '' || latitude === undefined, des === '')
+      (quatity === '' || number === '' || latitude === undefined,
+      des === '' || category === 'Select')
     ) {
       Alert.alert(
         'Error',
@@ -598,7 +583,7 @@ const FoodCreateRequest = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          onPress={() => handleCreate()}>
+          onPress={handleCreate}>
           <Text style={{color: 'white'}}>Send Request</Text>
         </TouchableOpacity>
       </ScrollView>

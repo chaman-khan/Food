@@ -38,7 +38,7 @@ const ChangeLocation = ({navigation}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(authLoad(false));
@@ -48,7 +48,7 @@ const ChangeLocation = ({navigation}) => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
       console.log('........now inside here.......');
     });
     // Geolocation.getCurrentPosition(

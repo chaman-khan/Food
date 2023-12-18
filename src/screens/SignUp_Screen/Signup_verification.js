@@ -11,6 +11,7 @@ import {styles} from './Signup_verification_styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import {authLoad, submitCertificates} from '../../redux/actions/auth';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Singnup_verification = ({navigation}) => {
   const [regNo, setRegNo] = useState(null);
@@ -43,7 +44,7 @@ const Singnup_verification = ({navigation}) => {
 
       var raw = JSON.stringify({
         user_id: loginData.data.user_id,
-        registration_no: reg,
+        registration_no: regNo,
         certificate: selectedImage,
       });
       console.log(raw);
@@ -82,6 +83,7 @@ const Singnup_verification = ({navigation}) => {
       ],
       {cancelable: false},
     );
+    navigation.navigate('Login');
   };
   const onError = err => {
     dispatch(authLoad(false));
@@ -99,12 +101,12 @@ const Singnup_verification = ({navigation}) => {
     });
   };
 
-  useFocusEffect(
-    React.useCallback(() => {
-      dispatch(authLoad(true));
-      dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
-    }, []),
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     dispatch(authLoad(true));
+  //     dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
+  //   }, []),
+  // );
 
   // const onSuccess = val => {
   //   console.log(val);

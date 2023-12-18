@@ -178,7 +178,7 @@ const FoodOutlet_Setting = ({navigation}) => {
         activeOpacity={1}
         onPress={() => {
           dispatch(logout());
-          navigation.navigate('Login');
+          navigation.replace('Login');
         }}>
         <Text style={{fontSize: 16, color: 'red', fontWeight: '0'}}>
           Log Out

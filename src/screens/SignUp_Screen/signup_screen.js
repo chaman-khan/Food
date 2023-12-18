@@ -20,6 +20,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {authLoad, registerUser} from '../../redux/actions/auth';
 import {PermissionsAndroid} from 'react-native';
 import {Loading} from '../../components/loading';
+import { getAllCategories } from '../../redux/actions/home';
 
 const {width} = Dimensions.get('screen');
 const data = [
@@ -45,8 +46,8 @@ const SignUp_Screen = ({navigation}) => {
   const [phone_numberError, setPhone_numberError] = useState(false);
   const [currentLocation, setCurrentLocation] = useState('Select Location');
   const [showMap, setShowMap] = useState(false);
-  const [latitude, setLatitude] = useState(89.90034672);
-  const [longitude, setlongitude] = useState(73.8137992);
+  const [latitude, setLatitude] = useState();
+  const [longitude, setlongitude] = useState();
   const dispatch = useDispatch();
 
   const {authLoading} = useSelector(state => state.auth);
@@ -83,33 +84,22 @@ const SignUp_Screen = ({navigation}) => {
     }
   };
   const getCurrentLocation = () => {
-    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
-      console.log('........now inside here.......');
+      setlongitude(info.coords.longitude)
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
 
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
-      dispatch(authLoad(false));
+      setlongitude(info.coords.longitude);
     });
-  }, [longitude, latitude]);
+    getCurrentLocation();
+    // dispatch(getAllCategories(loginData, categorySuccess, categoryError));
+    dispatch(authLoad(false));
+  }, [longitude, longitude]);
   const handleSignUp = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
     const emailRegex =

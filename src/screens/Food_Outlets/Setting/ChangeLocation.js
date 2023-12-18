@@ -29,7 +29,7 @@ const ChangeFoodLocation = ({navigation}) => {
   const [currentLocation, setCurrentLocation] = useState('Select Location');
   const [showMap, setShowMap] = useState(false);
   const [latitude, setLatitude] = useState();
-  const [longitude, setlongitude] = useState(73.8137992);
+  const [longitude, setlongitude] = useState();
 
   const {authLoading, loginData} = useSelector(state => state.auth);
 
@@ -38,30 +38,17 @@ const ChangeFoodLocation = ({navigation}) => {
   useEffect(() => {
     Geolocation.getCurrentPosition(info => {
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
     });
     getCurrentLocation();
     dispatch(authLoad(false));
   }, [longitude, latitude]);
   const getCurrentLocation = () => {
-    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setLatitude(info.coords.latitude);
-      console.log('........now inside here.......');
+      setlongitude(info.coords.longitude);
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
   const onRegionChange = region => {
     setLatitude(region.latitude);

@@ -402,7 +402,6 @@ export const NGOgetAllUserRequests = (data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
       var myHeaders = new Headers();
-      // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${data.token}`);
       var raw = '';
 
@@ -506,7 +505,7 @@ export const NGOcreateUserDonationRequest = (
     try {
       console.log('token');
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {
@@ -517,7 +516,7 @@ export const NGOcreateUserDonationRequest = (
       };
       console.log(requestOptions);
       console.log(`Bearer ${token.token}`);
-      fetch(`${baseUrl}/user/createUserRequest`, requestOptions)
+      fetch(`${baseUrl}/ngo/createRequest`, requestOptions)
         .then(response => response.json())
         .then(result => {
           handleSuccess(result);
