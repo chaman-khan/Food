@@ -20,7 +20,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {authLoad, registerUser} from '../../redux/actions/auth';
 import {PermissionsAndroid} from 'react-native';
 import {Loading} from '../../components/loading';
-import { getAllCategories } from '../../redux/actions/home';
+import {getAllCategories} from '../../redux/actions/home';
 
 const {width} = Dimensions.get('screen');
 const data = [
@@ -87,7 +87,7 @@ const SignUp_Screen = ({navigation}) => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
-      setlongitude(info.coords.longitude)
+      setlongitude(info.coords.longitude);
     });
   };
 
@@ -167,8 +167,8 @@ const SignUp_Screen = ({navigation}) => {
         ],
         {cancelable: false},
       );
-      } else if (value !== 'user') {
-        navigation.navigate('Singnup_verification');
+    } else if (value !== 'user') {
+      navigation.navigate('Singnup_verification');
     } else {
       dispatch(authLoad(true));
 
@@ -178,16 +178,16 @@ const SignUp_Screen = ({navigation}) => {
         email: email,
         password: password,
         location: 'Pakistan',
-        latitude: latitude.toString(),
-        longitude: longitude.toString(),
+        latitude: '22',
+        longitude: '23',
+        // latitude: latitude.toString(),
+        // longitude: longitude.toString(),
         role: value,
       });
       console.log(raw);
       dispatch(registerUser(raw, onSuccess, onError));
     }
   };
-
-
 
   const onSuccess = val => {
     console.log(val);
@@ -403,8 +403,7 @@ const SignUp_Screen = ({navigation}) => {
                   activeOpacity={0.7}
                   style={styles.Button}
                   // onPress={handleSignUp}
-                  onPress={handleSignUp}
-                  >
+                  onPress={handleSignUp}>
                   <Text style={styles.Sign_Up_Text}>Sign up</Text>
                 </TouchableOpacity>
               </View>

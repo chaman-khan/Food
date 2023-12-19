@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -7,10 +7,10 @@ import Donor_Notification from '../../screens/Local_Donor/Notification/Notificat
 import Donor_Category from '../../screens/Local_Donor/Category/Category';
 import Donor_Setting from '../../screens/Local_Donor/Setting/Setting';
 import Donor_Request from '../../screens/Local_Donor/Request/request';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
-import { notification } from '../../redux/actions/home';
-import { authLoad } from '../../redux/actions/auth';
+import {notification} from '../../redux/actions/home';
+import {authLoad} from '../../redux/actions/auth';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ const BottomTab = () => {
 
   const flanra = async () => {
     const token = await messaging().getToken();
-    
+
     fff(token);
   };
 
@@ -35,9 +35,10 @@ const BottomTab = () => {
       // user_id: loginData._id,
       // fcm_token: fcmToken,
     });
-console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
-console.log(raw);
-console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');    dispatch(authLoad(true));
+    console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
+    console.log(raw);
+    console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
+    dispatch(authLoad(true));
 
     dispatch(notification(loginData, raw, onSuccess, onError));
   };
