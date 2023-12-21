@@ -468,7 +468,7 @@ export const NGOsendDonation = (token, data, handleSuccess, handleError) => {
     try {
       console.log('token');
       var myHeaders = new Headers();
-      myHeaders.append('Accept', 'application/json');
+      myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('Authorization', `Bearer ${token.token}`);
 
       var requestOptions = {

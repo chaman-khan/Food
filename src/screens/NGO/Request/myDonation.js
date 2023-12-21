@@ -39,37 +39,7 @@ const NGOMyDonation = ({navigation}) => {
   const dispatch = useDispatch();
 
   const {authLoading, loginData} = useSelector(state => state.auth);
-  const data = [
-    {
-      id: '1',
-      category: 'Leftover',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '4575',
-      image: require('../../../Images/clothing.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
-  const data1 = [
-    {
-      id: '1',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
+
   useFocusEffect(
     React.useCallback(() => {
       dispatch(authLoad(true));

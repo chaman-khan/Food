@@ -5,10 +5,50 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLoad } from '../../../redux/actions/auth';
 const NGOSend_Donation = ({navigation}) => {
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+    // navigation.navigate('DonorStack', {
+    //   screen: 'Donation Done',
+    // });
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' &&
+              navigation.navigate('DonorStack', {
+                screen: 'Donation Done',
+              });
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+
   return (
     <View style={{flex: 1}}>
       <View style={{width: '95%', alignSelf: 'center', gap: 20}}>

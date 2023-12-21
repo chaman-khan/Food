@@ -9,12 +9,6 @@ import '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
 import messaging from '@react-native-firebase/messaging';
 
-// messaging().setBackgroundMessageHandler(async remoteMessage => {
-//   console.log('******************************************');
-//   console.log('Message handled in the background!', remoteMessage);
-//   console.log('******************************************');
-// });
-
 const App = () => {
   useEffect(() => {
     console.log('flanra()');

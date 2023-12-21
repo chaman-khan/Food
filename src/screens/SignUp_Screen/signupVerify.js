@@ -44,7 +44,7 @@ const SignupVerify = ({navigation}) => {
       dispatch(authLoad(true));
 
       var raw = JSON.stringify({
-        otp: '4033',
+        otp: code,
       });
 
       console.log(raw);
