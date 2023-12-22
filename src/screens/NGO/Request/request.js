@@ -10,8 +10,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {useFocusEffect} from '@react-navigation/native';
@@ -21,62 +19,7 @@ import {NGOgetAllUserRequests} from '../../../redux/actions/home';
 
 const {width, height} = Dimensions.get('screen');
 const NGO_Request = ({navigation}) => {
-  // const [category, setCategory] = useState('leftover');
-  // const [title, setTitle] = useState('Norshing Hearts through Food Donation');
-  // const [totalNumber, setTotalNumber] = useState(4575);
-
-  const [category, setCategory] = useState('leftover');
-  const [title, setTitle] = useState('Norshing Hearts through Food Donation');
-  const [totalNumber, setTotalNumber] = useState(4575);
   const [data, setData] = useState([]);
-  // const data = [
-  //   {
-  //     id: '1',
-  //     category: 'Leftover',
-  //     title: 'Nourishing Hearts Through Medicine Donation',
-  //     totalNumber: '4575',
-  //     image: require('../../../Images/clothing.jpg'),
-  //     description:
-  //       'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-  //   },
-  //   {
-  //     id: '2',
-  //     category: 'Medicine',
-  //     title: 'Nourishing Hearts Through Medicine Donation',
-  //     totalNumber: '3461',
-  //     image: require('../../../Images/medicine.jpg'),
-  //     description:
-  //       'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-  //   },
-  //   {
-  //     id: '2',
-  //     category: 'Medicine',
-  //     title: 'Nourishing Hearts Through Medicine Donation',
-  //     totalNumber: '3461',
-  //     image: require('../../../Images/medicine.jpg'),
-  //     description:
-  //       'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-  //   },
-  //   {
-  //     id: '2',
-  //     category: 'Medicine',
-  //     title: 'Nourishing Hearts Through Medicine Donation',
-  //     totalNumber: '3461',
-  //     image: require('../../../Images/medicine.jpg'),
-  //     description:
-  //       'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-  //   },
-  //   {
-  //     id: '2',
-  //     category: 'Medicine',
-  //     title: 'Nourishing Hearts Through Medicine Donation',
-  //     totalNumber: '3461',
-  //     image: require('../../../Images/medicine.jpg'),
-  //     description:
-  //       'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-  //   },
-  // ];
-
   const {authLoading, loginData} = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
@@ -123,40 +66,9 @@ const NGO_Request = ({navigation}) => {
           <Text style={styles.textStyle}>Donation amount</Text>
           <Text style={styles.reqCatValue}>{item.donation_amount}</Text>
         </View>
-        {/* <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required Raised</Text>
-          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>
-            {item.total_donation_amount}
-          </Text>
-        </View> */}
       </View>
     </TouchableOpacity>
   );
-  // const renderItem = ({item}) => (
-  //   <TouchableOpacity
-  //     style={styles.tabWrapper}
-  //     onPress={() => {
-  //       navigation.navigate('NGOStack', {
-  //         screen: 'NGODonationDetail',
-  //         params: {item: item},
-  //       });
-  //     }}>
-  //     <Image source={item.image} resizeMode="cover" style={styles.tabImage} />
-  //     <View style={styles.tabBottom}>
-  //       <Text style={styles.categoryText}>{category}</Text>
-  //       <Text style={styles.titleText}>{item.title}</Text>
-  //       <View style={styles.bottomDetail}>
-  //         <Text style={styles.textStyle}>Required {item.category}</Text>
-  //         <Text style={styles.reqCatValue}>{item.totalNumber}</Text>
-  //       </View>
-  //       <View style={styles.bottomDetail}>
-  //         <Text style={styles.textStyle}>Required Raised</Text>
-  //         <Text style={[styles.textStyle, {color: '#20B7FE'}]}>00</Text>
-  //       </View>
-  //     </View>
-  //   </TouchableOpacity>
-  // );
-
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
       <View style={styles.topWrapper}>
@@ -317,6 +229,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
     fontSize: 12,
+    color: 'black',
   },
   bottomDetail: {
     flexDirection: 'row',

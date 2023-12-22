@@ -63,19 +63,19 @@ const NGOSend_Donation = ({navigation}) => {
             size={25}
             onPress={() => navigation.goBack()}
           />
-          <Text style={{fontSize: 25}}>Send Donation</Text>
+          <Text style={{fontSize: 25, color: 'black'}}>Send Donation</Text>
           <Ionicons name="arrow-back" size={25} color="transparent" />
         </View>
         <View style={{gap: 7}}>
-          <Text style={{fontWeight: 'bold'}}>Donation Affordability</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>Donation Affordability</Text>
           <TextInput placeholder="0" style={styles.section} />
         </View>
         <View style={{gap: 7}}>
-          <Text style={{fontWeight: 'bold'}}>Phone Number</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>Phone Number</Text>
           <TextInput placeholder="03010549310" style={styles.section} />
         </View>
         <View style={{gap: 7}}>
-          <Text style={{fontWeight: 'bold'}}>Location</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>Location</Text>
           <View style={styles.newSection}>
             <TextInput placeholder="Add" />
             <Entypo name="location-pin" size={20} />

@@ -69,10 +69,11 @@ const RejectedDeatil = ({navigation}) => {
           size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 25}}>Donation Details</Text>
+        <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Entypo
           name="dots-three-vertical"
           size={25}
+          style={{color: 'black'}}
           onPress={() => setClicked(true)}
         />
       </View>
@@ -82,21 +83,23 @@ const RejectedDeatil = ({navigation}) => {
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.title}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>{routee.title}</Text>
         <View style={styles.categoryView}>
-          <Text>Donation Quantity</Text>
+          <Text style={{color: 'black'}}>Donation Quantity</Text>
           <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Phone Number</Text>
+          <Text style={{color: 'black'}}>Phone Number</Text>
           <Text style={{color: '#20B7FE'}}>{routee.phoneNO}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Location</Text>
+          <Text style={{color: 'black'}}>Location</Text>
           <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold', color: 'black'}}>
+          Donation Description
+        </Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
       {clicked && (
@@ -116,7 +119,7 @@ const RejectedDeatil = ({navigation}) => {
                 onPress={() => {
                   handleDelete;
                 }}>
-                <Text>Delete Request</Text>
+                <Text style={{color: 'black'}}>Delete Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancel}
@@ -160,6 +163,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+    color: 'black',
   },
   cancel: {
     height: 50,

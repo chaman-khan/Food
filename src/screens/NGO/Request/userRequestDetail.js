@@ -19,7 +19,6 @@ const theme = {
 const UserRequestDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
-  const [clicked, setClicked] = useState(false);
 
   return (
     <View style={{flex: 1}}>
@@ -35,12 +34,11 @@ const UserRequestDetail = ({navigation}) => {
           size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 25}}>Donation Details</Text>
+        <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Entypo
           name="dots-three-vertical"
           size={25}
           color="transparent"
-          onPress={() => setClicked(true)}
         />
       </View>
       <Image
@@ -50,19 +48,19 @@ const UserRequestDetail = ({navigation}) => {
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.donation_category}</Text>
         <View style={styles.categoryView}>
-          <Text>Donation Quantity</Text>
+          <Text style={{ color: 'black'}}>Donation Quantity</Text>
           <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Phone Number</Text>
+          <Text style={{ color: 'black'}}>Phone Number</Text>
           <Text style={{color: '#20B7FE'}}>{routee.phoneNo}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Location</Text>
+          <Text style={{ color: 'black'}}>Location</Text>
           <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold',  color: 'black'}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
       <View style={styles.buttonGroup}>
@@ -109,6 +107,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     lineHeight: 20,
+    color: 'black'
   },
   button: {
     width: '47%',
