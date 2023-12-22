@@ -8,7 +8,7 @@ const Donation_Done = ({navigation}) => {
         name="cross"
         size={30}
         onPress={() => navigation.replace('BottomTab')}
-        style={{margin: 10}}
+        style={{margin: 10, color: 'black'}}
       />
       <Image
         source={require('../../../Images/done.png')}
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 15,
     textAlign: 'center',
+    color: 'black',
   },
 });
 export default Donation_Done;

@@ -41,7 +41,7 @@ export const verifyAccount = (data, handleSuccess, handleError) => {
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: data,
+        body: raw,
         redirect: 'follow',
       };
 
@@ -68,10 +68,17 @@ export const submitCertificates = (data, handleSuccess, handleError) => {
       myHeaders.append('Accept', 'application/json');
 
       var raw = JSON.stringify(data);
+      console.log(
+        '==rawwwwwwwwwwwwwwwwwwwww==================================',
+      );
+      console.log(raw);
+      console.log(
+        '=========================rawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww===========',
+      );
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: data,
+        body: raw,
         redirect: 'follow',
       };
 

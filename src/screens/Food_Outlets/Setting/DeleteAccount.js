@@ -88,7 +88,7 @@ const DeleteAccountFood = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Delete Account</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Delete Account</Text>
       </View>
       <View style={{marginTop: 60, gap: 50}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
@@ -152,7 +152,7 @@ const DeleteAccountFood = ({navigation}) => {
         <Text style={{color: 'white'}}>Delete Account</Text>
       </TouchableOpacity>
 
-      <Loading visible={authLoading} />
+      <Loading />
     </View>
   );
 };

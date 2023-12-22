@@ -49,19 +49,7 @@ const ChangeLocation = ({navigation}) => {
       console.log(info);
       setLatitude(info.coords.latitude);
       setlongitude(info.coords.longitude);
-      console.log('........now inside here.......');
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
   const onRegionChange = region => {
     setLatitude(region.latitude);
@@ -127,7 +115,7 @@ const ChangeLocation = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Change Location</Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
@@ -142,9 +130,9 @@ const ChangeLocation = ({navigation}) => {
           style={{gap: 7}}
           activeOpacity={1}
           onPress={() => setShowMap(true)}>
-          <Text style={{fontWeight: 'bold'}}>Location</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>Location</Text>
           <View style={styles.newSection}>
-            <Text placeholder={currentLocation}>{currentLocation}</Text>
+            <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
             <Entypo name="location-pin" size={20} />
           </View>
         </TouchableOpacity>

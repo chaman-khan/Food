@@ -6,21 +6,21 @@ const FoodTerms = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
           Terms & Conditions
         </Text>
       </View>
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
-        onPress={() => navigation.navigate('FoodStack', {screen: 'FAQs'})}>
-        <Text>FAQ's</Text>
+        onPress={() => navigation.navigate('DonorStack', {screen: 'FAQs'})}>
+        <Text style={{color: 'black'}}>FAQ's</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
-        onPress={() => navigation.navigate('FoodStack', {screen: 'AboutUs'})}>
-        <Text>About Us</Text>
+        onPress={() => navigation.navigate('DonorStack', {screen: 'AboutUs'})}>
+        <Text style={{color: 'black'}}>About Us</Text>
       </TouchableOpacity>
     </View>
   );

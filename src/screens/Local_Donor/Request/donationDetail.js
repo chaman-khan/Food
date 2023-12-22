@@ -28,7 +28,7 @@ const DonationDetail = ({navigation, route}) => {
           size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 25}}>Donation Details</Text>
+        <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Ionicons name="arrow-back" size={25} color="transparent" />
       </View>
       <Image
@@ -37,17 +37,23 @@ const DonationDetail = ({navigation, route}) => {
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{data.donation_category}</Text>
-        <Text style={{marginVertical: 7}}>{data.donation_intro}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>
+          {data.donation_intro}
+        </Text>
         <View style={styles.categoryView}>
-          <Text>Required {data.donation_category}</Text>
+          <Text style={{color: 'black'}}>
+            Required {data.donation_category}
+          </Text>
           <Text style={{color: '#20B7FE'}}>{data.required_amount}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Required Raised</Text>
+          <Text style={{color: 'black'}}>Required Raised</Text>
           <Text style={{color: '#20B7FE'}}>{data.total_donation_amount}</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold', color: 'black'}}>
+          Donation Description
+        </Text>
         <Text style={styles.desc}>{data.donation_desc}</Text>
       </View>
       <TouchableOpacity
@@ -89,6 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+    color: 'black',
   },
   button: {
     width: '90%',

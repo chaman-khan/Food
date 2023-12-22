@@ -6,7 +6,7 @@ const Terms = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
           Terms & Conditions
         </Text>
       </View>
@@ -14,13 +14,13 @@ const Terms = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() => navigation.navigate('DonorStack', {screen: 'FAQs'})}>
-        <Text>FAQ's</Text>
+        <Text style={{color: 'black'}}>FAQ's</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
         activeOpacity={1}
         onPress={() => navigation.navigate('DonorStack', {screen: 'AboutUs'})}>
-        <Text>About Us</Text>
+        <Text style={{color: 'black'}}>About Us</Text>
       </TouchableOpacity>
     </View>
   );

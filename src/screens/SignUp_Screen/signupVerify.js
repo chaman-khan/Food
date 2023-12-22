@@ -67,12 +67,13 @@ const SignupVerify = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('Login');
+            val.status === 'success' && navigation.navigate('Sign Up');
           },
         },
       ],
       {cancelable: false},
     );
+    navigation.navigate('Login');
   };
   const onError = err => {
     dispatch(authLoad(false));
@@ -107,6 +108,7 @@ const SignupVerify = ({navigation}) => {
       <View style={styles.Button_Box}>
         <TouchableOpacity
           onPress={handleVerifyCode}
+          // onPress={() => navigation.navigate('Login')}
           style={styles.Button}
           activeOpacity={0.7}>
           <Text style={styles.Verify_Text}>Verify</Text>

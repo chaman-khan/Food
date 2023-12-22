@@ -27,6 +27,8 @@ const {width, height} = Dimensions.get('screen');
 const MyDonation = ({navigation}) => {
   const [selectedColor1, setSelectedColor1] = useState(theme.colors.primary);
   const [selectedColor2, setSelectedColor2] = useState('transparent');
+  const [Color1, setColor1] = useState('white');
+  const [Color2, setColor2] = useState('black');
 
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
@@ -40,37 +42,6 @@ const MyDonation = ({navigation}) => {
 
   const {authLoading, loginData} = useSelector(state => state.auth);
 
-  const data = [
-    {
-      id: '1',
-      category: 'Leftover',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '4575',
-      image: require('../../../Images/clothing.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
-  const data1 = [
-    {
-      id: '1',
-      category: 'Medicine',
-      title: 'Nourishing Hearts Through Medicine Donation',
-      totalNumber: '3461',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
 
   useFocusEffect(
     React.useCallback(() => {
@@ -123,7 +94,8 @@ const MyDonation = ({navigation}) => {
     );
   };
   const renderItem = ({item}) => (
-    <TouchableOpacity activeOpacity={1}
+    <TouchableOpacity
+      activeOpacity={1}
       style={styles.tabWrapper}
       onPress={() => {
         navigation.navigate('DonorStack', {
@@ -147,12 +119,7 @@ const MyDonation = ({navigation}) => {
           <Text style={styles.textStyle}>Donation amount</Text>
           <Text style={styles.reqCatValue}> {item.donation_amount}</Text>
         </View>
-        {/* <View style={styles.bottomDetail}>
-          <Text style={styles.textStyle}>Required Raised</Text>
-          <Text style={[styles.textStyle, {color: '#20B7FE'}]}>
-            {item.total_donation_amount}
-          </Text>
-        </View> */}
+        
       </View>
     </TouchableOpacity>
   );
@@ -165,65 +132,71 @@ const MyDonation = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>My Donation</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          My Donation
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       {/* <ScrollView> */}
-        <View style={styles.topRow}>
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: selectedColor1}]}
-            onPress={() => {
-              setSelectedColor1(theme.colors.primary);
-              setSelectedColor2('transparent');
-              setPos1(true);
-              setPos2(false);
-            }}>
-            <Text>All Request</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.button, {backgroundColor: selectedColor2}]}
-            onPress={() => {
-              setSelectedColor2(theme.colors.primary);
-              setSelectedColor1('transparent');
-              setPos2(true);
-              setPos1(false);
-            }}>
-            <Text>Complete</Text>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            width: '95%',
-            alignSelf: 'center',
-            height: '100%',
-            marginBottom: 200
+      <View style={styles.topRow}>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: selectedColor1}]}
+          onPress={() => {
+            setSelectedColor1(theme.colors.primary);
+            setSelectedColor2('transparent');
+            setColor1('white');
+            setColor2('black');
+            setPos1(true);
+            setPos2(false);
           }}>
-          <FlatList
-            data={pos1 ? allrequests : completedrequests}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            style={{ marginBottom: 200,}}
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  style={{
-                    height: 500,
-                    width: '90%',
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
-                    No Donation found
-                  </Text>
-                </View>
-              );
-            }}
-            ListFooterComponent={() => {
-              return <View style={{height: 200}} />;
-            }}
-          />
-        </View>
+          <Text style={{color: Color1}}>All Request</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, {backgroundColor: selectedColor2}]}
+          onPress={() => {
+            setSelectedColor2(theme.colors.primary);
+            setSelectedColor1('transparent');
+            setColor1('black');
+            setColor2('white');
+            setPos2(true);
+            setPos1(false);
+          }}>
+          <Text style={{color: Color2}}>Complete</Text>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          width: '95%',
+          alignSelf: 'center',
+          height: '100%',
+          marginBottom: 200,
+        }}>
+        <FlatList
+          data={pos1 ? allrequests : completedrequests}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          style={{marginBottom: 200}}
+          ListEmptyComponent={() => {
+            return (
+              <View
+                style={{
+                  height: 500,
+                  width: '90%',
+                  alignSelf: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                  No Donation found
+                </Text>
+              </View>
+            );
+          }}
+          ListFooterComponent={() => {
+            return <View style={{height: 200}} />;
+          }}
+        />
+      </View>
       {/* </ScrollView> */}
       {showMdel && <Modell />}
 
@@ -262,8 +235,9 @@ const styles = StyleSheet.create({
   tabWrapper: {
     borderRadius: 10,
     width: '100%',
-    // height: height / 3,
-    // marginBottom: 10,
+    height: height / 3,
+    marginBottom: 10,
+    // overflow: 'hidden'
   },
   tabImage: {
     width: '100%',
@@ -292,6 +266,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
+    color: 'black',
     fontSize: 12,
   },
   bottomDetail: {
@@ -300,6 +275,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontWeight: '500',
+    color: 'black',
     fontSize: 12,
   },
   cancel: {

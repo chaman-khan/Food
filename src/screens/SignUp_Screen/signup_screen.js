@@ -180,8 +180,6 @@ const SignUp_Screen = ({navigation}) => {
         location: 'Pakistan',
         latitude: '22',
         longitude: '23',
-        // latitude: latitude.toString(),
-        // longitude: longitude.toString(),
         role: value,
       });
       console.log(raw);
@@ -397,7 +395,7 @@ const SignUp_Screen = ({navigation}) => {
               </TouchableOpacity>
             </View>
 
-            {value == '1' ? (
+            {value == 'user' ? (
               <View style={styles.Button_Box}>
                 <TouchableOpacity
                   activeOpacity={0.7}

@@ -20,6 +20,10 @@ const Singnup_verification = ({navigation}) => {
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
 
+  console.log('=========Login \dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa===========================');
+  console.log(loginData);
+  console.log('=========Login \dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa===========================');
+
   const Handle_Send = () => {
     if (!regNo) {
       setRegError(true);
@@ -43,24 +47,24 @@ const Singnup_verification = ({navigation}) => {
       dispatch(authLoad(true));
 
       var raw = JSON.stringify({
-        user_id: loginData.data.user_id,
+        // user_id: loginData.data.user_id,
         registration_no: regNo,
         certificate: selectedImage,
       });
       console.log(raw);
       dispatch(submitCertificates(raw, onSuccess, onError));
 
-      // Alert.alert(
-      //   'Successfully Send',
-      //   'Your request has been successfully sent to admin you will be notify after verification.',
-      //   [
-      //     {
-      //       text: 'OK',
-      //       onPress: () => console.log('OK Pressed'),
-      //     },
-      //   ],
-      //   {cancelable: false},
-      // );
+      Alert.alert(
+        'Successfully Send',
+        'Your request has been successfully sent to admin you will be notify after verification.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {navigation.navigate('Login')},
+          },
+        ],
+        {cancelable: false},
+      );
     }
   };
 
@@ -68,7 +72,7 @@ const Singnup_verification = ({navigation}) => {
     console.log(val);
     dispatch(authLoad(false));
     Alert.alert(
-      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'true' ? 'Success' : 'Error',
       val.status === 'success'
         ? val.message
         : val.message || val.message.message,
@@ -77,13 +81,13 @@ const Singnup_verification = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('SignupVerify');
+            val.status === 'success' && navigation.navigate('Login');
           },
         },
       ],
       {cancelable: false},
     );
-    navigation.navigate('Login');
+    // navigation.navigate('Login');
   };
   const onError = err => {
     dispatch(authLoad(false));

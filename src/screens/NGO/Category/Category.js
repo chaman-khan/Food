@@ -59,7 +59,7 @@ const NGOCategory = () => {
                     : require('../../../Images/medicinec.png')
                 }
               />
-              <Text style={{fontSize: 20, fontWeight: '400'}}>
+              <Text style={{fontSize: 20, fontWeight: '400', color: 'black'}}>
                 {item.item.name}
               </Text>
             </View>

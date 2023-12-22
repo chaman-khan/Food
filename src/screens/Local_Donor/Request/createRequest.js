@@ -158,62 +158,6 @@ const CreateRequest = ({navigation}) => {
     console.log(err);
   };
 
-  const DropDown = ({setValue, value, data, dropOpen, setDropOpenn}) => {
-    return (
-      <View style={{position: 'relative'}}>
-        <TouchableOpacity
-          style={styles.dropTab}
-          onPress={() => setDropOpenn(!dropOpen)}>
-          <Text style={{width: '90%', color: theme.colors.grey}}>{value}</Text>
-          <Icon name="caretdown" type="ant-design" size={15} />
-        </TouchableOpacity>
-
-        {dropOpen && (
-          <View style={styles.containerWrapper}>
-            {data.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.containerItem}
-                onPress={() => {
-                  setValue(item);
-                  setDropOpenn(false);
-                }}>
-                <Text>{item}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      </View>
-    );
-  };
-
-  const InputFielder = ({
-    title,
-    placeholder,
-    height = 40,
-    multiline,
-    value,
-    setValue,
-  }) => {
-    return (
-      <View style={styles.inputWrapperCont}>
-        <Text>{title}</Text>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={[styles.inputTitle, {height: height}]}
-            placeholder={placeholder}
-            multiline={multiline}
-            value={value}
-            onChangeText={val => {
-              setValue(val);
-            }}
-            placeholderTextColor={theme.colors.grey}
-          />
-        </View>
-      </View>
-    );
-  };
-
   const gallery = () => {
     ImagePicker.openPicker({}).then(images => {
       console.log(images);
@@ -228,7 +172,7 @@ const CreateRequest = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Create Request</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Create Request</Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -245,7 +189,7 @@ const CreateRequest = ({navigation}) => {
                 color={theme.colors.primary}
                 size={30}
               />
-              <Text style={{fontSize: 12, marginTop: 8}}>Tap to upload</Text>
+              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>Tap to upload</Text>
             </View>
           ) : (
             <Image
@@ -255,7 +199,7 @@ const CreateRequest = ({navigation}) => {
           )}
         </TouchableOpacity>
         <View style={styles.donation}>
-          <Text>Donation Categroy</Text>
+          <Text style={{ color: 'black'}}>Donation Categroy</Text>
 
           <Dropdown
             style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -279,7 +223,7 @@ const CreateRequest = ({navigation}) => {
         </View>
         <View style={{zIndex: 0}}>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Donation Quantity'}</Text>
+            <Text style={{ color: 'black'}}>{'Donation Quantity'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -293,7 +237,7 @@ const CreateRequest = ({navigation}) => {
             </View>
           </View>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Phone Number'}</Text>
+            <Text style={{ color: 'black'}}>{'Phone Number'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -313,17 +257,18 @@ const CreateRequest = ({navigation}) => {
             onPress={() => setShowMap(true)}>
             <Text style={{fontWeight: '400'}}>Location</Text>
             <View style={styles.newSection}>
-              <Text placeholder={currentLocation}>{currentLocation}</Text>
+              <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
               <Entypo name="location-pin" size={20} />
             </View>
           </TouchableOpacity>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Donation Description'}</Text>
+            <Text style={{ color: 'black'}}>{'Donation Description'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
-                style={[styles.inputTitle, {height: 40}]}
+                style={[styles.inputTitle, {height: 120, maxHeight: 120}]}
                 placeholder={'Donation Description'}
                 value={des}
+                multiline
                 onChangeText={val => {
                   setDes(val);
                 }}
@@ -463,6 +408,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 10,
     zIndex: 0,
+    maxHeight: 100
   },
   inputTitle: {
     color: 'black',
@@ -533,7 +479,7 @@ const styles = StyleSheet.create({
     width: '91%',
     fontSize: responsiveScreenFontSize(1.6),
     fontFamily: 'Poppins',
-    color: '#000000',
+    color: 'black',
     fontWeight: '400',
   },
   placeholderStyle: {
@@ -542,7 +488,7 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(1.6),
   },
   selectedTextStyle: {
-    fontSize: 14,
+    fontSize: 14, color: 'black'
   },
   label: {
     color: '#000000',

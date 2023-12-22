@@ -29,7 +29,7 @@ const ChangeFoodLocation = ({navigation}) => {
   const [currentLocation, setCurrentLocation] = useState('Select Location');
   const [showMap, setShowMap] = useState(false);
   const [latitude, setLatitude] = useState();
-  const [longitude, setlongitude] = useState();
+  const [longitude, setlongitude] = useState(73.8137992);
 
   const {authLoading, loginData} = useSelector(state => state.auth);
 
@@ -44,6 +44,7 @@ const ChangeFoodLocation = ({navigation}) => {
     dispatch(authLoad(false));
   }, [longitude, latitude]);
   const getCurrentLocation = () => {
+    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
@@ -114,7 +115,9 @@ const ChangeFoodLocation = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Change Location
+        </Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
@@ -129,9 +132,11 @@ const ChangeFoodLocation = ({navigation}) => {
           style={{gap: 7}}
           activeOpacity={1}
           onPress={() => setShowMap(true)}>
-          <Text style={{fontWeight: 'bold'}}>Location</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>Location</Text>
           <View style={styles.newSection}>
-            <Text placeholder={currentLocation}>{currentLocation}</Text>
+            <Text placeholder={currentLocation} style={{color: 'black'}}>
+              {currentLocation}
+            </Text>
             <Entypo name="location-pin" size={20} />
           </View>
         </TouchableOpacity>

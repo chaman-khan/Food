@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
+import {View, Text, Image, FlatList, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
 import {StyleSheet} from 'react-native';
 import {getAllCategories} from '../../../redux/actions/home';
@@ -7,7 +7,7 @@ import {authLoad} from '../../../redux/actions/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loading} from '../../../components/loading';
 
-const Donor_Category = () => {
+const Donor_Category = ({navigation}) => {
   const [categoryData, setCategoryData] = useState([]);
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const Donor_Category = () => {
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Category</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Category</Text>
       </View>
       <FlatList
         data={categoryData}
@@ -38,7 +38,7 @@ const Donor_Category = () => {
         columnWrapperStyle={{justifyContent: 'space-between'}}
         renderItem={item => {
           return (
-            <View
+            <TouchableOpacity onPress={() => navigation.navigate('Request', {item: item.item.name})}
               style={[
                 styles.category,
                 {
@@ -59,10 +59,10 @@ const Donor_Category = () => {
                     : require('../../../Images/medicinec.png')
                 }
               />
-              <Text style={{fontSize: 20, fontWeight: '400'}}>
+              <Text style={{fontSize: 20, fontWeight: '400', color: 'black'}}>
                 {item.item.name}
               </Text>
-            </View>
+            </TouchableOpacity>
           );
         }}
       />

@@ -10,8 +10,6 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {Loading} from '../../../components/loading';
 import {useDispatch, useSelector} from 'react-redux';
@@ -20,10 +18,17 @@ import {authLoad} from '../../../redux/actions/auth';
 import {useFocusEffect} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
-const Donor_Request = ({navigation}) => {
+const Donor_Request = ({navigation, route}) => {
   const [category, setCategory] = useState('leftover');
   const [title, setTitle] = useState('Norshing Hearts through Food Donation');
   const [totalNumber, setTotalNumber] = useState(4575);
+
+  const item11 = route.params?.item || {};
+
+  console.log('===qlerkwfzqqkjkzwdjjexjlk.kmhlsadfc berhcrn erfui=================================');
+  console.log(item11);
+  console.log('====================================');
+
   const [data, setData] = useState([]);
 
   const {authLoading, loginData} = useSelector(state => state.auth);
@@ -113,7 +118,7 @@ const Donor_Request = ({navigation}) => {
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={styles.input} />
+        <TextInput placeholder="Search" style={styles.input} placeholderTextColor='black'/>
         <EvilIcons
           name="search"
           size={25}
@@ -137,7 +142,8 @@ const Donor_Request = ({navigation}) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                <Text
+                  style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
                   No request found
                 </Text>
               </View>

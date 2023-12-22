@@ -8,7 +8,9 @@ const Donor_Setting = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Category</Text>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '500'}}>
+          Setting
+        </Text>
       </View>
       <TouchableOpacity
         style={styles.item}
@@ -18,7 +20,9 @@ const Donor_Setting = ({navigation}) => {
             screen: 'ChangePassword',
           })
         }>
-        <Text style={{fontSize: 16, fontWeight: '0'}}>Change Password</Text>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+          Change Password
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
@@ -28,7 +32,9 @@ const Donor_Setting = ({navigation}) => {
             screen: 'Terms',
           })
         }>
-        <Text style={{fontSize: 16, fontWeight: '0'}}>Terms & Condition</Text>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+          Terms & Condition
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
@@ -38,7 +44,7 @@ const Donor_Setting = ({navigation}) => {
             screen: 'ChangeEmail',
           })
         }>
-        <Text style={{fontSize: 16, fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
           Change Email Address
         </Text>
       </TouchableOpacity>
@@ -50,7 +56,9 @@ const Donor_Setting = ({navigation}) => {
             screen: 'ChangeLocation',
           })
         }>
-        <Text style={{fontSize: 16, fontWeight: '0'}}>Change Location</Text>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+          Change Location
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
@@ -60,7 +68,9 @@ const Donor_Setting = ({navigation}) => {
             screen: 'DeleteAccount',
           })
         }>
-        <Text style={{fontSize: 16, fontWeight: '0'}}>Delete Account</Text>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+          Delete Account
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}

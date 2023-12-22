@@ -88,7 +88,7 @@ const DeleteAccount = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Delete Account</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Delete Account</Text>
       </View>
       <View style={{marginTop: 60, gap: 50}}>
         <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>

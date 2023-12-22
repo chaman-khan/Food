@@ -221,7 +221,8 @@ const NGO_Request = ({navigation}) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
-                <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                <Text
+                  style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
                   No request found
                 </Text>
               </View>

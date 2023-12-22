@@ -16,7 +16,7 @@ const FAQs = () => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>FAQ's</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>FAQ's</Text>
       </View>
       <View>
         <TouchableOpacity
@@ -33,14 +33,14 @@ const FAQs = () => {
               width: '100%',
               justifyContent: 'space-between',
             }}>
-            <Text style={{fontWeight: '600'}}>
+            <Text style={{fontWeight: '600',  color: 'black'}}>
               What do you want to know ablut this App?
             </Text>
 
             <Image source={source} />
           </View>
           {showDetails && (
-            <Text style={{marginTop: 10}}>
+            <Text style={{marginTop: 10, color: 'black'}}>
               Once you delete your account, then you are not able to recovere
               that. Are you sure to do this?
             </Text>
@@ -60,14 +60,14 @@ const FAQs = () => {
               width: '100%',
               justifyContent: 'space-between',
             }}>
-            <Text style={{fontWeight: '600'}}>
+            <Text style={{fontWeight: '600', color: 'black'}}>
               Which basic benefits of this app?
             </Text>
 
             <Image source={source1} />
           </View>
           {showDetails1 && (
-            <Text style={{marginTop: 10}}>
+            <Text style={{marginTop: 10, color: 'black'}}>
               It will be beneficial for all needy people and all those who want
               to help needy people by donating their goods like medicine,
               leftover and medicines.

@@ -35,9 +35,9 @@ const MyDonationDetail = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
+    navigation.navigate('DonorStack', {
+      screen: 'Donation Done',
+    });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -72,12 +72,15 @@ const MyDonationDetail = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Donation Detail</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Donation Detail
+        </Text>
 
         <Entypo
           name="dots-three-vertical"
           size={20}
           onPress={() => setClicked(true)}
+          style={{color: 'black'}}
         />
       </View>
       <View style={styles.red}>
@@ -94,9 +97,11 @@ const MyDonationDetail = ({navigation}) => {
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.donation_category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.user_name}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>
+          {routee.user_name}
+        </Text>
         <View style={styles.categoryView}>
-          <Text>Donation amount</Text>
+          <Text style={{color: 'black'}}>Donation amount</Text>
           <Text style={{color: '#20B7FE'}}>{routee.donation_amount}</Text>
         </View>
         {/* <View style={styles.categoryView}>
@@ -104,7 +109,7 @@ const MyDonationDetail = ({navigation}) => {
           <Text style={{color: '#20B7FE'}}>00</Text>
         </View> */}
         <View style={styles.descView}></View>
-        <Text style={{fontSize: 17}}>Donation Description</Text>
+        <Text style={{fontSize: 17, color: 'black'}}>Donation Description</Text>
         <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
       {/* <TouchableOpacity
@@ -136,7 +141,7 @@ const MyDonationDetail = ({navigation}) => {
                 onPress={() => {
                   handleDelete();
                 }}>
-                <Text>Cancel Request</Text>
+                <Text style={{ color: 'black'}}>Cancel Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancel}
@@ -184,6 +189,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+    color: 'black',
   },
   button: {
     width: '90%',
