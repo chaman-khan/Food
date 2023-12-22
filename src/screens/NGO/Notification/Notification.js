@@ -18,14 +18,16 @@ const NGONotification = () => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Notifications</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Notifications
+        </Text>
       </View>
       <View style={{marginTop: 17}}>
         <FlatList
           data={Data}
           renderItem={({item}) => (
             <View style={styles.notification}>
-              <Text style={{width: '85%'}}>{item.text}</Text>
+              <Text style={{width: '85%', color: 'black'}}>{item.text}</Text>
               <View style={styles.innerNotification}>
                 <Text style={{color: 'white', fontWeight: '600'}}>
                   {noOfNotifications}

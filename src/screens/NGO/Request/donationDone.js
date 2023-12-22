@@ -12,7 +12,7 @@ const NGODonation_Done = ({navigation}) => {
       />
       <Image
         source={require('../../../Images/done.png')}
-        style={{marginVertical: 50, width: '100%'}}
+        style={{marginVertical: 50, width: '100%'}} tintColor='black'
       />
       <Text style={styles.successfull}>Donation is Successfully</Text>
       <Text style={styles.text}>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: '80%',
     alignSelf: 'center',
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: 'center', color: 'black'
   },
 });
 export default NGODonation_Done;

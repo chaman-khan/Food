@@ -14,8 +14,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const NGOMyDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
-  const [clicked, setClicked] = useState(false);
-  const {width, height} = Dimensions.get('screen');
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
@@ -24,14 +22,11 @@ const NGOMyDonationDetail = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Donation Detail</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Donation Detail
+        </Text>
 
-        <Entypo
-          name="dots-three-vertical"
-          size={20}
-          color="transparent"
-          onPress={() => setClicked(true)}
-        />
+        <Entypo name="dots-three-vertical" size={20} color="transparent" />
       </View>
       <Image
         source={routee.image}
@@ -39,17 +34,19 @@ const NGOMyDonationDetail = ({navigation}) => {
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7}}>{routee.title}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>{routee.title}</Text>
         <View style={styles.categoryView}>
-          <Text>Required {routee.category}</Text>
+          <Text style={{color: 'black'}}>Required {routee.category}</Text>
           <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text>Required Raised</Text>
+          <Text style={{color: 'black'}}>Required Raised</Text>
           <Text style={{color: '#20B7FE'}}>00</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold', color: 'black'}}>
+          Donation Description
+        </Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
     </View>
@@ -88,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+    color: 'black',
   },
   button: {
     width: '90%',

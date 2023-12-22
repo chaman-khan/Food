@@ -27,6 +27,8 @@ const {width, height} = Dimensions.get('screen');
 const NGOMyDonation = ({navigation}) => {
   const [selectedColor1, setSelectedColor1] = useState(theme.colors.primary);
   const [selectedColor2, setSelectedColor2] = useState('transparent');
+  const [Color1, setColor1] = useState('white');
+  const [Color2, setColor2] = useState('black');
 
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
@@ -139,20 +141,24 @@ const NGOMyDonation = ({navigation}) => {
             onPress={() => {
               setSelectedColor1(theme.colors.primary);
               setSelectedColor2('transparent');
+              setColor1('White');
+              setColor2('black');
               setPos1(true);
               setPos2(false);
             }}>
-            <Text>Donation Req</Text>
+            <Text style={{color: Color1}}>Donation Req</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, {backgroundColor: selectedColor2}]}
             onPress={() => {
               setSelectedColor2(theme.colors.primary);
               setSelectedColor1('transparent');
+              setColor1('black');
+              setColor2('white');
               setPos2(true);
               setPos1(false);
             }}>
-            <Text>Complete Req</Text>
+            <Text style={{color: Color2}}>Complete Req</Text>
           </TouchableOpacity>
         </View>
         <View
@@ -176,7 +182,8 @@ const NGOMyDonation = ({navigation}) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                  <Text
+                    style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
                     No Donation found
                   </Text>
                 </View>
@@ -254,6 +261,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
     fontSize: 12,
+    color: 'black',
   },
   bottomDetail: {
     flexDirection: 'row',

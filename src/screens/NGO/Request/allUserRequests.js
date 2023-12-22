@@ -27,6 +27,8 @@ const {width, height} = Dimensions.get('screen');
 const AllUserRequests = ({navigation}) => {
   const [selectedColor1, setSelectedColor1] = useState(theme.colors.primary);
   const [selectedColor2, setSelectedColor2] = useState('transparent');
+  const [Color1, setColor1] = useState('white');
+  const [Color2, setColor2] = useState('black');
 
   const [pos1, setPos1] = useState(true);
   const [pos2, setPos2] = useState(false);
@@ -54,41 +56,6 @@ const AllUserRequests = ({navigation}) => {
     dispatch(authLoad(false));
     console.log(err);
   };
-
-  const data = [
-    {
-      id: '1',
-      category: 'Leftover',
-      phoneNo: '0302-9254721',
-      quantity: '34',
-      location: 'Valencia town',
-      image: require('../../../Images/clothing.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-    {
-      id: '2',
-      category: 'Medicine',
-      phoneNo: '0302-9254721',
-      quantity: '91',
-      location: 'Valencia town',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
-  const data1 = [
-    {
-      id: '1',
-      category: 'Medicine',
-      phoneNo: '0302-9254721',
-      quantity: '21',
-      location: 'Valencia town',
-      image: require('../../../Images/medicine.jpg'),
-      description:
-        'Food Banks: Nonprofit organization known as food banks act as central distribution hubs. They collect, store, and distribute donated foods to local charitis, shelters, and souo kithens.',
-    },
-  ];
 
   const renderItem = ({item}) => (
     <TouchableOpacity
@@ -137,7 +104,9 @@ const AllUserRequests = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>All User Requests</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          All User Requests
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -147,20 +116,24 @@ const AllUserRequests = ({navigation}) => {
             onPress={() => {
               setSelectedColor1(theme.colors.primary);
               setSelectedColor2('transparent');
+              setColor1('white');
+              setColor2('black');
               setPos1(true);
               setPos2(false);
             }}>
-            <Text>All Requests</Text>
+            <Text style={{color: Color1}}>All Requests</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, {backgroundColor: selectedColor2}]}
             onPress={() => {
               setSelectedColor2(theme.colors.primary);
               setSelectedColor1('transparent');
+              setColor1('black');
+              setColor2('white');
               setPos2(true);
               setPos1(false);
             }}>
-            <Text>Rejected</Text>
+            <Text style={{color: Color2}}>Rejected</Text>
           </TouchableOpacity>
         </View>
         <View
@@ -184,7 +157,8 @@ const AllUserRequests = ({navigation}) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                  <Text style={{fontWeight: 'bold', fontSize: 18}}>
+                  <Text
+                    style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
                     No Donation found
                   </Text>
                 </View>
@@ -270,6 +244,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontWeight: '500',
     fontSize: 12,
+    color: 'black',
   },
   cancel: {
     height: 50,

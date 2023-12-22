@@ -48,11 +48,12 @@ const NGODonationDetail = ({navigation}) => {
           size={25}
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 25}}>Donation Details</Text>
+        <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Entypo
           name="dots-three-vertical"
           size={25}
           onPress={() => setClicked(true)}
+          style={{color: 'black'}}
         />
       </View>
       <Image source={{uri: item.image}} style={{width: '100%', height: 240}} />
@@ -62,12 +63,14 @@ const NGODonationDetail = ({navigation}) => {
           {item.user_name}
         </Text>
         <View style={styles.categoryView}>
-          <Text>Donation Amount </Text>
+          <Text style={{color: 'black'}}>Donation Amount </Text>
           <Text style={{color: '#20B7FE'}}>{item.donation_amount}</Text>
         </View>
 
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold', color: 'black'}}>
+          Donation Description
+        </Text>
         <Text style={styles.desc}>{item.donation_desc}</Text>
       </View>
 
@@ -82,7 +85,7 @@ const NGODonationDetail = ({navigation}) => {
                     handleDelete;
                     setClicked(false);
                   }}>
-                  <Text>Delete Request</Text>
+                  <Text style={{}}>Delete Request</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.button1}
@@ -90,7 +93,7 @@ const NGODonationDetail = ({navigation}) => {
                     setClicked(false);
                     navigation.navigate('NGOStack', {screen: 'NGOEditRequest'});
                   }}>
-                  <Text>Edit Request</Text>
+                  <Text style={{color: 'black'}}>Edit Request</Text>
                 </TouchableOpacity>
               </View>
               <TouchableOpacity

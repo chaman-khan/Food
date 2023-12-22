@@ -80,24 +80,11 @@ const NGOCreateRequest = ({navigation}) => {
     console.log(err);
   };
   const getCurrentLocation = () => {
-    console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
       console.log(info);
       setLatitude(info.coords.latitude);
       setlongitude(info.coords.longitude);
-      console.log('........now inside here.......');
     });
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     console.log('Current Position:', position);
-    //     // Do something with the obtained location data
-    //   },
-    //   error => {
-    //     console.error('Error getting location:', error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-    // );
-    console.log('........exit here.......');
   };
   const onRegionChange = region => {
     setLatitude(region.latitude);
@@ -169,22 +156,6 @@ const NGOCreateRequest = ({navigation}) => {
     console.log(err);
   };
 
-  const InputFielder = ({title, placeholder, height = 40, multiline}) => {
-    return (
-      <View style={styles.inputWrapperCont}>
-        <Text>{title}</Text>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={[styles.inputTitle, {height: height}]}
-            placeholder={placeholder}
-            multiline={multiline}
-            placeholderTextColor={theme.colors.grey}
-          />
-        </View>
-      </View>
-    );
-  };
-
   const gallery = () => {
     ImagePicker.openPicker({}).then(images => {
       console.log(images);
@@ -199,7 +170,9 @@ const NGOCreateRequest = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Create Request</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Create Request
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -216,7 +189,9 @@ const NGOCreateRequest = ({navigation}) => {
                 color={theme.colors.primary}
                 size={30}
               />
-              <Text style={{fontSize: 12, marginTop: 8}}>Tap to upload</Text>
+              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>
+                Tap to upload
+              </Text>
             </View>
           ) : (
             <Image
@@ -228,7 +203,7 @@ const NGOCreateRequest = ({navigation}) => {
 
         <View style={{zIndex: 0}}>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Donation Introduction'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Introduction'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -241,7 +216,7 @@ const NGOCreateRequest = ({navigation}) => {
               />
             </View>
             <View style={styles.donation}>
-              <Text>Donation Categroy</Text>
+              <Text style={{color: 'black'}}>Donation Categroy</Text>
 
               <Dropdown
                 style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -266,7 +241,7 @@ const NGOCreateRequest = ({navigation}) => {
           </View>
 
           <View style={styles.inputWrapperCont}>
-            <Text>{'Add Required'}</Text>
+            <Text style={{ color: 'black'}}>{'Add Required'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -280,7 +255,7 @@ const NGOCreateRequest = ({navigation}) => {
             </View>
           </View>
           <View style={styles.inputWrapperCont}>
-            <Text>{'Donation Description'}</Text>
+            <Text style={{ color: 'black'}}>{'Donation Description'}</Text>
             <View style={{...styles.inputWrapper}}>
               <TextInput
                 style={[styles.inputTitle, {height: 100}]}
@@ -478,6 +453,7 @@ const styles = StyleSheet.create({
   },
   selectedTextStyle: {
     fontSize: 14,
+    color: 'black',
   },
   label: {
     color: '#000000',

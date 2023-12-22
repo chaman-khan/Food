@@ -32,9 +32,9 @@ const RejectedDeatil = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
+    navigation.navigate('DonorStack', {
+      screen: 'Donation Done',
+    });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
