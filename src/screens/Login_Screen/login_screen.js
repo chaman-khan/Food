@@ -62,13 +62,14 @@ const LoginScreen = ({navigation}) => {
         username: userName,
         password: password,
       });
+      console.log('raw;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;');
       console.log(raw);
+      console.log(';;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;raw');
       dispatch(loginUser(raw, onSuccess, onError));
     }
   };
 
   const onSuccess = val => {
-    console.log(val);
     dispatch(authLoad(false));
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -98,43 +99,6 @@ const LoginScreen = ({navigation}) => {
     dispatch(authLoad(false));
     console.log(err);
   };
-  // const handleLogin = () => {
-  //   const emailRegex =
-  //     /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,})$/;
-
-  //   if (!emailRegex.test(email)) {
-  //     setEmailError(true);
-  //   } else {
-  //     setEmailError(false);
-  //   }
-
-  //   if (!password) {
-  //     setPasswordError(true);
-  //   } else {
-  //     setPasswordError(false);
-  //   }
-  //   if (emailError || passwordError) {
-  //     Alert.alert(
-  //       'Warning',
-  //       'Please enter a valid email or password.',
-  //       [
-  //         {
-  //           text: 'OK',
-  //           onPress: () => console.log('OK Pressed'),
-  //         },
-  //       ],
-  //       {cancelable: false},
-  //     );
-  //   } else {
-  //     const data = {
-  //       username: nam,
-  //       password: '12345678',
-  //     };
-  //     // navigation.navigate('NGOBottomTab');
-  //     // return false;
-  //   }
-  //   // navigation.navigate('BottomTab');
-  // };
   return (
     <KeyboardAvoidingView
       enabled={true}
@@ -157,24 +121,6 @@ const LoginScreen = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.Input_Box}>
-              {/* <View style={styles.Email_Box}>
-                <Text style={styles.User_Password_Texts}>Email</Text>
-                <View style={styles.User_Input_Container}>
-                  <Image
-                    source={require('../../Images/User.png')}
-                    style={styles.UserIcon}
-                  />
-                  <TextInput
-                    onChangeText={Text => setEmail(Text)}
-                    placeholderTextColor={'#818181'}
-                    style={styles.User_input}
-                    placeholder="Email"
-                  />
-                </View>
-                {emailError ? (
-                  <Text style={styles.Error_Text}>* Enter valid Email</Text>
-                ) : null}
-              </View> */}
               <View style={styles.Email_Box}>
                 <Text style={styles.User_Password_Texts}>Username</Text>
                 <View style={styles.User_Input_Container}>
@@ -227,7 +173,6 @@ const LoginScreen = ({navigation}) => {
               <Text
                 onPress={() => navigation.navigate('RecoverStack')}
                 style={styles.Recover_Text}>
-                {' '}
                 Recover it
               </Text>
             </Text>

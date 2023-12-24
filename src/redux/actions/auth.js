@@ -108,7 +108,7 @@ export const loginUser = (data, handleSuccess, handleError) => {
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: data,
+        body: raw,
         redirect: 'follow',
       };
 

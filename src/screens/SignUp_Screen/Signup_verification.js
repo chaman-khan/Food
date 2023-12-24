@@ -13,17 +13,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import {authLoad, submitCertificates} from '../../redux/actions/auth';
 import {useFocusEffect} from '@react-navigation/native';
 
-const Singnup_verification = ({navigation}) => {
+const Singnup_verification = ({navigation, route}) => {
+  const {user_id} = route.params;
   const [regNo, setRegNo] = useState(null);
   const [regError, setRegError] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
-  const {authLoading, loginData} = useSelector(state => state.auth);
 
-  console.log('=========Login \dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa===========================');
-  console.log(loginData);
-  console.log('=========Login \dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa===========================');
-
+  console.log('====================================');
+  console.log(user_id);
+  console.log('====================================');
   const Handle_Send = () => {
     if (!regNo) {
       setRegError(true);
@@ -47,7 +46,7 @@ const Singnup_verification = ({navigation}) => {
       dispatch(authLoad(true));
 
       var raw = JSON.stringify({
-        user_id: loginData.data.user_id,
+        user_id: user_id,
         registration_no: regNo,
         certificate: selectedImage,
       });
@@ -60,7 +59,9 @@ const Singnup_verification = ({navigation}) => {
         [
           {
             text: 'OK',
-            onPress: () => {navigation.navigate('Login')},
+            onPress: () => {
+              navigation.navigate('Login');
+            },
           },
         ],
         {cancelable: false},

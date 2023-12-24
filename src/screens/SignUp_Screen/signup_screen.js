@@ -48,6 +48,7 @@ const SignUp_Screen = ({navigation}) => {
   const [showMap, setShowMap] = useState(false);
   const [latitude, setLatitude] = useState();
   const [longitude, setlongitude] = useState();
+  const [user_id, setUser_id] = useState('');
   const dispatch = useDispatch();
 
   const {authLoading} = useSelector(state => state.auth);
@@ -168,8 +169,6 @@ const SignUp_Screen = ({navigation}) => {
         {cancelable: false},
       );
     } else if (value !== 'user') {
-      navigation.navigate('Singnup_verification');
-    } else {
       dispatch(authLoad(true));
 
       var raw = JSON.stringify({
@@ -180,6 +179,22 @@ const SignUp_Screen = ({navigation}) => {
         location: 'Pakistan',
         latitude: '22',
         longitude: '23',
+        role: value,
+      });
+      console.log(raw);
+      dispatch(registerUser(raw, onSuccess1, onError1));
+    
+    } else {
+      dispatch(authLoad(true));
+
+      var raw = JSON.stringify({
+        fullName: name,
+        username: userName,
+        email: email,
+        password: password,
+        location: 'Pakistan',
+        latitude: latitude,
+        longitude: longitude,
         role: value,
       });
       console.log(raw);
@@ -214,19 +229,37 @@ const SignUp_Screen = ({navigation}) => {
     dispatch(authLoad(false));
     console.log(err);
   };
+  const onSuccess1 = val => {
+    dispatch(authLoad(false));
+    console.log('==========NGOOOOOOOOOOOOOOOOOOOOOOOOOO==========================');
+    console.log(val.user_id);
+    console.log('==========NGOOOOOOOOOOOOOOOOOOOOOOOOOOOO==========================');
+    setUser_id(val.user_id);
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' && navigation.navigate('Singnup_verification', {user_id});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  };
+  const onError1 = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
   const onRegionChange = region => {
     setLatitude(region.latitude);
     setlongitude(region.longitude);
-  };
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && {color: 'blue'}]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
   };
 
   return (
