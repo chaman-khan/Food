@@ -47,7 +47,7 @@ const Singnup_verification = ({navigation}) => {
       dispatch(authLoad(true));
 
       var raw = JSON.stringify({
-        // user_id: loginData.data.user_id,
+        user_id: loginData.data.user_id,
         registration_no: regNo,
         certificate: selectedImage,
       });

@@ -38,9 +38,6 @@ const FoodBottomTab = () => {
           } else if (Screen_name === 'Notification') {
             iconName = require('../../Images/notifications.png');
           }
-          //   else if (Screen_name === 'Category') {
-          //     iconName = require('../../Images/category.png');
-          //   }
           else if (Screen_name === 'Setting') {
             iconName = require('../../Images/setting.png');
           }
@@ -52,22 +49,10 @@ const FoodBottomTab = () => {
               resizeMode="contain"
               style={{width: 30, height: 30}}
             />
-            // <Ionicons
-            //   name={iconName}
-            //   size={size}
-            //   color={color}
-            //   style={{height: 30, width: 30}}
-            // />
           );
         },
       })}>
-      {/* <Tab.Screen
-        name="Home"
-        component={Donor_Home}
-        options={{
-          headerShown: false,
-        }}
-      /> */}
+      
       <Tab.Screen
         name="Request"
         component={FoodOutlet_Request}
@@ -82,13 +67,6 @@ const FoodBottomTab = () => {
           headerShown: false,
         }}
       />
-      {/* <Tab.Screen
-        name="Category"
-        component={Donor_Category}
-        options={{
-          headerShown: false,
-        }}
-      /> */}
       <Tab.Screen
         name="Setting"
         component={FoodOutlet_Setting}

@@ -369,9 +369,9 @@ const FoodCreateRequest = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('FoodStack', {
-    //   screen: 'Donation Done',
-    // });
+    navigation.navigate('FoodStack', {
+      screen: 'Donation Done',
+    });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',

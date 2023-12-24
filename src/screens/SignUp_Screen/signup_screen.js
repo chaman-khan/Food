@@ -188,8 +188,11 @@ const SignUp_Screen = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    console.log(val);
     dispatch(authLoad(false));
+    console.log('==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================');
+    console.log(val);
+    console.log('==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================');
+
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
