@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   responsiveScreenFontSize,
@@ -15,7 +16,8 @@ import {
 import {theme} from '../../../theme/theme';
 import {useDispatch, useSelector} from 'react-redux';
 import {changeEmail} from '../../../redux/actions/home';
-import { Loading } from '../../../components/loading';
+import {Loading} from '../../../components/loading';
+import { authLoad } from '../../../redux/actions/auth';
 
 const ChangeEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -23,6 +25,7 @@ const ChangeEmail = ({navigation}) => {
 
   const dispatch = useDispatch();
 
+  
   const handleconfirm = () => {
     var raw = JSON.stringify({
       email: email,
@@ -108,7 +111,7 @@ const ChangeEmail = ({navigation}) => {
       <TouchableOpacity style={styles.button} onPress={handleconfirm}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
-      <Loading visible={authLoading}/>
+      <Loading visible={authLoading} />
     </View>
   );
 };

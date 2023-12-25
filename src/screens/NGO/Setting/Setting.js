@@ -16,7 +16,7 @@ const Donor_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('NGOStack', {
             screen: 'ChangePassword',
           })
         }>
@@ -28,7 +28,7 @@ const Donor_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('NGOStack', {
             screen: 'Terms',
           })
         }>
@@ -40,7 +40,7 @@ const Donor_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('NGOStack', {
             screen: 'ChangeEmail',
           })
         }>
@@ -52,7 +52,7 @@ const Donor_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('NGOStack', {
             screen: 'ChangeLocation',
           })
         }>
@@ -64,7 +64,7 @@ const Donor_Setting = ({navigation}) => {
         style={styles.item}
         activeOpacity={1}
         onPress={() =>
-          navigation.navigate('DonorStack', {
+          navigation.navigate('NGOStack', {
             screen: 'DeleteAccount',
           })
         }>
