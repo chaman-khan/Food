@@ -1,5 +1,5 @@
 import {Icon} from 'react-native-elements';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,6 +13,16 @@ import {
   Alert,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad} from '../../../redux/actions/auth';
+import {Loading} from '../../../components/loading';
+import {Dropdown} from 'react-native-element-dropdown';
+import {
+  responsiveScreenFontSize,
+  responsiveScreenHeight,
+} from 'react-native-responsive-dimensions';
+import {NGOEditRequestt, getAllCategories} from '../../../redux/actions/home';
+import Geolocation from '@react-native-community/geolocation';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -24,52 +34,116 @@ const categoryData = ['Leftover', 'medicine', 'clothes'];
 
 const NGOEditRequest = ({navigation}) => {
   const [category, setCategory] = useState('Select');
-  const [dropOn, setDropOn] = useState(false);
   const [source, setSource] = useState(null);
+  const [intro, setIntro] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [descc, setDescc] = useState('');
+  const [isFocus, setIsFocus] = useState(false);
+  const [categoryData, setCategoryData] = useState([]);
+  const [number, setNumber] = useState('');
+  const [latitude, setLatitude] = useState();
+  const [longitude, setlongitude] = useState();
 
-  const DropDown = ({setValue, value, data, dropOpen, setDropOpenn}) => {
-    return (
-      <View style={{position: 'relative'}}>
-        <TouchableOpacity
-          style={styles.dropTab}
-          onPress={() => setDropOpenn(!dropOpen)}>
-          <Text style={{width: '90%', color: theme.colors.grey}}>{value}</Text>
-          <Icon name="caretdown" type="ant-design" size={15} />
-        </TouchableOpacity>
+  const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
 
-        {dropOpen && (
-          <View style={styles.containerWrapper}>
-            {data.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.containerItem}
-                onPress={() => {
-                  setValue(item);
-                  setDropOpenn(false);
-                }}>
-                <Text>{item}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      </View>
-    );
+  useEffect(() => {
+    Geolocation.getCurrentPosition(info => {
+      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
+    });
+    getCurrentLocation();
+    dispatch(getAllCategories(loginData, categorySuccess, categoryError));
+    dispatch(authLoad(false));
+  }, [longitude, latitude]);
+
+  const categorySuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    let cat = val.data.map(item => {
+      return {value: item._id, label: item.name};
+    });
+    setCategoryData(cat);
+  };
+  const categoryError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+  const getCurrentLocation = () => {
+    Geolocation.getCurrentPosition(info => {
+      console.log(info);
+      setLatitude(info.coords.latitude);
+      setlongitude(info.coords.longitude);
+    });
+  };
+  const onRegionChange = region => {
+    setLatitude(region.latitude);
+    setlongitude(region.longitude);
   };
 
-  const InputFielder = ({title, placeholder, height = 40, multiline}) => {
-    return (
-      <View style={styles.inputWrapperCont}>
-        <Text>{title}</Text>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={[styles.inputTitle, {height: height}]}
-            placeholder={placeholder}
-            multiline={multiline}
-            placeholderTextColor={theme.colors.grey}
-          />
-        </View>
-      </View>
+  const handleUpdate = () => {
+    var raw = JSON.stringify({
+      _id: loginData.data._id,
+      image: source,
+      donation_intro: intro,
+      donation_category: category,
+      required_amount: quantity,
+      donation_desc: descc,
+    });
+
+    console.log(
+      '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
     );
+    console.log(raw);
+    console.log(
+      '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
+    );
+
+    if (
+      (quantity === '' || number === '', descc === '' || category === 'Select')
+    ) {
+      Alert.alert(
+        'Error',
+        'Fill all fields',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              console.log('OK Pressed');
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    } else {
+      dispatch(authLoad(true));
+      dispatch(NGOEditRequestt(loginData, raw, onSuccess, onError));
+    }
+  };
+
+  const onSuccess = val => {
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' &&
+              navigation.replace('NGOStack', {screen: 'AllUserRequests'});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
 
   const gallery = () => {
@@ -118,38 +192,81 @@ const NGOEditRequest = ({navigation}) => {
             />
           )}
         </TouchableOpacity>
-        <InputFielder
-          title={'Donation Introduction'}
-          placeholder={'Nourishing Hearts Through Food Donation'}
-        />
-
-        <View style={styles.donation}>
-          <Text style={{color: 'black'}}>Donation Category</Text>
-          <DropDown
-            data={categoryData}
-            value={category}
-            setValue={item => setCategory(item)}
-            dropOpen={dropOn}
-            setDropOpenn={setDropOn}
-          />
-        </View>
         <View style={{zIndex: 0}}>
-          <InputFielder title={'Add Required'} placeholder={'123'} />
-          <InputFielder
-            title={'Donation Quantity'}
-            placeholder={'Donation Description'}
-            height={180}
-            multiline
-          />
+          <View style={styles.inputWrapperCont}>
+            <Text style={{color: 'black'}}>{'Donation Introduction'}</Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={[styles.inputTitle, {height: 40}]}
+                placeholder={'Write'}
+                value={intro}
+                onChangeText={val => {
+                  setIntro(val);
+                }}
+                placeholderTextColor={theme.colors.grey}
+              />
+            </View>
+            <View style={styles.donation}>
+              <Text style={{color: 'black'}}>Donation Categroy</Text>
+
+              <Dropdown
+                style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+                placeholderStyle={styles.placeholderStyle}
+                selectedTextStyle={styles.selectedTextStyle}
+                data={categoryData}
+                maxHeight={300}
+                labelField="label"
+                valueField="value"
+                placeholder={!isFocus ? 'Select Type' : '...'}
+                value={category.value}
+                itemTextStyle={styles.DropDown_Item}
+                onFocus={() => setIsFocus(true)}
+                onBlur={() => setIsFocus(false)}
+                onChange={item => {
+                  console.log(item);
+                  setCategory(item);
+                  setIsFocus(false);
+                }}
+              />
+            </View>
+          </View>
+
+          <View style={styles.inputWrapperCont}>
+            <Text style={{color: 'black'}}>{'Add Required'}</Text>
+            <View style={styles.inputWrapper}>
+              <TextInput
+                style={[styles.inputTitle, {height: 40}]}
+                placeholder={'Add'}
+                value={quantity}
+                onChangeText={val => {
+                  setQuantity(val);
+                }}
+                keyboardType="numeric"
+                placeholderTextColor={theme.colors.grey}
+              />
+            </View>
+          </View>
+          <View style={styles.inputWrapperCont}>
+            <Text style={{color: 'black'}}>{'Donation Description'}</Text>
+            <View style={{...styles.inputWrapper}}>
+              <TextInput
+                style={[styles.inputTitle, {height: 100}]}
+                placeholder={'Donation Description'}
+                multiline
+                value={descc}
+                onChangeText={val => {
+                  setDescc(val);
+                }}
+                placeholderTextColor={theme.colors.grey}
+              />
+            </View>
+          </View>
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() =>
-            navigation.navigate('NGOStack', {screen: 'AllUserRequests'})
-          }>
+        <TouchableOpacity style={styles.button} onPress={handleUpdate}>
           <Text style={{color: 'white'}}>Save Change</Text>
         </TouchableOpacity>
       </ScrollView>
+      <Loading visible={authLoading} />
     </View>
   );
 };
@@ -229,7 +346,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   donation: {
-    width: '95%',
+    width: '100%',
     alignSelf: 'center',
     marginTop: 20,
     zIndex: 10,
@@ -244,6 +361,59 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  dropdown: {
+    // borderColor:'#E4E4E4',
+    // backgroundColor: 'red',
+    color: '#000000',
+    height: responsiveScreenHeight(5),
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    paddingHorizontal: 8,
+    width: '100%',
+    marginRight: 10,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  DropDown_Item: {
+    height: responsiveScreenHeight(2),
+    width: '91%',
+    fontSize: responsiveScreenFontSize(1.6),
+    fontFamily: 'Poppins',
+    color: 'black',
+    fontWeight: '400',
+  },
+  placeholderStyle: {
+    fontFamily: 'Poppins',
+    color: '#818181',
+    fontSize: responsiveScreenFontSize(1.6),
+  },
+  selectedTextStyle: {
+    fontSize: 14,
+    color: 'black',
+  },
+  inputWrapperCont: {
+    width: '95%',
+    alignSelf: 'center',
+    marginTop: 20,
+    zIndex: 0,
+  },
+  inputWrapper: {
+    width: '100%',
+    borderRadius: 10,
+    borderColor: theme.colors.grey,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderWidth: 0.5,
+    paddingHorizontal: 10,
+    marginTop: 10,
+    zIndex: 0,
+  },
+  inputTitle: {
+    color: 'black',
+    textAlignVertical: 'top',
+    width: '100%',
   },
 });
 export default NGOEditRequest;

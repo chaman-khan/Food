@@ -50,7 +50,7 @@ const NGOMyDonation = ({navigation}) => {
   );
 
   const onSuccess = val => {
-    console.log(val);
+    console.log(val)
     dispatch(authLoad(false));
     console.log(val.data);
     if (val.data.status === true) setCompletedrequests(val.data);

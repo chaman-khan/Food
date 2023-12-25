@@ -79,6 +79,7 @@ const MyFoodDonationDetail = ({navigation}) => {
         <Entypo
           name="dots-three-vertical"
           size={20}
+          style={{color: 'black'}}
           onPress={() => setClicked(true)}
         />
       </View>
@@ -140,7 +141,7 @@ const MyFoodDonationDetail = ({navigation}) => {
                 onPress={() => {
                   handleDelete();
                 }}>
-                <Text>Cancel Request</Text>
+                <Text style={{color: 'black'}}>Cancel Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancel}

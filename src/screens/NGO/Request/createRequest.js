@@ -52,7 +52,7 @@ const NGOCreateRequest = ({navigation}) => {
   const [number, setNumber] = useState('');
   const [des, setDes] = useState('');
   const [latitude, setLatitude] = useState();
-  const [longitude, setlongitude] = useState(73.8137992);
+  const [longitude, setlongitude] = useState();
 
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);

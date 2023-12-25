@@ -6,6 +6,7 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   responsiveScreenFontSize,
@@ -14,9 +15,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 import {useDispatch, useSelector} from 'react-redux';
-import { changeEmail } from '../../../redux/actions/home';
-import { Loading } from '../../../components/loading';
-import { authLoad } from '../../../redux/actions/auth';
+import {changeEmail} from '../../../redux/actions/home';
+import {Loading} from '../../../components/loading';
+import {authLoad} from '../../../redux/actions/auth';
 
 const ChangeFoodEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -26,7 +27,7 @@ const ChangeFoodEmail = ({navigation}) => {
 
   const handleconfirm = () => {
     var raw = JSON.stringify({
-      email: email
+      email: email,
     });
     console.log(raw);
 
@@ -67,6 +68,7 @@ const ChangeFoodEmail = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
+            navigation.goBack();
           },
         },
       ],
@@ -110,9 +112,7 @@ const ChangeFoodEmail = ({navigation}) => {
           />
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handleconfirm}>
+      <TouchableOpacity style={styles.button} onPress={handleconfirm}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
       <Loading visible={authLoading} />

@@ -7,7 +7,7 @@ const Food_Donation_Done = ({navigation}) => {
       <Entypo
         name="cross"
         size={30}
-        onPress={() => navigation.replace('FoodBottomTab')}
+        onPress={() => navigation.replace('FoodStack', {screen: 'My Donation'})}
         style={{margin: 10, color: 'black'}}
       />
       <Image

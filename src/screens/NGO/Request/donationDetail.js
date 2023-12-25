@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
+  ScrollView,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -33,7 +34,8 @@ const NGODonationDetail = ({navigation}) => {
     });
   };
   return (
-    <View style={{flex: 1}}>
+    <ScrollView>
+      <View style={{flex: 1}}>
       <View
         style={{
           flexDirection: 'row',
@@ -47,6 +49,7 @@ const NGODonationDetail = ({navigation}) => {
           name="arrow-back"
           size={25}
           onPress={() => navigation.goBack()}
+          style={{color: 'black'}}
         />
         <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Entypo
@@ -85,7 +88,7 @@ const NGODonationDetail = ({navigation}) => {
                     handleDelete;
                     setClicked(false);
                   }}>
-                  <Text style={{}}>Delete Request</Text>
+                  <Text style={{color: 'black'}}>Delete Request</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.button1}
@@ -107,6 +110,7 @@ const NGODonationDetail = ({navigation}) => {
         </Modal>
       )}
     </View>
+    </ScrollView>
   );
 };
 
@@ -134,6 +138,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     height: 180,
+    color: 'black'
   },
   button: {
     width: '90%',
