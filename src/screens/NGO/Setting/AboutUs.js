@@ -8,7 +8,7 @@ const AboutUs = () => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>About Us</Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           About Us
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 70, color: 'black'}}>

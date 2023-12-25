@@ -466,7 +466,7 @@ const FoodCreateRequest = ({navigation}) => {
         </View>
         <View style={{zIndex: 0}}>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Donation Quantity'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Quantity'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -480,7 +480,7 @@ const FoodCreateRequest = ({navigation}) => {
             </View>
           </View>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Phone Number'}</Text>
+            <Text style={{color: 'black'}}>{'Phone Number'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -499,12 +499,14 @@ const FoodCreateRequest = ({navigation}) => {
             onPress={() => setShowMap(true)}>
             <Text style={{fontWeight: '400'}}>Location</Text>
             <View style={styles.newSection}>
-              <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
+              <Text placeholder={currentLocation} style={{color: 'black'}}>
+                {currentLocation}
+              </Text>
               <Entypo name="location-pin" size={20} />
             </View>
           </TouchableOpacity>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Donation Quantity'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Quantity'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -726,7 +728,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins',
     color: '#818181',
     fontSize: responsiveScreenFontSize(1.6),
-    
   },
   selectedTextStyle: {
     fontSize: 14,

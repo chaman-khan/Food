@@ -14,6 +14,8 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 import {useDispatch, useSelector} from 'react-redux';
+import {changeEmail} from '../../../redux/actions/home';
+import { Loading } from '../../../components/loading';
 
 const ChangeEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -23,8 +25,7 @@ const ChangeEmail = ({navigation}) => {
 
   const handleconfirm = () => {
     var raw = JSON.stringify({
-      password: password,
-      confirm_password: confirmPassword,
+      email: email,
     });
     console.log(raw);
 
@@ -44,16 +45,13 @@ const ChangeEmail = ({navigation}) => {
       );
     } else {
       dispatch(authLoad(true));
-      dispatch(changePassword(loginData, raw, onSuccess, onError));
+      dispatch(changeEmail(loginData, raw, onSuccess, onError));
     }
   };
 
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -83,7 +81,7 @@ const ChangeEmail = ({navigation}) => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           Change Email Address
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>
@@ -103,14 +101,14 @@ const ChangeEmail = ({navigation}) => {
             // placeholderStyle={styles.placeholderStyle}
             style={styles.User_input}
             placeholder="Email"
+            value={email}
           />
         </View>
       </View>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={styles.button} onPress={handleconfirm}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
+      <Loading visible={authLoading}/>
     </View>
   );
 };

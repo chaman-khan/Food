@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useDispatch, useSelector } from 'react-redux';
-import { authLoad } from '../../../redux/actions/auth';
+import {useDispatch, useSelector} from 'react-redux';
+import {authLoad} from '../../../redux/actions/auth';
 const NGOSend_Donation = ({navigation}) => {
   const {authLoading, loginData} = useSelector(state => state.auth);
 
@@ -67,7 +67,9 @@ const NGOSend_Donation = ({navigation}) => {
           <Ionicons name="arrow-back" size={25} color="transparent" />
         </View>
         <View style={{gap: 7}}>
-          <Text style={{fontWeight: 'bold', color: 'black'}}>Donation Affordability</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>
+            Donation Affordability
+          </Text>
           <TextInput placeholder="0" style={styles.section} />
         </View>
         <View style={{gap: 7}}>

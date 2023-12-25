@@ -35,11 +35,7 @@ const UserRequestDetail = ({navigation}) => {
           onPress={() => navigation.goBack()}
         />
         <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
-        <Entypo
-          name="dots-three-vertical"
-          size={25}
-          color="transparent"
-        />
+        <Entypo name="dots-three-vertical" size={25} color="transparent" />
       </View>
       <Image
         source={routee.image}
@@ -48,19 +44,21 @@ const UserRequestDetail = ({navigation}) => {
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.donation_category}</Text>
         <View style={styles.categoryView}>
-          <Text style={{ color: 'black'}}>Donation Quantity</Text>
+          <Text style={{color: 'black'}}>Donation Quantity</Text>
           <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text style={{ color: 'black'}}>Phone Number</Text>
+          <Text style={{color: 'black'}}>Phone Number</Text>
           <Text style={{color: '#20B7FE'}}>{routee.phoneNo}</Text>
         </View>
         <View style={styles.categoryView}>
-          <Text style={{ color: 'black'}}>Location</Text>
+          <Text style={{color: 'black'}}>Location</Text>
           <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
         </View>
         <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold',  color: 'black'}}>Donation Description</Text>
+        <Text style={{fontWeight: 'bold', color: 'black'}}>
+          Donation Description
+        </Text>
         <Text style={styles.desc}>{routee.description}</Text>
       </View>
       <View style={styles.buttonGroup}>
@@ -107,7 +105,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     lineHeight: 20,
-    color: 'black'
+    color: 'black',
   },
   button: {
     width: '47%',

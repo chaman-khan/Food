@@ -98,7 +98,9 @@ const FoodOutlet_Notification = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Notifications</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Notifications
+        </Text>
       </View>
       <View style={{marginTop: 17}}>
         <FlatList

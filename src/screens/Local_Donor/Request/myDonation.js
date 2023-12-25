@@ -42,7 +42,6 @@ const MyDonation = ({navigation}) => {
 
   const {authLoading, loginData} = useSelector(state => state.auth);
 
-
   useFocusEffect(
     React.useCallback(() => {
       dispatch(authLoad(true));
@@ -119,7 +118,6 @@ const MyDonation = ({navigation}) => {
           <Text style={styles.textStyle}>Donation amount</Text>
           <Text style={styles.reqCatValue}> {item.donation_amount}</Text>
         </View>
-        
       </View>
     </TouchableOpacity>
   );

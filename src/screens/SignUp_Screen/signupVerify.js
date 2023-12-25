@@ -47,7 +47,9 @@ const SignupVerify = ({navigation}) => {
         otp: code,
       });
 
+      console.log('raw...........');
       console.log(raw);
+      console.log('raw.........kfu');
       dispatch(verifyAccount(raw, onSuccess, onError));
     } else {
       Alert.alert('Incorrect', 'Please enter a 6-digit verification code.');
@@ -55,8 +57,11 @@ const SignupVerify = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    console.log(val);
+    Alert.alert('skjdgtxblqw', 'j,gjefdjoxtegcfiyrnifyhcnuy');
     dispatch(authLoad(false));
+    console.log('val....................................................');
+    console.log(val);
+    console.log('val....................................................');
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
@@ -67,7 +72,7 @@ const SignupVerify = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('Sign Up');
+            val.status === 'success' && navigation.navigate('Login');
           },
         },
       ],
@@ -76,6 +81,13 @@ const SignupVerify = ({navigation}) => {
     navigation.navigate('Login');
   };
   const onError = err => {
+    console.log(
+      '==============ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRR======================',
+    );
+    console.log(err);
+    console.log(
+      '==============ERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR======================',
+    );
     dispatch(authLoad(false));
     console.log(err);
   };

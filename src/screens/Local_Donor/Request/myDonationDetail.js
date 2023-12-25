@@ -141,7 +141,7 @@ const MyDonationDetail = ({navigation}) => {
                 onPress={() => {
                   handleDelete();
                 }}>
-                <Text style={{ color: 'black'}}>Cancel Request</Text>
+                <Text style={{color: 'black'}}>Cancel Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.cancel}

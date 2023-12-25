@@ -30,7 +30,9 @@ const NGOCategory = () => {
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Category</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Category
+        </Text>
       </View>
       <FlatList
         data={categoryData}

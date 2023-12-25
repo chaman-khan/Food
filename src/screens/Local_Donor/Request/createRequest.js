@@ -103,7 +103,6 @@ const CreateRequest = ({navigation}) => {
       longitude: longitude,
     });
 
-
     if (
       (quatity === '' || number === '' || latitude === undefined,
       des === '' || category === 'Select')
@@ -172,7 +171,9 @@ const CreateRequest = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Create Request</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Create Request
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -189,7 +190,9 @@ const CreateRequest = ({navigation}) => {
                 color={theme.colors.primary}
                 size={30}
               />
-              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>Tap to upload</Text>
+              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>
+                Tap to upload
+              </Text>
             </View>
           ) : (
             <Image
@@ -199,7 +202,7 @@ const CreateRequest = ({navigation}) => {
           )}
         </TouchableOpacity>
         <View style={styles.donation}>
-          <Text style={{ color: 'black'}}>Donation Categroy</Text>
+          <Text style={{color: 'black'}}>Donation Categroy</Text>
 
           <Dropdown
             style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
@@ -223,7 +226,7 @@ const CreateRequest = ({navigation}) => {
         </View>
         <View style={{zIndex: 0}}>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Donation Quantity'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Quantity'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -237,7 +240,7 @@ const CreateRequest = ({navigation}) => {
             </View>
           </View>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Phone Number'}</Text>
+            <Text style={{color: 'black'}}>{'Phone Number'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -257,12 +260,14 @@ const CreateRequest = ({navigation}) => {
             onPress={() => setShowMap(true)}>
             <Text style={{fontWeight: '400'}}>Location</Text>
             <View style={styles.newSection}>
-              <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
+              <Text placeholder={currentLocation} style={{color: 'black'}}>
+                {currentLocation}
+              </Text>
               <Entypo name="location-pin" size={20} />
             </View>
           </TouchableOpacity>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Donation Description'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Description'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 120, maxHeight: 120}]}
@@ -408,7 +413,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: 10,
     zIndex: 0,
-    maxHeight: 100
+    maxHeight: 100,
   },
   inputTitle: {
     color: 'black',
@@ -488,7 +493,8 @@ const styles = StyleSheet.create({
     fontSize: responsiveScreenFontSize(1.6),
   },
   selectedTextStyle: {
-    fontSize: 14, color: 'black'
+    fontSize: 14,
+    color: 'black',
   },
   label: {
     color: '#000000',

@@ -16,7 +16,9 @@ const FAQs = () => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>FAQ's</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          FAQ's
+        </Text>
       </View>
       <View>
         <TouchableOpacity
@@ -33,7 +35,7 @@ const FAQs = () => {
               width: '100%',
               justifyContent: 'space-between',
             }}>
-            <Text style={{fontWeight: '600',  color: 'black'}}>
+            <Text style={{fontWeight: '600', color: 'black'}}>
               What do you want to know ablut this App?
             </Text>
 

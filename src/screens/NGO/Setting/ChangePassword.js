@@ -81,9 +81,6 @@ const ChangePassword = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -113,7 +110,7 @@ const ChangePassword = ({navigation}) => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>Change Password</Text>
       </View>
       <View style={{marginTop: 60, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           Change Password
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>

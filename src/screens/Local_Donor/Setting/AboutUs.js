@@ -5,10 +5,12 @@ const AboutUs = () => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>About Us</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          About Us
+        </Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           About Us
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 70, color: 'black'}}>

@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from '../../../theme/theme';
-import {useDispatch,} from 'react-redux';
-import { logout} from '../../../redux/actions/auth';
+import {useDispatch} from 'react-redux';
+import {logout} from '../../../redux/actions/auth';
 const FoodOutlet_Setting = ({navigation}) => {
   const dispatch = useDispatch();
   return (
@@ -20,7 +20,7 @@ const FoodOutlet_Setting = ({navigation}) => {
             screen: 'ChangePassword',
           })
         }>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Change Password
         </Text>
       </TouchableOpacity>
@@ -32,7 +32,7 @@ const FoodOutlet_Setting = ({navigation}) => {
             screen: 'Terms',
           })
         }>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Terms & Condition
         </Text>
       </TouchableOpacity>
@@ -44,7 +44,7 @@ const FoodOutlet_Setting = ({navigation}) => {
             screen: 'ChangeEmail',
           })
         }>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Change Email Address
         </Text>
       </TouchableOpacity>
@@ -56,7 +56,7 @@ const FoodOutlet_Setting = ({navigation}) => {
             screen: 'ChangeLocation',
           })
         }>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Change Location
         </Text>
       </TouchableOpacity>
@@ -68,7 +68,7 @@ const FoodOutlet_Setting = ({navigation}) => {
             screen: 'DeleteAccount',
           })
         }>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'black', fontWeight: '400'}}>
           Delete Account
         </Text>
       </TouchableOpacity>
@@ -79,7 +79,7 @@ const FoodOutlet_Setting = ({navigation}) => {
           dispatch(logout());
           navigation.replace('Login');
         }}>
-        <Text style={{fontSize: 16, color: 'red', fontWeight: '0'}}>
+        <Text style={{fontSize: 16, color: 'red', fontWeight: '400'}}>
           Log Out
         </Text>
       </TouchableOpacity>

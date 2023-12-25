@@ -241,7 +241,7 @@ const NGOCreateRequest = ({navigation}) => {
           </View>
 
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Add Required'}</Text>
+            <Text style={{color: 'black'}}>{'Add Required'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -255,7 +255,7 @@ const NGOCreateRequest = ({navigation}) => {
             </View>
           </View>
           <View style={styles.inputWrapperCont}>
-            <Text style={{ color: 'black'}}>{'Donation Description'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Description'}</Text>
             <View style={{...styles.inputWrapper}}>
               <TextInput
                 style={[styles.inputTitle, {height: 100}]}

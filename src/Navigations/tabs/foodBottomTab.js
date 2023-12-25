@@ -37,8 +37,7 @@ const FoodBottomTab = () => {
             iconName = require('../../Images/request.png');
           } else if (Screen_name === 'Notification') {
             iconName = require('../../Images/notifications.png');
-          }
-          else if (Screen_name === 'Setting') {
+          } else if (Screen_name === 'Setting') {
             iconName = require('../../Images/setting.png');
           }
           return (
@@ -52,7 +51,6 @@ const FoodBottomTab = () => {
           );
         },
       })}>
-      
       <Tab.Screen
         name="Request"
         component={FoodOutlet_Request}

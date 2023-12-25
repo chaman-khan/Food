@@ -30,7 +30,9 @@ const Donor_Category = ({navigation}) => {
   return (
     <View style={{width: '90%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Category</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Category
+        </Text>
       </View>
       <FlatList
         data={categoryData}
@@ -38,7 +40,10 @@ const Donor_Category = ({navigation}) => {
         columnWrapperStyle={{justifyContent: 'space-between'}}
         renderItem={item => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate('Request', {item: item.item.name})}
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate('Request', {item: item.item.name})
+              }
               style={[
                 styles.category,
                 {

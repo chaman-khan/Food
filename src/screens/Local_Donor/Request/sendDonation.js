@@ -152,10 +152,12 @@ const Send_Donation = ({navigation, route}) => {
           <Ionicons name="arrow-back" size={25} color="transparent" />
         </View>
         <View style={{gap: 7}}>
-          <Text style={{fontWeight: 'bold', color: 'black'}}>Donation Affordability</Text>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>
+            Donation Affordability
+          </Text>
           <TextInput
             placeholder="0"
-            placeholderTextColor='black'
+            placeholderTextColor="black"
             style={styles.section}
             value={quatity}
             onChangeText={txt => setQuantity(txt)}
@@ -176,7 +178,9 @@ const Send_Donation = ({navigation, route}) => {
           onPress={() => setShowMap(true)}>
           <Text style={{fontWeight: 'bold', color: 'black'}}>Location</Text>
           <View style={styles.newSection}>
-            <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
+            <Text placeholder={currentLocation} style={{color: 'black'}}>
+              {currentLocation}
+            </Text>
             <Entypo name="location-pin" size={20} />
           </View>
         </TouchableOpacity>

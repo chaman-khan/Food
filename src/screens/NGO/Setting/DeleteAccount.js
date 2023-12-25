@@ -91,7 +91,7 @@ const DeleteAccount = ({navigation}) => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>Delete Account</Text>
       </View>
       <View style={{marginTop: 60, gap: 50}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           Delete Acount!
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 70, color: 'black'}}>

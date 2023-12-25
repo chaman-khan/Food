@@ -25,7 +25,9 @@ const Donor_Request = ({navigation, route}) => {
 
   const item11 = route.params?.item || {};
 
-  console.log('===qlerkwfzqqkjkzwdjjexjlk.kmhlsadfc berhcrn erfui=================================');
+  console.log(
+    '===qlerkwfzqqkjkzwdjjexjlk.kmhlsadfc berhcrn erfui=================================',
+  );
   console.log(item11);
   console.log('====================================');
 
@@ -118,7 +120,11 @@ const Donor_Request = ({navigation, route}) => {
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={styles.input} placeholderTextColor='black'/>
+        <TextInput
+          placeholder="Search"
+          style={styles.input}
+          placeholderTextColor="black"
+        />
         <EvilIcons
           name="search"
           size={25}

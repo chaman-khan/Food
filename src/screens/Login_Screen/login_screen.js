@@ -70,6 +70,9 @@ const LoginScreen = ({navigation}) => {
   };
 
   const onSuccess = val => {
+    console.log('====================================');
+    console.log(val);
+    console.log('====================================');
     dispatch(authLoad(false));
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -82,7 +85,9 @@ const LoginScreen = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             dispatch(loginSuccess(val));
-            if (val.status === 'success') {
+            if (val.status === 'success' && val.isVerified === false) {
+              navigation.navigate('SignupVerify');
+            } else if (val.status === 'success') {
               val.data.role === 'user'
                 ? navigation.navigate('BottomTab')
                 : val.data.role === 'ngo'

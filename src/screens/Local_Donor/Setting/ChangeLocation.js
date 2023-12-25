@@ -115,10 +115,12 @@ const ChangeLocation = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Change Location</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Change Location
+        </Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           Change Your Location
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>
@@ -132,7 +134,9 @@ const ChangeLocation = ({navigation}) => {
           onPress={() => setShowMap(true)}>
           <Text style={{fontWeight: 'bold', color: 'black'}}>Location</Text>
           <View style={styles.newSection}>
-            <Text placeholder={currentLocation} style={{ color: 'black'}}>{currentLocation}</Text>
+            <Text placeholder={currentLocation} style={{color: 'black'}}>
+              {currentLocation}
+            </Text>
             <Entypo name="location-pin" size={20} />
           </View>
         </TouchableOpacity>

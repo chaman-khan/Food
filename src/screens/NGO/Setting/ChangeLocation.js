@@ -130,7 +130,7 @@ const ChangeLocation = ({navigation}) => {
         <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
-        <Text style={{fontSize: 25, fontWeight: '450', color: 'black'}}>
+        <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
           Change Your Location
         </Text>
         <Text style={{lineHeight: 20, marginBottom: 20, color: 'black'}}>

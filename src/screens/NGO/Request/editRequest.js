@@ -88,7 +88,9 @@ const NGOEditRequest = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>Edit Request</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Edit Request
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -105,7 +107,9 @@ const NGOEditRequest = ({navigation}) => {
                 color={theme.colors.primary}
                 size={30}
               />
-              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>Tap to upload</Text>
+              <Text style={{fontSize: 12, marginTop: 8, color: 'black'}}>
+                Tap to upload
+              </Text>
             </View>
           ) : (
             <Image
@@ -120,7 +124,7 @@ const NGOEditRequest = ({navigation}) => {
         />
 
         <View style={styles.donation}>
-          <Text style={{ color: 'black'}}>Donation Category</Text>
+          <Text style={{color: 'black'}}>Donation Category</Text>
           <DropDown
             data={categoryData}
             value={category}
