@@ -14,6 +14,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 import {useDispatch, useSelector} from 'react-redux';
+import { changeEmail } from '../../../redux/actions/home';
+import { authLoad } from '../../../redux/actions/auth';
+import { Loading } from '../../../components/loading';
 
 const ChangeEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -23,8 +26,7 @@ const ChangeEmail = ({navigation}) => {
 
   const handleconfirm = () => {
     var raw = JSON.stringify({
-      password: password,
-      confirm_password: confirmPassword,
+      email: email,
     });
     console.log(raw);
 
@@ -44,16 +46,13 @@ const ChangeEmail = ({navigation}) => {
       );
     } else {
       dispatch(authLoad(true));
-      dispatch(changePassword(loginData, raw, onSuccess, onError));
+      dispatch(changeEmail(loginData, raw, onSuccess, onError));
     }
   };
 
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    // navigation.navigate('DonorStack', {
-    //   screen: 'Donation Done',
-    // });
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -110,9 +109,10 @@ const ChangeEmail = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}>
+        onPress={handleconfirm}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
+      <Loading visible={authLoading} />
     </View>
   );
 };

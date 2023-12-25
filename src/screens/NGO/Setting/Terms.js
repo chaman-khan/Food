@@ -6,7 +6,7 @@ const Terms = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
           Terms & Conditions
         </Text>
       </View>

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {authLoad} from '../../../redux/actions/auth';
-import {NGOgetAllUserRequests} from '../../../redux/actions/home';
+import {NGOgetAcceptedRequests, NGOgetAllUserRequests} from '../../../redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loading} from '../../../components/loading';
 const theme = {
@@ -36,6 +36,7 @@ const AllUserRequests = ({navigation}) => {
   const [category, setCategory] = useState('leftover');
   const [showMdel, setShowModel] = useState(false);
   const [allrequests, setAllRequests] = useState([]);
+  const [acceptedTRequests, setAcceptedRequests] = useState([]);
 
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
@@ -44,6 +45,7 @@ const AllUserRequests = ({navigation}) => {
     React.useCallback(() => {
       dispatch(authLoad(true));
       dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
+      dispatch(NGOgetAcceptedRequests(loginData, onSuccess1, onError1));
     }, []),
   );
 
@@ -53,6 +55,15 @@ const AllUserRequests = ({navigation}) => {
     setAllRequests(val.data);
   };
   const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+  const onSuccess1= val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setAcceptedRequests(val.data);
+  };
+  const onError1 = err => {
     dispatch(authLoad(false));
     console.log(err);
   };
@@ -133,17 +144,17 @@ const AllUserRequests = ({navigation}) => {
               setPos2(true);
               setPos1(false);
             }}>
-            <Text style={{color: Color2}}>Rejected</Text>
+            <Text style={{color: Color2}}>Accepted</Text>
           </TouchableOpacity>
         </View>
         <View
           style={{
             width: '95%',
             alignSelf: 'center',
-            height: height / 1.2,
+            height: height / 1.5,
           }}>
           <FlatList
-            data={pos1 ? allrequests : data1}
+            data={pos1 ? allrequests : acceptedTRequests}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             style={{height: '100%'}}

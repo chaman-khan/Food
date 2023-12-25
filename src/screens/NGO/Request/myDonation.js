@@ -131,7 +131,7 @@ const NGOMyDonation = ({navigation}) => {
           type="feather"
           onPress={() => navigation.goBack()}
         />
-        <Text style={{fontSize: 16, fontWeight: '500'}}>My Donation</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>My Donation</Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -196,6 +196,7 @@ const NGOMyDonation = ({navigation}) => {
         </View>
       </ScrollView>
       {showMdel && <Modell />}
+      <Loading visible={authLoading} />
     </View>
   );
 };

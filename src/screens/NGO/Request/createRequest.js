@@ -94,11 +94,20 @@ const NGOCreateRequest = ({navigation}) => {
   const handleCreate = () => {
     var raw = JSON.stringify({
       ngo_id: loginData.data._id,
+      image: source,
       donation_intro: intro,
-      donation_category: category,
+      donation_category: category.value,
       required_amount: quatity,
       donation_desc: des,
     });
+
+    console.log(
+      '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
+    );
+    console.log(raw);
+    console.log(
+      '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
+    );
 
     if (
       (quatity === '' || number === '' || latitude === undefined,
@@ -126,12 +135,7 @@ const NGOCreateRequest = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    console.log('val.............');
-    console.log(val);
-    navigation.navigate('NGOStack', {
-      screen: 'NGODonation_Done',
-    });
-
+   
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
@@ -143,7 +147,7 @@ const NGOCreateRequest = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.navigate('NGOStack', {screen: 'NGOMyDonation'});
+              navigation.replace('NGOStack', {screen: 'NGODonation_Done'});
           },
         },
       ],
@@ -281,7 +285,7 @@ const NGOCreateRequest = ({navigation}) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-          onPress={() => handleCreate()}>
+          onPress={handleCreate}>
           <Text style={{color: 'white'}}>Send Request</Text>
         </TouchableOpacity>
       </ScrollView>

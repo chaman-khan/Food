@@ -7,13 +7,12 @@ const NGODonation_Done = ({navigation}) => {
       <Entypo
         name="cross"
         size={30}
-        onPress={() => navigation.goBack()}
-        style={{margin: 10}}
+        onPress={() => navigation.replace('NGOMyDonation')}
+        style={{margin: 10, color: 'black'}}
       />
       <Image
         source={require('../../../Images/done.png')}
         style={{marginVertical: 50, width: '100%'}}
-        tintColor="black"
       />
       <Text style={styles.successfull}>Donation is Successfully</Text>
       <Text style={styles.text}>

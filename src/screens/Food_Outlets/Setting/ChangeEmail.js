@@ -14,6 +14,9 @@ import {
 } from 'react-native-responsive-dimensions';
 import {theme} from '../../../theme/theme';
 import {useDispatch, useSelector} from 'react-redux';
+import { changeEmail } from '../../../redux/actions/home';
+import { Loading } from '../../../components/loading';
+import { authLoad } from '../../../redux/actions/auth';
 
 const ChangeFoodEmail = ({navigation}) => {
   const [email, setEmail] = useState('');
@@ -23,8 +26,7 @@ const ChangeFoodEmail = ({navigation}) => {
 
   const handleconfirm = () => {
     var raw = JSON.stringify({
-      password: password,
-      confirm_password: confirmPassword,
+      email: email
     });
     console.log(raw);
 
@@ -44,7 +46,7 @@ const ChangeFoodEmail = ({navigation}) => {
       );
     } else {
       dispatch(authLoad(true));
-      dispatch(changePassword(loginData, raw, onSuccess, onError));
+      dispatch(changeEmail(loginData, raw, onSuccess, onError));
     }
   };
 
@@ -110,9 +112,10 @@ const ChangeFoodEmail = ({navigation}) => {
       </View>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.goBack()}>
+        onPress={handleconfirm}>
         <Text style={{color: 'white'}}>Save Changes</Text>
       </TouchableOpacity>
+      <Loading visible={authLoading} />
     </View>
   );
 };

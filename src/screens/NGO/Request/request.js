@@ -109,7 +109,7 @@ const NGO_Request = ({navigation}) => {
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={styles.input} />
+        <TextInput placeholder="Search" style={styles.input} placeholderTextColor= 'black' />
         <EvilIcons
           name="search"
           size={25}
@@ -238,6 +238,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontWeight: '500',
     fontSize: 12,
+    color: 'black'
   },
 });
 

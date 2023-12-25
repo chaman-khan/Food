@@ -7,9 +7,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
+  Alert,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
+import {useDispatch, useSelector} from 'react-redux';
+import {NGOUpdateRequest} from '../../../redux/actions/home';
+import { Loading } from '../../../components/loading';
+import { authLoad } from '../../../redux/actions/auth';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -19,6 +24,43 @@ const theme = {
 const UserRequestDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
+
+  const dispatch = useDispatch();
+  const {authLoading, loginData} = useSelector(state => state.auth);
+  const handleAccepted = () => {
+    var raw = JSON.stringify({
+      userRequestId: routee._id,
+      ngoId: loginData.data._id,
+      status: true,
+    });
+    dispatch(authLoad(true));
+    dispatch(NGOUpdateRequest(loginData, raw, onSuccess, onError));
+  };
+
+  const onSuccess = val => {
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' &&
+              navigation.replace('NGOStack', {screen: 'NGOMyDonation'});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -32,24 +74,25 @@ const UserRequestDetail = ({navigation}) => {
         <Ionicons
           name="arrow-back"
           size={25}
+          style={{color: 'black'}}
           onPress={() => navigation.goBack()}
         />
         <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
         <Entypo name="dots-three-vertical" size={25} color="transparent" />
       </View>
       <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
+        source={{uri: routee.image}}
+        style={{alignSelf: 'center', width: '90%', height: 180}}
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
         <Text style={styles.category}>{routee.donation_category}</Text>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Donation Quantity</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.donation_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Phone Number</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.phoneNo}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.phone_number}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Location</Text>
@@ -59,12 +102,10 @@ const UserRequestDetail = ({navigation}) => {
         <Text style={{fontWeight: 'bold', color: 'black'}}>
           Donation Description
         </Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
       <View style={styles.buttonGroup}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.button} onPress={handleAccepted}>
           <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
             Accept
           </Text>
@@ -77,6 +118,7 @@ const UserRequestDetail = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+      <Loading visible={authLoading} />
     </View>
   );
 };
@@ -131,7 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   buttonGroup: {
-    width: '100%',
+    width: '90%',
     alignSelf: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',

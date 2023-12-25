@@ -127,7 +127,9 @@ const ChangeLocation = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Email</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Change Email
+        </Text>
       </View>
       <View style={{marginTop: 40, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>

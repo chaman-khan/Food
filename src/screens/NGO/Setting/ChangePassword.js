@@ -107,7 +107,9 @@ const ChangePassword = ({navigation}) => {
   return (
     <View style={{width: '95%', alignSelf: 'center'}}>
       <View style={styles.topBar}>
-        <Text style={{fontSize: 16, fontWeight: '500'}}>Change Password</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          Change Password
+        </Text>
       </View>
       <View style={{marginTop: 60, gap: 20}}>
         <Text style={{fontSize: 25, fontWeight: '400', color: 'black'}}>
