@@ -1,4 +1,4 @@
-import react from 'react';
+import React from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 const Donation_Done = ({navigation}) => {

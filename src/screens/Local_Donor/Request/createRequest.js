@@ -127,11 +127,7 @@ const CreateRequest = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    console.log('val.............');
-    console.log(val);
-    navigation.navigate('DonorStack', {
-      screen: 'Donation Done',
-    });
+    
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -144,7 +140,7 @@ const CreateRequest = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.replace('DonorStack', {screen: 'My Donation'});
+              navigation.replace('DonorStack', {screen: 'Donation Done'});
           },
         },
       ],
@@ -236,6 +232,7 @@ const CreateRequest = ({navigation}) => {
                   setQuantity(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
+                keyboardType='numeric'
               />
             </View>
           </View>
@@ -250,6 +247,7 @@ const CreateRequest = ({navigation}) => {
                   setNumber(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
+                keyboardType='numeric'
               />
             </View>
           </View>

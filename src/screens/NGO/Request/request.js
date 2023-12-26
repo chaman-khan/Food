@@ -46,7 +46,7 @@ const NGO_Request = ({navigation}) => {
       style={styles.tabWrapper}
       onPress={() => {
         navigation.navigate('NGOStack', {
-          screen: 'NGODonationDetail',
+          screen: 'UserRequestDetail',
           params: {item: item},
         });
       }}>

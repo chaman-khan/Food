@@ -12,9 +12,12 @@ import {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch, useSelector} from 'react-redux';
-import {NGOUpdateRequest} from '../../../redux/actions/home';
-import { Loading } from '../../../components/loading';
-import { authLoad } from '../../../redux/actions/auth';
+import {
+  NGOUpdateRequest,
+  NGOdeleteUserDonationRequest,
+} from '../../../redux/actions/home';
+import {Loading} from '../../../components/loading';
+import {authLoad} from '../../../redux/actions/auth';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -60,6 +63,24 @@ const UserRequestDetail = ({navigation}) => {
   const onError = err => {
     dispatch(authLoad(false));
     console.log(err);
+  };
+  const handleRejected = () => {
+    dispatch(authLoad(true));
+    dispatch(
+      NGOdeleteUserDonationRequest(loginData, routee, onSuccess1, onError1),
+    );
+    navigation.goBack();
+    // navigation.navigate('NGOStack', {
+      // screen: 'NGOMyDonation',
+    // });
+  };
+
+  const onSuccess1 = val => {
+    dispatch(authLoad(false));
+  };
+
+  const onError1 = err => {
+    dispatch(authLoad(false));
   };
 
   return (
@@ -110,9 +131,7 @@ const UserRequestDetail = ({navigation}) => {
             Accept
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.button1}
-          onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.button1} onPress={handleRejected}>
           <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20}}>
             Reject
           </Text>

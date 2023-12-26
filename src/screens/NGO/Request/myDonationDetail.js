@@ -14,6 +14,10 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const NGOMyDonationDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
+
+  console.log('====================================');
+  console.log(routee);
+  console.log('====================================');
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
