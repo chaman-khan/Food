@@ -130,7 +130,7 @@ const MyFoodDonation = ({navigation}) => {
           onPress={() => navigation.replace('FoodBottomTab')}
         />
         <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
-          My Requests
+          My Donations
         </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
@@ -183,7 +183,7 @@ const MyFoodDonation = ({navigation}) => {
                     justifyContent: 'center',
                   }}>
                   <Text style={{fontWeight: 'bold', fontSize: 18}}>
-                    No Requests found
+                    No Donation found
                   </Text>
                 </View>
               );

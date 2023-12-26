@@ -106,7 +106,7 @@ const Donor_Request = ({navigation, route}) => {
               source={require('../../../Images/profileLogo.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate('DonorStack', {
                 screen: 'Create Request',
@@ -116,7 +116,7 @@ const Donor_Request = ({navigation, route}) => {
               style={styles.topImageIcon}
               source={require('../../../Images/plus.png')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
   topLogo: {width: 120, height: 30, resizeMode: 'contain'},
   topIconCont: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     width: '15%',
   },

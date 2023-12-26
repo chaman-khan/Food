@@ -129,9 +129,9 @@ const NGOMyDonation = ({navigation}) => {
         <Icon
           name="arrow-left"
           type="feather"
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.replace('NGOBottomTab')}
         />
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>My Donation</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>My Requests</Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>
@@ -184,7 +184,7 @@ const NGOMyDonation = ({navigation}) => {
                   }}>
                   <Text
                     style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-                    No Donation found
+                    No Request found
                   </Text>
                 </View>
               );

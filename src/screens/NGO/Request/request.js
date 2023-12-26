@@ -95,7 +95,7 @@ const NGO_Request = ({navigation}) => {
               source={require('../../../Images/profileLogo1.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate('NGOStack', {
                 screen: 'NGOCreateRequest',
@@ -105,7 +105,7 @@ const NGO_Request = ({navigation}) => {
               style={styles.topImageIcon}
               source={require('../../../Images/plus.png')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    width: '20%',
+    width: '15%',
   },
   topImageIcon: {
     height: 20,

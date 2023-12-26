@@ -11,6 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import messaging from '@react-native-firebase/messaging';
 import {notification} from '../../redux/actions/home';
 import {authLoad} from '../../redux/actions/auth';
+import CreateRequest from '../../screens/Local_Donor/Request/createRequest';
 
 const Tab = createBottomTabNavigator();
 
@@ -105,8 +106,8 @@ const BottomTab = () => {
             iconName = require('../../Images/request.png');
           } else if (Screen_name === 'Notification') {
             iconName = require('../../Images/notifications.png');
-          } else if (Screen_name === 'Category') {
-            iconName = require('../../Images/category.png');
+          } else if (Screen_name === 'CreateRequest') {
+            iconName = require('../../Images/plus.png');
           } else if (Screen_name === 'Setting') {
             iconName = require('../../Images/setting.png');
           }
@@ -134,16 +135,17 @@ const BottomTab = () => {
           headerShown: false,
         }}
       />
+
       <Tab.Screen
-        name="Notification"
-        component={Donor_Notification}
+        name="CreateRequest"
+        component={CreateRequest}
         options={{
           headerShown: false,
         }}
       />
       <Tab.Screen
-        name="Category"
-        component={Donor_Category}
+        name="Notification"
+        component={Donor_Notification}
         options={{
           headerShown: false,
         }}

@@ -169,15 +169,15 @@ const NGOCreateRequest = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.topBar}>
-        <Icon
+        {/* <Icon
           name="arrow-left"
           type="feather"
           onPress={() => navigation.goBack()}
-        />
+        /> */}
         <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
           Create Request
         </Text>
-        <Icon name="arrow-left" type="feather" color={'transparent'} />
+        {/* <Icon name="arrow-left" type="feather" color={'transparent'} /> */}
       </View>
       <ScrollView>
         <TouchableOpacity
@@ -255,6 +255,7 @@ const NGOCreateRequest = ({navigation}) => {
                   setQuantity(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
+                keyboardType='numeric'
               />
             </View>
           </View>
@@ -341,7 +342,7 @@ const styles = StyleSheet.create({
     width: '95%',
     height: 40,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
   },
