@@ -11,6 +11,7 @@ import NGO_Request from '../../screens/NGO/Request/request';
 import NGONotification from '../../screens/NGO/Notification/Notification';
 import NGOCategory from '../../screens/NGO/Category/Category';
 import NGOSetting from '../../screens/NGO/Setting/Setting';
+import NGOCreateRequest from '../../screens/NGO/Request/createRequest';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,8 +46,8 @@ const NGOBottomTab = () => {
             iconName = require('../../Images/request.png');
           } else if (Screen_name === 'NGONotification') {
             iconName = require('../../Images/notifications.png');
-          } else if (Screen_name === 'NGOCategory') {
-            iconName = require('../../Images/category.png');
+          } else if (Screen_name === 'NGOCreateRequest') {
+            iconName = require('../../Images/plus.png');
           } else if (Screen_name === 'NGOSetting') {
             iconName = require('../../Images/setting.png');
           }
@@ -58,12 +59,6 @@ const NGOBottomTab = () => {
               resizeMode="contain"
               style={{width: 30, height: 30}}
             />
-            // <Ionicons
-            //   name={iconName}
-            //   size={size}
-            //   color={color}
-            //   style={{height: 30, width: 30}}
-            // />
           );
         },
       })}>
@@ -75,20 +70,21 @@ const NGOBottomTab = () => {
           title: 'Request',
         }}
       />
+      
+      <Tab.Screen
+        name="NGOCreateRequest"
+        component={NGOCreateRequest}
+        options={{
+          headerShown: false,
+          title: 'Create',
+        }}
+      />
       <Tab.Screen
         name="NGONotification"
         component={NGONotification}
         options={{
           headerShown: false,
           title: 'Notification',
-        }}
-      />
-      <Tab.Screen
-        name="NGOCategory"
-        component={NGOCategory}
-        options={{
-          headerShown: false,
-          title: 'Category',
         }}
       />
       <Tab.Screen

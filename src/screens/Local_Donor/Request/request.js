@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
   input: {
     width: '95%',
     padding: 0,
+    color: 'black'
   },
   tabBottom: {
     borderWidth: 0.5,

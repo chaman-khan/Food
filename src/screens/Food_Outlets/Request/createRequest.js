@@ -94,7 +94,8 @@ const FoodCreateRequest = ({navigation}) => {
     var raw = JSON.stringify({
       user_id: loginData.data._id,
       image: source,
-      donation_category: category.value,
+      // donation_category: category.value,
+      donation_category: '6563b00afee79aab6f20d9cd',
       donation_amount: quatity,
       donation_desc: des,
       phone_number: number,
@@ -102,6 +103,12 @@ const FoodCreateRequest = ({navigation}) => {
       latitude: latitude,
       longitude: longitude,
     });
+
+    console.log(
+      '==RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr==================================',
+    );
+    console.log(raw);
+    console.log('====================================');
 
     if (
       (quatity === '' || number === '' || latitude === undefined,
@@ -127,8 +134,6 @@ const FoodCreateRequest = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    
-
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
@@ -162,15 +167,20 @@ const FoodCreateRequest = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.topBar}>
-        <Icon
+        {/* <Icon
           name="arrow-left"
           type="feather"
           onPress={() => navigation.goBack()}
-        />
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+        /> */}
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: '500',
+            color: 'black',
+          }}>
           Create Request
         </Text>
-        <Icon name="arrow-left" type="feather" color={'transparent'} />
+        {/* <Icon name="arrow-left" type="feather" color={'transparent'} /> */}
       </View>
       <ScrollView>
         <TouchableOpacity
@@ -197,7 +207,7 @@ const FoodCreateRequest = ({navigation}) => {
             />
           )}
         </TouchableOpacity>
-        <View style={styles.donation}>
+        {/* <View style={styles.donation}>
           <Text style={{color: 'black'}}>Donation Categroy</Text>
 
           <Dropdown
@@ -219,7 +229,7 @@ const FoodCreateRequest = ({navigation}) => {
               setIsFocus(false);
             }}
           />
-        </View>
+        </View> */}
         <View style={{zIndex: 0}}>
           <View style={styles.inputWrapperCont}>
             <Text style={{color: 'black'}}>{'Donation Quantity'}</Text>
@@ -232,7 +242,7 @@ const FoodCreateRequest = ({navigation}) => {
                   setQuantity(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </View>
           </View>
@@ -247,7 +257,7 @@ const FoodCreateRequest = ({navigation}) => {
                   setNumber(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </View>
           </View>
@@ -264,7 +274,7 @@ const FoodCreateRequest = ({navigation}) => {
             </View>
           </TouchableOpacity>
           <View style={styles.inputWrapperCont}>
-            <Text style={{color: 'black'}}>{'Donation Quantity'}</Text>
+            <Text style={{color: 'black'}}>{'Donation Description'}</Text>
             <View style={styles.inputWrapper}>
               <TextInput
                 style={[styles.inputTitle, {height: 40}]}
@@ -284,7 +294,7 @@ const FoodCreateRequest = ({navigation}) => {
             backgroundColor: theme.colors.primary,
             height: 50,
             alignSelf: 'center',
-            marginTop: 20,
+            marginTop: 50,
             borderRadius: 10,
             alignItems: 'center',
             justifyContent: 'center',
@@ -345,7 +355,7 @@ const styles = StyleSheet.create({
     width: '95%',
     height: 40,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
   },

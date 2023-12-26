@@ -127,10 +127,10 @@ const MyFoodDonation = ({navigation}) => {
         <Icon
           name="arrow-left"
           type="feather"
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.replace('FoodBottomTab')}
         />
         <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
-          My Donation
+          My Requests
         </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
@@ -165,7 +165,7 @@ const MyFoodDonation = ({navigation}) => {
           style={{
             width: '95%',
             alignSelf: 'center',
-            height: height / 1.2,
+            height: height / 1.5,
           }}>
           <FlatList
             data={pos1 ? allrequests : completedrequests}
@@ -183,7 +183,7 @@ const MyFoodDonation = ({navigation}) => {
                     justifyContent: 'center',
                   }}>
                   <Text style={{fontWeight: 'bold', fontSize: 18}}>
-                    No Donation found
+                    No Requests found
                   </Text>
                 </View>
               );

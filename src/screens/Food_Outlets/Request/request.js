@@ -99,7 +99,7 @@ const FoodOutlet_Request = ({navigation}) => {
               source={require('../../../Images/profileLogo.png')}
             />
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() =>
               navigation.navigate('FoodStack', {
                 screen: 'Create Request',
@@ -109,11 +109,11 @@ const FoodOutlet_Request = ({navigation}) => {
               style={styles.topImageIcon}
               source={require('../../../Images/plus.png')}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={styles.input} />
+        <TextInput placeholder="Search" placeholderTextColor='black' style={styles.input} />
         <EvilIcons
           name="search"
           size={25}
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   topLogo: {width: 120, height: 30, resizeMode: 'contain'},
   topIconCont: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     width: '15%',
   },
@@ -216,6 +216,7 @@ const styles = StyleSheet.create({
   input: {
     width: '95%',
     padding: 0,
+    color: 'black'
   },
   tabBottom: {
     borderWidth: 0.5,

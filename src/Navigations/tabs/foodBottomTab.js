@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FoodOutlet_Request from '../../screens/Food_Outlets/Request/request';
 import FoodOutlet_Notification from '../../screens/Food_Outlets/Notification/Notification';
 import FoodOutlet_Setting from '../../screens/Food_Outlets/Setting/Setting';
+import FoodCreateRequest from '../../screens/Food_Outlets/Request/createRequest';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,10 +36,13 @@ const FoodBottomTab = () => {
           let Screen_name = route.name;
           if (Screen_name === 'Request') {
             iconName = require('../../Images/request.png');
+          } else if (Screen_name === 'FoodCreateRequest') {
+            iconName = require('../../Images/plus.png');
+          } else if (Screen_name === 'Setting') {
           } else if (Screen_name === 'Notification') {
             iconName = require('../../Images/notifications.png');
           } else if (Screen_name === 'Setting') {
-            iconName = require('../../Images/setting.png');
+            iconName = require('../../Images/privacy.png');
           }
           return (
             <Image
@@ -55,6 +59,14 @@ const FoodBottomTab = () => {
         name="Request"
         component={FoodOutlet_Request}
         options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="FoodCreateRequest"
+        component={FoodCreateRequest}
+        options={{
+          title: 'Create',
           headerShown: false,
         }}
       />
