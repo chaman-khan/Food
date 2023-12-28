@@ -498,7 +498,6 @@ export const NGOmyDonatios = (data, handleSuccess, handleError) => {
       var myHeaders = new Headers();
       myHeaders.append('Authorization', `Bearer ${data.token}`);
       var raw = '';
-
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
@@ -506,7 +505,10 @@ export const NGOmyDonatios = (data, handleSuccess, handleError) => {
         redirect: 'follow',
       };
 
-      fetch(`${baseUrl}/ngo/getRequestById/${data.data._id}`, requestOptions)
+      fetch(
+        `${baseUrl}/ngo/getAllRequestsByNgo/${data.data._id}`,
+        requestOptions,
+      )
         .then(response => response.json())
         .then(result => {
           handleSuccess(result);

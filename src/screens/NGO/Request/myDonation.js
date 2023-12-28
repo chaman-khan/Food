@@ -50,7 +50,9 @@ const NGOMyDonation = ({navigation}) => {
   );
 
   const onSuccess = val => {
+    console.log('.......................................................................')
     console.log(val)
+    console.log('.......................................................................')
     dispatch(authLoad(false));
     console.log(val.data);
     if (val.data.status === true) setCompletedrequests(val.data);
@@ -165,7 +167,7 @@ const NGOMyDonation = ({navigation}) => {
           style={{
             width: '95%',
             alignSelf: 'center',
-            height: height / 1.2,
+            height: height / 1.5,
           }}>
           <FlatList
             data={pos1 ? allrequests : completedrequests}

@@ -29,6 +29,7 @@ import {
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
 import {Loading} from '../../../components/loading';
+import RNFS from 'react-native-fs';
 
 const theme = {
   colors: {
@@ -91,10 +92,12 @@ const NGOCreateRequest = ({navigation}) => {
     setlongitude(region.longitude);
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    const imageBase64 = await RNFS.readFile(source, 'base64');
+    const imageUri = `data:image/jpeg;base64,${imageBase64}`;
     var raw = JSON.stringify({
       ngo_id: loginData.data._id,
-      image: source,
+      image: imageUri,
       donation_intro: intro,
       donation_category: category.value,
       required_amount: quatity,
