@@ -14,7 +14,7 @@ import {
 import {Dropdown} from 'react-native-element-dropdown';
 import {styles} from './Signup_Styles';
 import {useDispatch, useSelector} from 'react-redux';
-import {baseUrl} from '../../constants/constants';
+import {baseUrl, setUseridd} from '../../constants/constants';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 import {authLoad, registerUser} from '../../redux/actions/auth';
@@ -48,7 +48,7 @@ const SignUp_Screen = ({navigation}) => {
   const [showMap, setShowMap] = useState(false);
   const [latitude, setLatitude] = useState();
   const [longitude, setlongitude] = useState();
-  const [user_id, setUser_id] = useState('');
+  // const [userId, setUserId] = useState('');
   const dispatch = useDispatch();
 
   const [latitudeDelta, setLatitudeDelta] = useState(0.0922);
@@ -206,13 +206,6 @@ const SignUp_Screen = ({navigation}) => {
 
   const onSuccess = val => {
     dispatch(authLoad(false));
-    console.log(
-      '==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================',
-    );
-    console.log(val);
-    console.log(
-      '==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================',
-    );
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -238,6 +231,19 @@ const SignUp_Screen = ({navigation}) => {
   const onSuccess1 = val => {
     dispatch(authLoad(false));
 
+    console.log('==VVVVVVVVVVVVVVVVVAAAAAAAAAAAAAAAAAAAAAALLLLLLLLLLLLLLLLLLLLLLLLLLLLL==================================');
+    console.log(val.user_id);
+    // setUserId(val.user_id);
+    // console.log('====================================');
+    // console.log('====================================');
+    // console.log('====================================');
+    // console.log('====================================');
+    // console.log('====================================');
+
+    // console.log('====================================');
+    // console.log(userId);
+    // console.log('====================================');
+
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
@@ -249,7 +255,7 @@ const SignUp_Screen = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.navigate('Singnup_verification', {user_id});
+              navigation.navigate('Singnup_verification', {userId: val.user_id});
           },
         },
       ],

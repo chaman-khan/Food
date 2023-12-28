@@ -11,18 +11,22 @@ import {styles} from './Signup_verification_styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import {authLoad, submitCertificates} from '../../redux/actions/auth';
+import RNFS from 'react-native-fs';
 
 const Singnup_verification = ({navigation, route}) => {
-  const {user_id} = route.params;
+  const {userId} = route.params;
   const [regNo, setRegNo] = useState(null);
   const [regError, setRegError] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
+  // const [selectedImage, setSelectedImage] = useState(null);
   const dispatch = useDispatch();
 
-  console.log('====================================');
-  console.log(user_id);
-  console.log('====================================');
-  const Handle_Send = () => {
+  // console.log(
+  //   '=========UUUUUUUUUUUUUUUUUUUUUSSSSSSSSSSSSSSSSSSSSSSSSSEEEEEEEEEEEEEEEEEEEEEEEEETRRRRRRRRRRRRRRRRRRRRRR===========================',
+  // );
+  // console.log(userId);
+  // console.log('====================================');
+  const Handle_Send = async () => {
     if (!regNo) {
       setRegError(true);
     } else {
@@ -44,10 +48,12 @@ const Singnup_verification = ({navigation, route}) => {
     } else {
       dispatch(authLoad(true));
 
+      const imageBase64 = await RNFS.readFile(selectedImage, 'base64');
+      const imageUri = `data:image/jpeg;base64,${imageBase64}`;
       var raw = JSON.stringify({
-        user_id: user_id,
+        user_id: userId,
         registration_no: regNo,
-        certificate: selectedImage,
+        certificate: imageUri,
       });
       console.log(raw);
       dispatch(submitCertificates(raw, onSuccess, onError));
@@ -81,7 +87,7 @@ const Singnup_verification = ({navigation, route}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('Login');
+            val.status === 'true' && navigation.navigate('Login');
           },
         },
       ],
@@ -104,7 +110,6 @@ const Singnup_verification = ({navigation, route}) => {
       setSelectedImage(image.path);
     });
   };
-
 
   return (
     <View style={styles.Display}>
@@ -144,8 +149,8 @@ const Singnup_verification = ({navigation, route}) => {
             <Image
               source={
                 selectedImage
-                  ? {uri: selectedImage}
-                  : require('../../Images/add-file.png')
+                ? {uri: selectedImage}
+                : require('../../Images/add-file.png')
               }
               style={{width: 60, height: 60}}
             />
