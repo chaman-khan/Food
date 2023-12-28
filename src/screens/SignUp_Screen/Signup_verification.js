@@ -11,7 +11,6 @@ import {styles} from './Signup_verification_styles';
 import ImagePicker from 'react-native-image-crop-picker';
 import {useDispatch, useSelector} from 'react-redux';
 import {authLoad, submitCertificates} from '../../redux/actions/auth';
-import {useFocusEffect} from '@react-navigation/native';
 
 const Singnup_verification = ({navigation, route}) => {
   const {user_id} = route.params;
@@ -106,22 +105,6 @@ const Singnup_verification = ({navigation, route}) => {
     });
   };
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     dispatch(authLoad(true));
-  //     dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
-  //   }, []),
-  // );
-
-  // const onSuccess = val => {
-  //   console.log(val);
-  //   dispatch(authLoad(false));
-  //   setData(val.data);
-  // };
-  // const onError = err => {
-  //   dispatch(authLoad(false));
-  //   console.log(err);
-  // };
 
   return (
     <View style={styles.Display}>
@@ -145,8 +128,7 @@ const Singnup_verification = ({navigation, route}) => {
           />
           <TextInput
             maxLength={15}
-            keyboardType="numeric"
-            onChangeText={Text => setRegNo(Text)}
+            onChangeText={txt => setRegNo(txt)}
             placeholderTextColor={'#818181'}
             style={styles.No_input}
             placeholder="Registration no"

@@ -64,7 +64,7 @@ const CreateRequest = ({navigation}) => {
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [longitude, longitude]);
+  }, []);
 
   const categorySuccess = val => {
     console.log(val);
@@ -127,8 +127,6 @@ const CreateRequest = ({navigation}) => {
   };
 
   const onSuccess = val => {
-    
-
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
       val.status === 'success'
@@ -232,7 +230,7 @@ const CreateRequest = ({navigation}) => {
                   setQuantity(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </View>
           </View>
@@ -247,7 +245,7 @@ const CreateRequest = ({navigation}) => {
                   setNumber(val);
                 }}
                 placeholderTextColor={theme.colors.grey}
-                keyboardType='numeric'
+                keyboardType="numeric"
               />
             </View>
           </View>
@@ -322,7 +320,7 @@ const CreateRequest = ({navigation}) => {
                 latitude: latitude,
                 longitude: longitude,
               }}
-              title="Current Location"
+              title="Your Location"
             />
           </MapView>
           <View style={styles.Button_Box}>

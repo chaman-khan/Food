@@ -51,39 +51,42 @@ const SignUp_Screen = ({navigation}) => {
   const [user_id, setUser_id] = useState('');
   const dispatch = useDispatch();
 
+  const [latitudeDelta, setLatitudeDelta] = useState(0.0922);
+  const [longitudeDelta, setLongitudeDelta] = useState(0.0421);
+
   const {authLoading} = useSelector(state => state.auth);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  const handleButtonPress = async () => {
-    try {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Location Permission',
-            message: 'App needs access to your location for some features.',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        );
+  // const handleButtonPress = async () => {
+  //   try {
+  //     if (Platform.OS === 'android') {
+  //       const granted = await PermissionsAndroid.request(
+  //         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //         {
+  //           title: 'Location Permission',
+  //           message: 'App needs access to your location for some features.',
+  //           buttonNeutral: 'Ask Me Later',
+  //           buttonNegative: 'Cancel',
+  //           buttonPositive: 'OK',
+  //         },
+  //       );
 
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('Location permission granted');
-          // Now you can use Geolocation to get the current position
-          getCurrentLocation();
-          setShowMap(true);
-        } else {
-          console.log('Location permission denied');
-        }
-      } else {
-        getCurrentLocation();
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
+  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //         console.log('Location permission granted');
+  //         // Now you can use Geolocation to get the current position
+  //         getCurrentLocation();
+  //         setShowMap(true);
+  //       } else {
+  //         console.log('Location permission denied');
+  //       }
+  //     } else {
+  //       getCurrentLocation();
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  // };
   const getCurrentLocation = () => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);
@@ -100,7 +103,7 @@ const SignUp_Screen = ({navigation}) => {
     getCurrentLocation();
     // dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [longitude, longitude]);
+  }, []);
   const handleSignUp = () => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).{6,}$/;
     const emailRegex =
@@ -177,13 +180,12 @@ const SignUp_Screen = ({navigation}) => {
         email: email,
         password: password,
         location: 'Pakistan',
-        latitude: '22',
-        longitude: '23',
+        latitude: latitude,
+        longitude: longitude,
         role: value,
       });
       console.log(raw);
       dispatch(registerUser(raw, onSuccess1, onError1));
-    
     } else {
       dispatch(authLoad(true));
 
@@ -204,9 +206,13 @@ const SignUp_Screen = ({navigation}) => {
 
   const onSuccess = val => {
     dispatch(authLoad(false));
-    console.log('==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================');
+    console.log(
+      '==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================',
+    );
     console.log(val);
-    console.log('==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================');
+    console.log(
+      '==========vaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllll==========================',
+    );
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -231,10 +237,6 @@ const SignUp_Screen = ({navigation}) => {
   };
   const onSuccess1 = val => {
     dispatch(authLoad(false));
-    console.log('==========NGOOOOOOOOOOOOOOOOOOOOOOOOOO==========================');
-    console.log(val.user_id);
-    console.log('==========NGOOOOOOOOOOOOOOOOOOOOOOOOOOOO==========================');
-    setUser_id(val.user_id);
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -246,7 +248,8 @@ const SignUp_Screen = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' && navigation.navigate('Singnup_verification', {user_id});
+            val.status === 'success' &&
+              navigation.navigate('Singnup_verification', {user_id});
           },
         },
       ],
@@ -260,6 +263,8 @@ const SignUp_Screen = ({navigation}) => {
   const onRegionChange = region => {
     setLatitude(region.latitude);
     setlongitude(region.longitude);
+    setLatitudeDelta(region.latitudeDelta);
+    setLongitudeDelta(region.longitudeDelta);
   };
 
   return (
@@ -480,15 +485,15 @@ const SignUp_Screen = ({navigation}) => {
               initialRegion={{
                 latitude: latitude,
                 longitude: longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: latitudeDelta,
+                longitudeDelta: longitudeDelta,
               }}>
               <Marker
                 coordinate={{
                   latitude: latitude,
                   longitude: longitude,
                 }}
-                title="Current Location"
+                title="Your Location"
               />
             </MapView>
             <View style={styles.Button_Box}>

@@ -55,7 +55,7 @@ const NGOEditRequest = ({navigation}) => {
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [longitude, latitude]);
+  }, []);
 
   const categorySuccess = val => {
     console.log(val);

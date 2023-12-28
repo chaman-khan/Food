@@ -42,7 +42,7 @@ const ChangeLocation = ({navigation}) => {
     });
     getCurrentLocation();
     dispatch(authLoad(false));
-  }, [longitude, latitude]);
+  }, []);
   const getCurrentLocation = () => {
     console.log('........entered here.......');
     Geolocation.getCurrentPosition(info => {
@@ -182,7 +182,7 @@ const ChangeLocation = ({navigation}) => {
                 latitude: latitude,
                 longitude: longitude,
               }}
-              title="Current Location"
+              title="Your Location"
             />
           </MapView>
           <View style={styles.Button_Box}>

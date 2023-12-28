@@ -78,7 +78,7 @@ export const submitCertificates = (data, handleSuccess, handleError) => {
       var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: data,
         redirect: 'follow',
       };
 

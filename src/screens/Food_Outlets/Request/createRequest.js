@@ -64,7 +64,7 @@ const FoodCreateRequest = ({navigation}) => {
     getCurrentLocation();
     dispatch(getAllCategories(loginData, categorySuccess, categoryError));
     dispatch(authLoad(false));
-  }, [latitude, longitude]);
+  }, []);
 
   const categorySuccess = val => {
     console.log(val);
@@ -330,7 +330,7 @@ const FoodCreateRequest = ({navigation}) => {
                 latitude: latitude,
                 longitude: longitude,
               }}
-              title="Current Location"
+              title="Your Location"
             />
           </MapView>
           <View style={styles.Button_Box}>
