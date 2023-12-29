@@ -30,6 +30,8 @@ import {
   createUserDonationRequest,
   getAllCategories,
 } from '../../../redux/actions/home';
+
+import RNFS from 'react-native-fs';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -90,10 +92,12 @@ const FoodCreateRequest = ({navigation}) => {
     setlongitude(region.longitude);
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    const imageBase64 = await RNFS.readFile(source, 'base64');
+    const imageUri = `data:image/jpeg;base64,${imageBase64}`;
     var raw = JSON.stringify({
       user_id: loginData.data._id,
-      image: source,
+      image: imageUri,
       // donation_category: category.value,
       donation_category: '6563b00afee79aab6f20d9cd',
       donation_amount: quatity,
