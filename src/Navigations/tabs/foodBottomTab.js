@@ -42,7 +42,7 @@ const FoodBottomTab = () => {
           } else if (Screen_name === 'Notification') {
             iconName = require('../../Images/notifications.png');
           } else if (Screen_name === 'Setting') {
-            iconName = require('../../Images/privacy.png');
+            iconName = require('../../Images/setting.png');
           }
           return (
             <Image

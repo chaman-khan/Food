@@ -161,7 +161,8 @@ const CreateRequest = ({navigation}) => {
     });
   };
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <ScrollView>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.topBar}>
         {/* <Icon
           name="arrow-left"
@@ -341,6 +342,7 @@ const CreateRequest = ({navigation}) => {
       )}
       <Loading visible={authLoading} />
     </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

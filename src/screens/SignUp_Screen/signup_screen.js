@@ -58,35 +58,6 @@ const SignUp_Screen = ({navigation}) => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  // const handleButtonPress = async () => {
-  //   try {
-  //     if (Platform.OS === 'android') {
-  //       const granted = await PermissionsAndroid.request(
-  //         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-  //         {
-  //           title: 'Location Permission',
-  //           message: 'App needs access to your location for some features.',
-  //           buttonNeutral: 'Ask Me Later',
-  //           buttonNegative: 'Cancel',
-  //           buttonPositive: 'OK',
-  //         },
-  //       );
-
-  //       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  //         console.log('Location permission granted');
-  //         // Now you can use Geolocation to get the current position
-  //         getCurrentLocation();
-  //         setShowMap(true);
-  //       } else {
-  //         console.log('Location permission denied');
-  //       }
-  //     } else {
-  //       getCurrentLocation();
-  //     }
-  //   } catch (err) {
-  //     console.warn(err);
-  //   }
-  // };
   const getCurrentLocation = () => {
     Geolocation.getCurrentPosition(info => {
       console.log(info);

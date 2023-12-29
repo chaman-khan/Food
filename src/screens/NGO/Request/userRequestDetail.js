@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Modal,
   Alert,
+  Dimensions,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -18,27 +19,53 @@ import {
 } from '../../../redux/actions/home';
 import {Loading} from '../../../components/loading';
 import {authLoad} from '../../../redux/actions/auth';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {
+  responsiveScreenFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 const theme = {
   colors: {
     primary: '#1CB5FD',
     grey: '#9B9B9B',
   },
 };
+
+const {width, height} = Dimensions.get('screen');
 const UserRequestDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
+  const [showMap, setShowMap] = useState(false);
+  const [latitudeDelta, setLatitudeDelta] = useState(0.0922);
+  const [longitudeDelta, setLongitudeDelta] = useState(0.0421);
+  const [latitude, setLatitude] = useState(Number(routee.latitude));
+  const [longitude, setlongitude] = useState(Number(routee.longitude));
 
-  console.log('==========tttttttttttttttttttttttttttttttttttttt==========================');
+  console.log(
+    '==========tttttttttttttttttttttttttttttttttttttt==========================',
+  );
   console.log(routee);
   console.log('====================================');
 
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
+
   const handleAccepted = () => {
     var raw = JSON.stringify({
       userRequestId: routee._id,
       ngoId: loginData.data._id,
       status: true,
+    });
+    dispatch(authLoad(true));
+    dispatch(NGOUpdateRequest(loginData, raw, onSuccess, onError));
+  };
+
+  const handleRejected = () => {
+    var raw = JSON.stringify({
+      userRequestId: routee._id,
+      ngoId: loginData.data._id,
+      status: false,
     });
     dispatch(authLoad(true));
     dispatch(NGOUpdateRequest(loginData, raw, onSuccess, onError));
@@ -55,8 +82,7 @@ const UserRequestDetail = ({navigation}) => {
           text: 'OK',
           onPress: () => {
             console.log('OK Pressed');
-            val.status === 'success' &&
-              navigation.replace('NGOStack', {screen: 'NGOMyDonation'});
+            val.status === 'success' && navigation.goBack();
           },
         },
       ],
@@ -68,42 +94,13 @@ const UserRequestDetail = ({navigation}) => {
     dispatch(authLoad(false));
     console.log(err);
   };
-  const handleRejected = () => {
-    dispatch(authLoad(true));
-    dispatch(
-      NGOdeleteUserDonationRequest(loginData, routee, onSuccess1, onError1),
-    );
-    navigation.goBack();
-    // navigation.navigate('NGOStack', {
-      // screen: 'NGOMyDonation',
-    // });
-  };
 
-  const onSuccess1 = val => {
-    Alert.alert(
-      val.status === 'success' ? 'Success' : 'Error',
-      val.status === 'success'
-        ? val.message
-        : val.message || val.message.message,
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            console.log('OK Pressed');
-            val.status === 'success' &&
-              navigation.replace('NGOStack', {screen: 'NGOMyDonation'});
-          },
-        },
-      ],
-      {cancelable: false},
-    );
-    dispatch(authLoad(false));
+  const onRegionChange = region => {
+    setLatitude(region.latitude);
+    setlongitude(region.longitude);
+    // setLatitudeDelta(region.latitudeDelta);
+    // setLongitudeDelta(region.longitudeDelta);
   };
-
-  const onError1 = err => {
-    dispatch(authLoad(false));
-  };
-
   return (
     <View style={{flex: 1}}>
       <View
@@ -136,10 +133,13 @@ const UserRequestDetail = ({navigation}) => {
           <Text style={{color: 'black'}}>Phone Number</Text>
           <Text style={{color: '#20B7FE'}}>{routee.phone_number}</Text>
         </View>
-        <View style={styles.categoryView}>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.categoryView}
+          onPress={() => setShowMap(true)}>
           <Text style={{color: 'black'}}>Location</Text>
           <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold', color: 'black'}}>
           Donation Description
@@ -158,6 +158,48 @@ const UserRequestDetail = ({navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
+      {showMap && (
+        <View
+          style={{
+            height: '100%',
+            width: width,
+            zIndex: 100,
+            position: 'absolute',
+            alignSelf: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <MapView
+            // provider={PROVIDER_GOOGLE}
+            onRegionChange={onRegionChange}
+            style={{height: '50%', width: '100%', backgroundColor: 'red'}}
+            initialRegion={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: latitudeDelta,
+              longitudeDelta: longitudeDelta,
+            }}>
+            <Marker
+              coordinate={{
+                latitude: latitude,
+                longitude: longitude,
+              }}
+              title="Your Location"
+            />
+          </MapView>
+          <View style={styles.Button_Box}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.Button}
+              onPress={() => {
+                setShowMap(false);
+              }}>
+              <Text style={styles.Sign_Up_Text}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
       <Loading visible={authLoading} />
     </View>
   );
@@ -219,6 +261,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     position: 'absolute',
     bottom: 10,
+  },
+  Button_Box: {
+    // borderWidth:2,
+    width: '100%',
+    height: responsiveScreenHeight(5.5),
+    marginTop: responsiveScreenHeight(2),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Button: {
+    width: responsiveScreenWidth(85),
+    height: responsiveScreenHeight(5.5),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1CB5FD',
+    borderRadius: 11,
+  },
+  Sign_Up_Text: {
+    fontFamily: 'Poppins',
+    fontSize: responsiveScreenFontSize(1.4),
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
 });
 export default UserRequestDetail;

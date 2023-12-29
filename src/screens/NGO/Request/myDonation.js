@@ -55,8 +55,15 @@ const NGOMyDonation = ({navigation}) => {
     console.log('.......................................................................')
     dispatch(authLoad(false));
     console.log(val.data);
-    if (val.data.status === true) setCompletedrequests(val.data);
     setAllRequests(val.data);
+    const completeddRequests = allrequests.filter(
+      item => item.required_amount - item.total_donation_amount <= 0
+    );
+    setCompletedrequests(completeddRequests)
+    // if (val.data.status === 'success')
+    // if ((val.data.required_amount - val.data.total_donation_amount) === 0) {
+    //   setCompletedrequests(val.data)
+    // }
   };
   const onError = err => {
     dispatch(authLoad(false));

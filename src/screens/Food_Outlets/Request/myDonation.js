@@ -53,8 +53,12 @@ const MyFoodDonation = ({navigation}) => {
     console.log(val);
     dispatch(authLoad(false));
     console.log(val.data);
-    if (val.data.compeletedBy === null) setCompletedrequests(val.data);
     setAllRequests(val.data);
+    const completeddRequests = allrequests.filter(
+      item => item.compeletedBy != null
+    );
+  
+    setCompletedrequests(completeddRequests);
   };
   const onError = err => {
     dispatch(authLoad(false));

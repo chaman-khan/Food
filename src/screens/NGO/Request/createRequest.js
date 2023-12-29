@@ -169,7 +169,8 @@ const NGOCreateRequest = ({navigation}) => {
     });
   };
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <ScrollView>
+      <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.topBar}>
         {/* <Icon
           name="arrow-left"
@@ -337,6 +338,7 @@ const NGOCreateRequest = ({navigation}) => {
       )}
       <Loading visible={authLoading} />
     </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({

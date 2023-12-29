@@ -19,22 +19,16 @@ import {useFocusEffect} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('screen');
 const Donor_Request = ({navigation, route}) => {
-  const [category, setCategory] = useState('leftover');
-  const [title, setTitle] = useState('Norshing Hearts through Food Donation');
-  const [totalNumber, setTotalNumber] = useState(4575);
 
-  const item11 = route.params?.item || {};
-
-  console.log(
-    '===qlerkwfzqqkjkzwdjjexjlk.kmhlsadfc berhcrn erfui=================================',
-  );
-  console.log(item11);
-  console.log('====================================');
 
   const [data, setData] = useState([]);
 
   const {authLoading, loginData} = useSelector(state => state.auth);
 
+
+  console.log('====================================');
+  console.log(loginData);
+  console.log('====================================');
   const dispatch = useDispatch();
 
   useFocusEffect(
@@ -45,9 +39,11 @@ const Donor_Request = ({navigation, route}) => {
   );
 
   const onSuccess = val => {
-    console.log(val);
-    dispatch(authLoad(false));
     setData(val.data);
+    dispatch(authLoad(false));
+    console.log('====================================');
+    console.log(data);
+    console.log('====================================');
   };
   const onError = err => {
     dispatch(authLoad(false));
@@ -55,7 +51,7 @@ const Donor_Request = ({navigation, route}) => {
   };
 
   const renderItem = ({item}) => (
-    <TouchableOpacity
+    <TouchableOpacity activeOpacity={1}
       style={styles.tabWrapper}
       onPress={() => {
         navigation.navigate('DonorStack', {
@@ -209,7 +205,8 @@ const styles = StyleSheet.create({
   tabWrapper: {
     borderRadius: 10,
     width: '100%',
-    // height: height / 3,
+    flexGrow: 1,
+    height: height / 3,
     marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
@@ -227,7 +224,7 @@ const styles = StyleSheet.create({
   input: {
     width: '95%',
     padding: 0,
-    color: 'black'
+    color: 'black',
   },
   tabBottom: {
     borderWidth: 0.5,

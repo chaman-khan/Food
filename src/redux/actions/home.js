@@ -46,17 +46,15 @@ export const getAllNgoRequestsByArea = (data, handleSuccess, handleError) => {
       var myHeaders = new Headers();
       // myHeaders.append('Accept', 'application/json');
       myHeaders.append('Authorization', `Bearer ${data.token}`);
-      var raw = '';
 
       var requestOptions = {
         method: 'GET',
         headers: myHeaders,
-        body: raw,
         redirect: 'follow',
       };
 
       fetch(
-        `${baseUrl}/user/getAllNgoRequestsByArea/${data._id}`,
+        `${baseUrl}/user/getAllNgoRequestsByArea/${data.data._id}`,
         requestOptions,
       )
         .then(response => response.json())
