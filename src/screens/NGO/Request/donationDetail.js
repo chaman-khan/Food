@@ -8,12 +8,14 @@ import {
   StyleSheet,
   Modal,
   ScrollView,
+  Alert,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {Loading} from '../../../components/loading';
 import {NGOdeleteUserDonationRequest} from '../../../redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
+import { authLoad } from '../../../redux/actions/auth';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -27,89 +29,123 @@ const NGODonationDetail = ({navigation}) => {
   const {authLoading, loginData} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const handleDelete = () => {
+
+    console.log('====================================');
+    console.log("kerjhsd...........................");
+    console.log('====================================');
     dispatch(authLoad(true));
     dispatch(NGOdeleteUserDonationRequest(loginData, item, onSuccess, onError));
-    navigation.navigate('NGOStack', {
-      screen: 'NGOMyDonation',
-    });
+    setClicked(false)
+  };
+  const onSuccess = val => {
+    console.log('val.............');
+    console.log(val);
+
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            setClicked(false);
+            val.status === 'success' &&
+              navigation.navigate('NGOStack', {
+                screen: 'NGOMyDonation',
+              });
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+    dispatch(authLoad(false));
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
   };
   return (
     <ScrollView>
       <View style={{flex: 1}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 15,
-          height: 50,
-          alignItems: 'center',
-        }}>
-        <Ionicons
-          name="arrow-back"
-          size={25}
-          onPress={() => navigation.goBack()}
-          style={{color: 'black'}}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 15,
+            height: 50,
+            alignItems: 'center',
+          }}>
+          <Ionicons
+            name="arrow-back"
+            size={25}
+            onPress={() => navigation.goBack()}
+            style={{color: 'black'}}
+          />
+          <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
+          <Entypo
+            name="dots-three-vertical"
+            size={25}
+            onPress={() => setClicked(true)}
+            style={{color: 'black'}}
+          />
+        </View>
+        <Image
+          source={{uri: item.image}}
+          style={{width: '100%', height: 240}}
         />
-        <Text style={{fontSize: 25, color: 'black'}}>Donation Details</Text>
-        <Entypo
-          name="dots-three-vertical"
-          size={25}
-          onPress={() => setClicked(true)}
-          style={{color: 'black'}}
-        />
-      </View>
-      <Image source={{uri: item.image}} style={{width: '100%', height: 240}} />
-      <View style={{margin: 5, paddingHorizontal: 7}}>
-        <Text style={styles.category}>{item.donation_category}</Text>
-        <Text style={{marginVertical: 7, color: 'black', fontWeight: '600'}}>
-          {item.user_name}
-        </Text>
-        <View style={styles.categoryView}>
-          <Text style={{color: 'black'}}>Donation Amount </Text>
-          <Text style={{color: '#20B7FE'}}>{item.donation_amount}</Text>
+        <View style={{margin: 5, paddingHorizontal: 7}}>
+          <Text style={styles.category}>{item.donation_category}</Text>
+          <Text style={{marginVertical: 7, color: 'black', fontWeight: '600'}}>
+            {item.user_name}
+          </Text>
+          <View style={styles.categoryView}>
+            <Text style={{color: 'black'}}>Donation Amount </Text>
+            <Text style={{color: '#20B7FE'}}>{item.donation_amount}</Text>
+          </View>
+
+          <View style={styles.descView}></View>
+          <Text style={{fontWeight: 'bold', color: 'black'}}>
+            Donation Description
+          </Text>
+          <Text style={styles.desc}>{item.donation_desc}</Text>
         </View>
 
-        <View style={styles.descView}></View>
-        <Text style={{fontWeight: 'bold', color: 'black'}}>
-          Donation Description
-        </Text>
-        <Text style={styles.desc}>{item.donation_desc}</Text>
-      </View>
-
-      {clicked && (
-        <Modal transparent>
-          <View style={{flex: 1, backgroundColor: 'rgba(50, 50, 50,0.9)'}}>
-            <View style={styles.modell}>
-              <View style={styles.request}>
+        {clicked && (
+          <Modal transparent>
+            <View style={{flex: 1, backgroundColor: 'rgba(50, 50, 50,0.9)'}}>
+              <View style={styles.modell}>
+                <View style={styles.request}>
+                  <TouchableOpacity
+                    style={styles.button1}
+                    onPress={handleDelete}>
+                    <Text style={{color: 'black'}}>Delete Request</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.button1}
+                    onPress={() => {
+                      setClicked(false);
+                      navigation.navigate('NGOStack', {
+                        screen: 'NGOEditRequest', params: {item}
+                      });
+                    }}>
+                    <Text style={{color: 'black'}}>Edit Request</Text>
+                  </TouchableOpacity>
+                </View>
                 <TouchableOpacity
-                  style={styles.button1}
-                  onPress={() => {
-                    handleDelete;
-                    setClicked(false);
-                  }}>
-                  <Text style={{color: 'black'}}>Delete Request</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.button1}
-                  onPress={() => {
-                    setClicked(false);
-                    navigation.navigate('NGOStack', {screen: 'NGOEditRequest'});
-                  }}>
-                  <Text style={{color: 'black'}}>Edit Request</Text>
+                  style={styles.cancel}
+                  onPress={() => setClicked(false)}>
+                  <Text style={{color: 'red'}}>Cancel</Text>
                 </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                style={styles.cancel}
-                onPress={() => setClicked(false)}>
-                <Text style={{color: 'red'}}>Cancel</Text>
-              </TouchableOpacity>
             </View>
-          </View>
-          <Loading visible={authLoading} />
-        </Modal>
-      )}
-    </View>
+            <Loading visible={authLoading} />
+          </Modal>
+        )}
+      </View>
     </ScrollView>
   );
 };
@@ -138,7 +174,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     height: 180,
-    color: 'black'
+    color: 'black',
   },
   button: {
     width: '90%',

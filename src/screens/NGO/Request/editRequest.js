@@ -23,6 +23,7 @@ import {
 } from 'react-native-responsive-dimensions';
 import {NGOEditRequestt, getAllCategories} from '../../../redux/actions/home';
 import Geolocation from '@react-native-community/geolocation';
+import RNFS from 'react-native-fs';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -32,12 +33,19 @@ const theme = {
 
 const categoryData = ['Leftover', 'medicine', 'clothes'];
 
-const NGOEditRequest = ({navigation}) => {
-  const [category, setCategory] = useState('Select');
-  const [source, setSource] = useState(null);
-  const [intro, setIntro] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [descc, setDescc] = useState('');
+const NGOEditRequest = ({navigation, route}) => {
+
+  const {item} = route.params;
+
+  console.log('====================================');
+  console.log(item.required_amount);
+  console.log('====================================');
+
+  const [category, setCategory] = useState(item.donation_category);
+  const [source, setSource] = useState(item.image);
+  const [intro, setIntro] = useState(item.donation_intro);
+  const [quantity, setQuantity] = useState(item.required_amount);
+  const [descc, setDescc] = useState(item.donation_desc);
   const [isFocus, setIsFocus] = useState(false);
   const [categoryData, setCategoryData] = useState([]);
   const [number, setNumber] = useState('');
@@ -81,12 +89,14 @@ const NGOEditRequest = ({navigation}) => {
     setlongitude(region.longitude);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = async () => {
+    const imageBase64 = await RNFS.readFile(source, 'base64');
+    const imageUri = `data:image/jpeg;base64,${imageBase64}`;
     var raw = JSON.stringify({
-      _id: loginData.data._id,
-      image: source,
+      _id: item._id,
+      image: imageUri,
       donation_intro: intro,
-      donation_category: category,
+      donation_category: category.value,
       required_amount: quantity,
       donation_desc: descc,
     });
@@ -95,9 +105,7 @@ const NGOEditRequest = ({navigation}) => {
       '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
     );
     console.log(raw);
-    console.log(
-      '========RRRRRRRRRRRRRAAAAAAAAAAAAAAAAAAAAWWWWWWWWWWWWWWWWWWWWWWWWW============================',
-    );
+    
 
     if (
       (quantity === '' || number === '', descc === '' || category === 'Select')
@@ -133,7 +141,7 @@ const NGOEditRequest = ({navigation}) => {
           onPress: () => {
             console.log('OK Pressed');
             val.status === 'success' &&
-              navigation.replace('NGOStack', {screen: 'AllUserRequests'});
+              navigation.replace('NGOStack', {screen: 'NGOMyDonation'});
           },
         },
       ],

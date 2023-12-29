@@ -28,6 +28,10 @@ const UserRequestDetail = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
 
+  console.log('==========tttttttttttttttttttttttttttttttttttttt==========================');
+  console.log(routee);
+  console.log('====================================');
+
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
   const handleAccepted = () => {
@@ -76,6 +80,23 @@ const UserRequestDetail = ({navigation}) => {
   };
 
   const onSuccess1 = val => {
+    Alert.alert(
+      val.status === 'success' ? 'Success' : 'Error',
+      val.status === 'success'
+        ? val.message
+        : val.message || val.message.message,
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            console.log('OK Pressed');
+            val.status === 'success' &&
+              navigation.replace('NGOStack', {screen: 'NGOMyDonation'});
+          },
+        },
+      ],
+      {cancelable: false},
+    );
     dispatch(authLoad(false));
   };
 
