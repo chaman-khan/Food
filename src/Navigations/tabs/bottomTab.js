@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Image} from 'react-native';
+import {Alert, Image} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -33,12 +33,7 @@ const BottomTab = () => {
     var raw = JSON.stringify({
       user_id: loginData.data._id,
       fcm_token: token,
-      // user_id: loginData._id,
-      // fcm_token: fcmToken,
     });
-    console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
-    console.log(raw);
-    console.log('==============RAWWWWWWWWWWWWWWWWWWW======================');
     dispatch(authLoad(true));
 
     dispatch(notification(loginData, raw, onSuccess, onError));
@@ -51,30 +46,31 @@ const BottomTab = () => {
     //   screen: 'Donation Done',
     // });
 
-    Alert.alert(
-      val.status === 'success' ? 'Success' : 'Error',
-      val.status === 'success'
-        ? val.message
-        : val.message || val.message.message,
-      [
-        {
-          text: 'OK',
-          onPress: () => {
-            console.log('OK Pressed');
-            val.status === 'success';
-            // &&
-            // navigation.navigate('FoodStack', {
-            //   screen: 'Donation Done',
-            // });
-          },
-        },
-      ],
-      {cancelable: false},
-    );
+    // Alert.alert(
+    //   val.status === 'success' ? 'Success' : 'Error',
+    //   val.status === 'success'
+    //     ? val.message
+    //     : val.message || val.message.message,
+    //   [
+    //     {
+    //       text: 'OK',
+    //       onPress: () => {
+    //         console.log('OK Pressed');
+    //         val.status === 'success';
+    //         // &&
+    //         // navigation.navigate('FoodStack', {
+    //         //   screen: 'Donation Done',
+    //         // });
+    //       },
+    //     },
+    //   ],
+    //   {cancelable: false},
+    // );
     dispatch(authLoad(false));
   };
   const onError = err => {
     dispatch(authLoad(false));
+    console.log('err..........');
     console.log(err);
   };
   return (

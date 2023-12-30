@@ -720,19 +720,17 @@ export const updateGORequest = (token, data, handleSuccess, handleError) => {
 export const notification = (token, data, handleSuccess, handleError) => {
   return async dispatch => {
     try {
-      console.log('data..............');
-      console.log(data);
-      console.log(token);
       var myHeaders = new Headers();
       myHeaders.append('Accept', 'application/json');
       myHeaders.append('Content-Type', 'application/json');
 
       var requestOptions = {
-        method: 'GET',
+        method: 'POST',
         headers: myHeaders,
+        body: data,
         redirect: 'follow',
       };
-      fetch(`${baseUrl}//${data._id}`, requestOptions)
+      fetch(`${baseUrl}/user/save-fcm-token`, requestOptions)
         .then(response => response.json())
         .then(result => {
           handleSuccess(result);

@@ -19,7 +19,21 @@ import {NGOgetAllUserRequests} from '../../../redux/actions/home';
 
 const {width, height} = Dimensions.get('screen');
 const NGO_Request = ({navigation}) => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      donation_amount: 23,
+      donation_category: 'Food',
+      donation_desc: '2423423423423dwswdacdsafcsfds',
+      image:
+        'https://nationaltoday.com/wp-content/uploads/2021/12/Throw-Out-Your-Leftovers-Day-1200x834.jpg',
+      latitude: '37.785834',
+      location: 'Pakistan',
+      longitude: '73.8137992',
+      phone_number: '2324234234224234',
+      user_name: null,
+      _id: '656dccf67a3baeb99bb1deb7',
+    },
+  ]);
   const {authLoading, loginData} = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
@@ -32,9 +46,11 @@ const NGO_Request = ({navigation}) => {
   );
 
   const onSuccess = val => {
-    console.log(val);
     dispatch(authLoad(false));
-    setData(val.data);
+    const result = val.data.filter(item => {
+      return item !== null;
+    });
+    setData(result);
   };
   const onError = err => {
     dispatch(authLoad(false));
@@ -109,7 +125,11 @@ const NGO_Request = ({navigation}) => {
         </View>
       </View>
       <View style={styles.searchBarWrapper}>
-        <TextInput placeholder="Search" style={styles.input} placeholderTextColor= 'black' />
+        <TextInput
+          placeholder="Search"
+          style={styles.input}
+          placeholderTextColor="black"
+        />
         <EvilIcons
           name="search"
           size={25}
@@ -121,7 +141,6 @@ const NGO_Request = ({navigation}) => {
         <FlatList
           data={data}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
           ListEmptyComponent={() => {
             return (
@@ -206,7 +225,7 @@ const styles = StyleSheet.create({
   input: {
     width: '95%',
     padding: 0,
-    color: 'black'
+    color: 'black',
   },
   tabBottom: {
     borderWidth: 0.5,
@@ -239,7 +258,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontWeight: '500',
     fontSize: 12,
-    color: 'black'
+    color: 'black',
   },
 });
 
