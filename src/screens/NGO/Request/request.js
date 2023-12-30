@@ -42,6 +42,7 @@ const NGO_Request = ({navigation}) => {
     React.useCallback(() => {
       dispatch(authLoad(true));
       dispatch(NGOgetAllUserRequests(loginData, onSuccess, onError));
+      console.log('doe');
     }, []),
   );
 
