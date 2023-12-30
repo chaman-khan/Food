@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   tabWrapper: {
     borderRadius: 10,
     width: '100%',
-    // height: height / 3,
+    height: height / 3,
     marginBottom: 10,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
