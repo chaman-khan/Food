@@ -156,7 +156,7 @@ const AllUserRequests = ({navigation}) => {
           <FlatList
             data={pos1 ? allrequests : acceptedTRequests}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item._id}
             style={{height: '100%'}}
             ListEmptyComponent={() => {
               return (

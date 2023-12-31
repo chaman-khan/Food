@@ -7,7 +7,7 @@ const NGODonation_Done = ({navigation}) => {
       <Entypo
         name="cross"
         size={30}
-        onPress={() => navigation.replace('NGOMyDonation')}
+        onPress={() => navigation.replace('NGOBottomTab')}
         style={{margin: 10, color: 'black'}}
       />
       <Image
