@@ -39,11 +39,9 @@ const Donor_Request = ({navigation, route}) => {
   );
 
   const onSuccess = val => {
+    console.log(val);
     setData(val.data);
     dispatch(authLoad(false));
-    console.log('====================================');
-    console.log(data);
-    console.log('====================================');
   };
   const onError = err => {
     dispatch(authLoad(false));

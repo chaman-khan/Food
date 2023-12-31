@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 
 const FoodBottomTab = () => {
   const dispatch = useDispatch();
-  const {authLoading, loginData} = use(state => state.auth);
+  const {authLoading, loginData} = useSelector(state => state.auth);
 
   useEffect(() => {
     flanra();

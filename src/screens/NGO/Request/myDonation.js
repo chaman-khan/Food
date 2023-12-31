@@ -50,16 +50,18 @@ const NGOMyDonation = ({navigation}) => {
   );
 
   const onSuccess = val => {
-    console.log('.......................................................................')
-    console.log(val)
-    console.log('.......................................................................')
+    console.log('.....My Requests.................');
+    console.log(val);
+    console.log('.....My Requests.................');
+
     dispatch(authLoad(false));
     console.log(val.data);
     setAllRequests(val.data);
-    const completeddRequests = allrequests.filter(
-      item => item.required_amount - item.total_donation_amount <= 0
+    const completeddRequests = val.data.filter(
+      item =>
+        Number(item.required_amount) - Number(item.total_donation_amount) <= 0,
     );
-    setCompletedrequests(completeddRequests)
+    setCompletedrequests(completeddRequests);
     // if (val.data.status === 'success')
     // if ((val.data.required_amount - val.data.total_donation_amount) === 0) {
     //   setCompletedrequests(val.data)
@@ -124,7 +126,14 @@ const NGOMyDonation = ({navigation}) => {
       />
       <View style={styles.tabBottom}>
         <Text style={styles.categoryText}>{item.donation_category}</Text>
-        <Text style={styles.titleText}>{item.user_name}</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.titleText}>{item.donation_intro}</Text>
+          <Text style={{color: theme.colors.primary}}>
+            {item.required_amount - item.total_donation_amount >= 1
+              ? item.required_amount - item.total_donation_amount
+              : ''}
+          </Text>
+        </View>
         <Text style={{...styles.titleText, fontWeight: '400'}}>
           {item.donation_desc}
         </Text>
@@ -140,7 +149,9 @@ const NGOMyDonation = ({navigation}) => {
           type="feather"
           onPress={() => navigation.replace('NGOBottomTab')}
         />
-        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>My Requests</Text>
+        <Text style={{fontSize: 16, fontWeight: '500', color: 'black'}}>
+          My Requests
+        </Text>
         <Icon name="arrow-left" type="feather" color={'transparent'} />
       </View>
       <ScrollView>

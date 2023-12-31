@@ -15,7 +15,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import {Loading} from '../../../components/loading';
 import {NGOdeleteUserDonationRequest} from '../../../redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
-import { authLoad } from '../../../redux/actions/auth';
+import {authLoad} from '../../../redux/actions/auth';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -29,13 +29,12 @@ const NGODonationDetail = ({navigation}) => {
   const {authLoading, loginData} = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const handleDelete = () => {
-
     console.log('====================================');
-    console.log("kerjhsd...........................");
+    console.log('kerjhsd...........................');
     console.log('====================================');
     dispatch(authLoad(true));
     dispatch(NGOdeleteUserDonationRequest(loginData, item, onSuccess, onError));
-    setClicked(false)
+    setClicked(false);
   };
   const onSuccess = val => {
     console.log('val.............');
@@ -100,11 +99,11 @@ const NGODonationDetail = ({navigation}) => {
         <View style={{margin: 5, paddingHorizontal: 7}}>
           <Text style={styles.category}>{item.donation_category}</Text>
           <Text style={{marginVertical: 7, color: 'black', fontWeight: '600'}}>
-            {item.user_name}
+            {item.donation_intro}
           </Text>
           <View style={styles.categoryView}>
             <Text style={{color: 'black'}}>Donation Amount </Text>
-            <Text style={{color: '#20B7FE'}}>{item.donation_amount}</Text>
+            <Text style={{color: '#20B7FE'}}>{item.required_amount}</Text>
           </View>
 
           <View style={styles.descView}></View>
@@ -129,7 +128,8 @@ const NGODonationDetail = ({navigation}) => {
                     onPress={() => {
                       setClicked(false);
                       navigation.navigate('NGOStack', {
-                        screen: 'NGOEditRequest', params: {item}
+                        screen: 'NGOEditRequest',
+                        params: {item},
                       });
                     }}>
                     <Text style={{color: 'black'}}>Edit Request</Text>

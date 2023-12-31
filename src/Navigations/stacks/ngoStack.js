@@ -21,6 +21,7 @@ import FAQs from '../../screens/NGO/Setting/FAQs';
 import AboutUs from '../../screens/NGO/Setting/AboutUs';
 import ChangeEmail from '../../screens/NGO/Setting/ChangeEmail';
 import ChangeLocation from '../../screens/NGO/Setting/ChangeLocation';
+import ChangePassword from '../../screens/NGO/Setting/ChangePassword';
 
 function NGOStack() {
   const Stack = createNativeStackNavigator();
@@ -100,6 +101,11 @@ function NGOStack() {
       <Stack.Screen
         name="ChangeLocation"
         component={ChangeLocation}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePassword}
         options={{headerShown: false}}
       />
     </Stack.Navigator>

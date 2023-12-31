@@ -91,7 +91,7 @@ const ChangePassword = ({navigation}) => {
         {
           text: 'OK',
           onPress: () => {
-            console.log('OK Pressed');
+            navigation.goBack();
           },
         },
       ],

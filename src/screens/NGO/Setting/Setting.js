@@ -19,7 +19,8 @@ const Donor_Setting = ({navigation}) => {
           navigation.navigate('NGOStack', {
             screen: 'ChangePassword',
           })
-        }>
+        }
+        >
         <Text style={{fontSize: 16, fontWeight: '400', color: 'black'}}>
           Change Password
         </Text>

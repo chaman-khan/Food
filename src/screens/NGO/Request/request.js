@@ -19,21 +19,7 @@ import {NGOgetAllUserRequests} from '../../../redux/actions/home';
 
 const {width, height} = Dimensions.get('screen');
 const NGO_Request = ({navigation}) => {
-  const [data, setData] = useState([
-    {
-      donation_amount: 23,
-      donation_category: 'Food',
-      donation_desc: '2423423423423dwswdacdsafcsfds',
-      image:
-        'https://nationaltoday.com/wp-content/uploads/2021/12/Throw-Out-Your-Leftovers-Day-1200x834.jpg',
-      latitude: '37.785834',
-      location: 'Pakistan',
-      longitude: '73.8137992',
-      phone_number: '2324234234224234',
-      user_name: null,
-      _id: '656dccf67a3baeb99bb1deb7',
-    },
-  ]);
+  const [data, setData] = useState([]);
   const {authLoading, loginData} = useSelector(state => state.auth);
 
   const dispatch = useDispatch();
@@ -47,6 +33,9 @@ const NGO_Request = ({navigation}) => {
   );
 
   const onSuccess = val => {
+    console.log('=====All Requests For NGOs===============================');
+    console.log(val.data);
+    console.log('====================================');
     dispatch(authLoad(false));
     const result = val.data.filter(item => {
       return item !== null;

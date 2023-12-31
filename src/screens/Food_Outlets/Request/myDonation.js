@@ -54,7 +54,7 @@ const MyFoodDonation = ({navigation}) => {
     dispatch(authLoad(false));
     console.log(val.data);
     setAllRequests(val.data);
-    const completeddRequests = allrequests.filter(
+    const completeddRequests = val.data.filter(
       item => item.compeletedBy != null
     );
   

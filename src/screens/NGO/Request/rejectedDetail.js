@@ -7,19 +7,36 @@ import {
   TouchableOpacity,
   StyleSheet,
   Modal,
+  Dimensions,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useDispatch, useSelector} from 'react-redux';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
+import {
+  responsiveScreenFontSize,
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+} from 'react-native-responsive-dimensions';
 const theme = {
   colors: {
     primary: '#1CB5FD',
     grey: '#9B9B9B',
   },
 };
+const {width, height} = Dimensions.get('screen');
 const RejectedDeatil = ({navigation}) => {
   const route = useRoute().params;
   const routee = route.item;
+  console.log('====================================');
+  console.log(routee);
+  console.log('====================================');
+
+  const [showMap, setShowMap] = useState(false);
+  const [latitudeDelta, setLatitudeDelta] = useState(0.0922);
+  const [longitudeDelta, setLongitudeDelta] = useState(0.0421);
+  const [latitude, setLatitude] = useState(Number(routee.latitude));
+  const [longitude, setlongitude] = useState(Number(routee.longitude));
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
 
@@ -61,6 +78,12 @@ const RejectedDeatil = ({navigation}) => {
     console.log(err);
   };
 
+  const onRegionChange = region => {
+    setLatitude(region.latitude);
+    setlongitude(region.longitude);
+    // setLatitudeDelta(region.latitudeDelta);
+    // setLongitudeDelta(region.longitudeDelta);
+  };
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
@@ -78,29 +101,34 @@ const RejectedDeatil = ({navigation}) => {
         />
       </View>
       <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
+        source={{uri: routee.image}}
+        style={{alignSelf: 'center', width: '90%', height: 180}}
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
-        <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7, color: 'black'}}>{routee.title}</Text>
+        <Text style={styles.category}>{routee.donation_category}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>
+          {routee.user_name}
+        </Text>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Donation Quantity</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.quantity}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.donation_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Phone Number</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.phoneNO}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.phone_number}</Text>
         </View>
-        <View style={styles.categoryView}>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={styles.categoryView}
+          onPress={() => setShowMap(true)}>
           <Text style={{color: 'black'}}>Location</Text>
           <Text style={{color: '#20B7FE'}}>{routee.location}</Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold', color: 'black'}}>
           Donation Description
         </Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
       {clicked && (
         <Modal transparent>
@@ -129,6 +157,48 @@ const RejectedDeatil = ({navigation}) => {
             </View>
           </View>
         </Modal>
+      )}
+      {showMap && (
+        <View
+          style={{
+            height: '100%',
+            width: width,
+            zIndex: 100,
+            position: 'absolute',
+            alignSelf: 'center',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <MapView
+            // provider={PROVIDER_GOOGLE}
+            onRegionChange={onRegionChange}
+            style={{height: '50%', width: '100%', backgroundColor: 'red'}}
+            initialRegion={{
+              latitude: latitude,
+              longitude: longitude,
+              latitudeDelta: latitudeDelta,
+              longitudeDelta: longitudeDelta,
+            }}>
+            <Marker
+              coordinate={{
+                latitude: latitude,
+                longitude: longitude,
+              }}
+              title="Your Location"
+            />
+          </MapView>
+          <View style={styles.Button_Box}>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.Button}
+              onPress={() => {
+                setShowMap(false);
+              }}>
+              <Text style={styles.Sign_Up_Text}>OK</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       )}
     </View>
   );
@@ -171,6 +241,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 15,
     backgroundColor: 'white',
+  },
+  Button_Box: {
+    // borderWidth:2,
+    width: '100%',
+    height: responsiveScreenHeight(5.5),
+    marginTop: responsiveScreenHeight(2),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  Button: {
+    width: responsiveScreenWidth(85),
+    height: responsiveScreenHeight(5.5),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1CB5FD',
+    borderRadius: 11,
+  },
+  Sign_Up_Text: {
+    fontFamily: 'Poppins',
+    fontSize: responsiveScreenFontSize(1.4),
+    fontWeight: '600',
+    color: '#FFFFFF',
   },
 });
 export default RejectedDeatil;
