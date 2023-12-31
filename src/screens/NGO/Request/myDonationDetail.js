@@ -33,25 +33,25 @@ const NGOMyDonationDetail = ({navigation}) => {
         <Entypo name="dots-three-vertical" size={20} color="transparent" />
       </View>
       <Image
-        source={routee.image}
-        style={{alignSelf: 'center', width: '90%'}}
+        source={{uri: routee.image}}
+        style={{alignSelf: 'center', width: '90%', height: 180}}
       />
       <View style={{margin: 5, paddingHorizontal: 12}}>
-        <Text style={styles.category}>{routee.category}</Text>
-        <Text style={{marginVertical: 7, color: 'black'}}>{routee.title}</Text>
+        <Text style={styles.category}>{routee.donation_category}</Text>
+        <Text style={{marginVertical: 7, color: 'black'}}>{routee.donation_intro}</Text>
         <View style={styles.categoryView}>
-          <Text style={{color: 'black'}}>Required {routee.category}</Text>
-          <Text style={{color: '#20B7FE'}}>{routee.totalNumber}</Text>
+          <Text style={{color: 'black'}}>Required {routee.donation_category}</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.required_amount}</Text>
         </View>
         <View style={styles.categoryView}>
           <Text style={{color: 'black'}}>Required Raised</Text>
-          <Text style={{color: '#20B7FE'}}>00</Text>
+          <Text style={{color: '#20B7FE'}}>{routee.total_donation_amount}</Text>
         </View>
         <View style={styles.descView}></View>
         <Text style={{fontWeight: 'bold', color: 'black'}}>
           Donation Description
         </Text>
-        <Text style={styles.desc}>{routee.description}</Text>
+        <Text style={styles.desc}>{routee.donation_desc}</Text>
       </View>
     </View>
   );
