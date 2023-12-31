@@ -13,7 +13,10 @@ import {
 } from 'react-native';
 import {Icon} from 'react-native-elements';
 import {authLoad} from '../../../redux/actions/auth';
-import {NGOgetAcceptedRequests, NGOgetAllUserRequests} from '../../../redux/actions/home';
+import {
+  NGOgetAcceptedRequests,
+  NGOgetAllUserRequests,
+} from '../../../redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loading} from '../../../components/loading';
 const theme = {
@@ -38,6 +41,10 @@ const AllUserRequests = ({navigation}) => {
   const [allrequests, setAllRequests] = useState([]);
   const [acceptedTRequests, setAcceptedRequests] = useState([]);
 
+  const [isLoadingAllRequests, setIsLoadingAllRequests] = useState(true);
+  const [isLoadingAcceptedRequests, setIsLoadingAcceptedRequests] =
+    useState(true);
+
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
 
@@ -49,23 +56,33 @@ const AllUserRequests = ({navigation}) => {
     }, []),
   );
 
+  console.log('========loginDataaaaaaaaaaaa============================');
+  console.log(loginData);
+  console.log('====================================');
+
   const onSuccess = val => {
+    console.log('val.data................................');
     console.log(val);
+    console.log('............................val.data');
     dispatch(authLoad(false));
     setAllRequests(val.data);
+    setIsLoadingAllRequests(false);
   };
   const onError = err => {
     dispatch(authLoad(false));
     console.log(err);
+    setIsLoadingAllRequests(false);
   };
-  const onSuccess1= val => {
+  const onSuccess1 = val => {
     console.log(val);
     dispatch(authLoad(false));
     setAcceptedRequests(val.data);
+    setIsLoadingAcceptedRequests(false);
   };
   const onError1 = err => {
     dispatch(authLoad(false));
     console.log(err);
+    setIsLoadingAcceptedRequests(false);
   };
 
   const renderItem = ({item}) => (
@@ -93,11 +110,11 @@ const AllUserRequests = ({navigation}) => {
         <Text style={styles.categoryText}>{item.donation_category}</Text>
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Donation Quantity</Text>
-          <Text style={styles.reqCatValue}>{item.quantity}</Text>
+          <Text style={styles.reqCatValue}>{item.donation_amount}</Text>
         </View>
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Phone Number</Text>
-          <Text style={styles.reqCatValue}>{item.phoneNo}</Text>
+          <Text style={styles.reqCatValue}>{item.phone_number}</Text>
         </View>
         <View style={styles.bottomDetail}>
           <Text style={styles.textStyle}>Location</Text>
@@ -153,32 +170,40 @@ const AllUserRequests = ({navigation}) => {
             alignSelf: 'center',
             height: height / 1.5,
           }}>
-          <FlatList
-            data={pos1 ? allrequests : acceptedTRequests}
-            renderItem={renderItem}
-            keyExtractor={item => item._id}
-            style={{height: '100%'}}
-            ListEmptyComponent={() => {
-              return (
-                <View
-                  style={{
-                    height: 500,
-                    width: '90%',
-                    alignSelf: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <Text
-                    style={{fontWeight: 'bold', fontSize: 18, color: 'black'}}>
-                    No Donation found
-                  </Text>
-                </View>
-              );
-            }}
-            ListFooterComponent={() => {
-              return <View style={{height: 200}} />;
-            }}
-          />
+          {isLoadingAllRequests || isLoadingAcceptedRequests ? (
+            <Loading />
+          ) : (
+            <FlatList
+              data={pos1 ? allrequests : acceptedTRequests}
+              renderItem={renderItem}
+              keyExtractor={(item, index) => index.toString()}
+              style={{height: '100%'}}
+              ListEmptyComponent={() => {
+                return (
+                  <View
+                    style={{
+                      height: 500,
+                      width: '90%',
+                      alignSelf: 'center',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <Text
+                      style={{
+                        fontWeight: 'bold',
+                        fontSize: 18,
+                        color: 'black',
+                      }}>
+                      No Donation found
+                    </Text>
+                  </View>
+                );
+              }}
+              ListFooterComponent={() => {
+                return <View style={{height: 200}} />;
+              }}
+            />
+          )}
         </View>
       </ScrollView>
       <Loading visible={authLoading} />
