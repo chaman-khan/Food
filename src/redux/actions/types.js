@@ -20,3 +20,4 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const CHECK_INTERNET = 'CHECK_INTERNET';
+export const DATA = 'DATA';

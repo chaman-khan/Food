@@ -18,6 +18,9 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
 } from 'react-native-responsive-dimensions';
+import { authLoad } from '../../../redux/actions/auth';
+import { deleteUserDonationRequest } from '../../../redux/actions/home';
+import { Loading } from '../../../components/loading';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -49,9 +52,7 @@ const RejectedDeatil = ({navigation}) => {
   const onSuccess = val => {
     console.log('val.............');
     console.log(val);
-    navigation.navigate('DonorStack', {
-      screen: 'Donation Done',
-    });
+    navigation.goBack();
 
     Alert.alert(
       val.status === 'success' ? 'Success' : 'Error',
@@ -142,11 +143,7 @@ const RejectedDeatil = ({navigation}) => {
                 width: '95%',
                 alignSelf: 'center',
               }}>
-              <TouchableOpacity
-                style={styles.cancel}
-                onPress={() => {
-                  handleDelete;
-                }}>
+              <TouchableOpacity style={styles.cancel} onPress={handleDelete}>
                 <Text style={{color: 'black'}}>Delete Request</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -156,6 +153,7 @@ const RejectedDeatil = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
+          <Loading visible={authLoading} />
         </Modal>
       )}
       {showMap && (

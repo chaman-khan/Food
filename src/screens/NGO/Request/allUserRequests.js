@@ -16,6 +16,7 @@ import {authLoad} from '../../../redux/actions/auth';
 import {
   NGOgetAcceptedRequests,
   NGOgetAllUserRequests,
+  saveData,
 } from '../../../redux/actions/home';
 import {useDispatch, useSelector} from 'react-redux';
 import {Loading} from '../../../components/loading';
@@ -47,6 +48,7 @@ const AllUserRequests = ({navigation}) => {
 
   const dispatch = useDispatch();
   const {authLoading, loginData} = useSelector(state => state.auth);
+  const {ngoData} = useSelector(state => state.home);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -65,6 +67,7 @@ const AllUserRequests = ({navigation}) => {
     console.log(val);
     console.log('............................val.data');
     dispatch(authLoad(false));
+    dispatch(saveData(val.data))
     setAllRequests(val.data);
     setIsLoadingAllRequests(false);
   };
@@ -174,7 +177,7 @@ const AllUserRequests = ({navigation}) => {
             <Loading />
           ) : (
             <FlatList
-              data={pos1 ? allrequests : acceptedTRequests}
+              data={pos1 ? ngoData : acceptedTRequests}
               renderItem={renderItem}
               keyExtractor={(item, index) => index.toString()}
               style={{height: '100%'}}

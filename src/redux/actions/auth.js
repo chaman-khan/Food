@@ -369,16 +369,7 @@ const saveToken = data => {
   };
 };
 
-export const updateCallAPIstate = data => {
-  return {
-    type: types.CHANGE_CALL,
-    payload: data,
-  };
-};
 
-export const dollarRate = data => {
-  return {
-    type: types.DOLLAR_RATE,
-    payload: data,
-  };
-};
+
+
+

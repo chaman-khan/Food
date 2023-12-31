@@ -1,5 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import * as types from '../actions/types';
+import {renderItem} from '../actions/home';
 const initialState = {
   homeData: [],
   homeLoading: false,
@@ -8,7 +9,7 @@ const initialState = {
   images: [],
 
   rooms: [],
-  conversation: [],
+  ngoData: [],
   languages: 'ara',
 };
 export const homeReducer = (state = initialState, action) => {
@@ -79,6 +80,12 @@ export const homeReducer = (state = initialState, action) => {
       return {
         ...state,
         currency: action.payload,
+      };
+    }
+    case types.DATA: {
+      return {
+        ...state,
+        ngoData: action.payload,
       };
     }
 

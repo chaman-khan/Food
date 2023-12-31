@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
 import {View, Text, FlatList, Image, StyleSheet} from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLoad } from '../../../redux/actions/auth';
+import { getNotification } from '../../../redux/actions/home';
+import { useFocusEffect } from '@react-navigation/native';
 const theme = {
   colors: {
     primary: '#1CB5FD',
@@ -8,13 +12,32 @@ const theme = {
 };
 
 const Donor_Notification = () => {
+
+  const [data, setData] = useState([]);
+
+  const {authLoading, loginData} = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+
+  useFocusEffect(
+    React.useCallback(() => {
+      dispatch(authLoad(true));
+      dispatch(getNotification(loginData, onSuccess, onError));
+    }, []),
+  );
+
+  const onSuccess = val => {
+    console.log(val);
+    dispatch(authLoad(false));
+    setData(val.data);
+  };
+  const onError = err => {
+    dispatch(authLoad(false));
+    console.log(err);
+  };
+
   const [noOfNotifications, setNoOFNotifications] = useState(1);
-  const Data = [
-    {
-      id: 1,
-      text: 'Your Request has been successful. Now my team will come and take it',
-    },
-  ];
+  
   return (
     <View style={{flex: 1}}>
       <View style={styles.topBar}>
@@ -24,15 +47,28 @@ const Donor_Notification = () => {
       </View>
       <View style={{marginTop: 17}}>
         <FlatList
-          data={Data}
+          data={data}
           renderItem={({item}) => (
             <View style={styles.notification}>
-              <Text style={{width: '85%', color: 'black'}}>{item.text}</Text>
+              <Text style={{width: '85%', color: 'black'}}>{item.notificationTitle}</Text>
               <View style={styles.innerNotification}>
                 <Text style={{color: 'white', fontWeight: '600'}}>
                   {noOfNotifications}
                 </Text>
               </View>
+            </View>
+          )}
+          ListEmptyComponent={() => (
+            <View
+              style={{
+                flex: 1,
+                height: 750,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Text style={{color: 'black', fontWeight: 20, fontWeight: '500'}}>
+                No Notifications for you
+              </Text>
             </View>
           )}
           keyExtractor={item => item.id}
@@ -69,3 +105,5 @@ const styles = StyleSheet.create({
   },
 });
 export default Donor_Notification;
+
+

@@ -745,3 +745,61 @@ export const notification = (token, data, handleSuccess, handleError) => {
     }
   };
 };
+export const getNotification = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+      };
+      fetch(`https://foodcare.glitch.me/get-notification-for-user/${data.data._id}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+export const getNGONotification = (data, handleSuccess, handleError) => {
+  return async dispatch => {
+    try {
+      var requestOptions = {
+        method: 'GET',
+        redirect: 'follow',
+      };
+      fetch(`https://foodcare.glitch.me/get-notification-for-ngo/${data.data._id}`, requestOptions)
+        .then(response => response.json())
+        .then(result => {
+          handleSuccess(result);
+        })
+        .catch(error => {
+          handleError(error);
+        });
+    } catch (err) {
+      dispatch(authLoad(false));
+      console.log(err);
+      handleError(err);
+    }
+  };
+};
+
+export const renderItem = data => {
+  return {
+    type: types.RENDER_ITEM,
+    payload: data,
+  };
+};
+
+export const saveData = data => {
+  return {
+    type: types.DATA,
+    payload: data,
+  };
+};

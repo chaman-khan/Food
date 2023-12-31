@@ -33,7 +33,7 @@ const NGO_Request = ({navigation}) => {
   );
 
   const onSuccess = val => {
-    console.log('=====All Requests For NGOs===============================');
+    console.log('====================================');
     console.log(val.data);
     console.log('====================================');
     dispatch(authLoad(false));
@@ -154,8 +154,8 @@ const NGO_Request = ({navigation}) => {
           }}
           style={{height: '100%'}}
         />
+        <Loading visible={authLoading} />
       </View>
-      <Loading visible={authLoading} />
     </View>
   );
 };
